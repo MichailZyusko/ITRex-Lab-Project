@@ -1,0 +1,158 @@
+*{
+  border-radius: 10px;
+}
+
+textarea{
+  resize: none;
+}
+
+body{
+  margin: 0;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 20px 32px;
+  background-color: #F3F9F2;
+}
+
+#addClient{
+  display: flex;
+  /* flex: 1; */
+  flex-direction: column;
+
+  /* height: 18vh; */
+
+  margin-top: 3vh;
+  padding: 32px 28px;
+
+  background: linear-gradient(280.8deg,
+   rgba(97, 186, 77, 0.32) 19.39%,
+   rgba(174, 236, 199, 0.2875) 48.84%,
+   rgba(229, 225, 241, 0.16) 82.22%);
+  backdrop-filter: blur(15px);
+  border: 1px solid #FFFFFF;
+}
+
+#search{
+  width: 40%;
+  margin: 4vh 0px 3vh 15px;
+}
+
+#searchResult{
+  display: flex;
+  /* flex: 1; */
+  height: 40vh;
+  padding: 9px 11px;
+
+  background: linear-gradient(276.12deg,
+   rgba(229, 225, 241, 0.16) 11.11%,
+   rgba(174, 236, 199, 0.2875) 47.54%,
+   rgba(97, 186, 77, 0.32) 88.82%);
+  backdrop-filter: blur(15px);
+
+  border: 1px solid #FFFFFF;
+}
+
+#searchBlock{
+  flex: 2;
+  background: #F3F9F2;
+  border-width: 0px;
+  box-shadow: inset 0px 4px 15px rgba(148, 145, 158, 0.25);
+}
+
+#addButton{
+  width: 25%;
+  margin-right: 5px;
+}
+
+#nameInput{
+  width: 50%;
+}
+
+#clientInfo{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+#nextClientInfo{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 31px;
+}
+
+#docButton{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#resolution{
+  display: flex;
+  /* flex: 1; */
+  height: 15vh;
+
+  margin: 18px 0px;
+  padding: 8px 15px;
+
+  background: linear-gradient(276.12deg,
+  rgba(97, 186, 77, 0.32) 11.11%,
+  rgba(174, 236, 199, 0.2875) 47.54%,
+  rgba(229, 225, 241, 0.16) 88.82%);
+  border: 1px solid #FFFFFF;
+  backdrop-filter: blur(15px);
+}
+
+#labelResolutionText{
+  display: flex;
+  align-self: center;
+  flex: 1;
+}
+
+#resolutionText{
+  display: flex;
+  flex: 2;
+
+  background: #F3F9F2;
+  border: 1px solid #FFFFFF;
+  box-shadow: inset 0px 4px 15px rgba(148, 145, 158, 0.25);
+}
+
+#docsearchResult{
+  display: flex;
+  /* flex: 1; */
+  justify-content: space-between;
+  height: 35vh;
+  padding: 9px 11px;
+
+  background: linear-gradient(276.12deg,
+   rgba(229, 225, 241, 0.16) 11.11%,
+   rgba(174, 236, 199, 0.2875) 47.54%,
+   rgba(97, 186, 77, 0.32) 88.82%);
+  border: 1px solid #FFFFFF;
+  backdrop-filter: blur(15px);
+}
+
+#docSearchBlock{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-self: center;
+  align-items: center;
+  margin-right: 25px;
+}
+
+#deleteButton{
+  margin-top: 25px;
+  width: 50%;
+}
+
+#hl{
+  display: flex;
+  width: 100%;
+  height: 4px;
+  margin-top: 4vh;
+  background-color: #DEEEDA;
+}
