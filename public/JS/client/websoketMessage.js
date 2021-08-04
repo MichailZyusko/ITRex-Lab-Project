@@ -1,31 +1,27 @@
-export default (res) => {
+/* eslint-disable consistent-return */
+/* eslint-disable import/extensions */
+
+import getQueue from '../general/getQueue.js';
+
+const queueStatus = document.getElementById('queueStatus');
+const firstName = document.getElementById('firstName');
+const lastName = document.getElementById('lastName');
+
+export default async (res) => {
   // Смотрим с какого сайта пришел event и изменяем количество человек в очереди
   // и следующего пациента при приеме врача
-  if (res.data === 'clinic') {
-    const array = JSON.parse(localStorage.getItem('arr'));
+  if (res.data !== 'clinic') return null;
 
-    const queueStatus = document.getElementById('queueStatus');
-    const firstName = document.getElementById('firstName');
-    const lastName = document.getElementById('lastName');
+  const clients = await getQueue('inputQueue');
 
-    // Меняем текст подписей, соответсвующих реальности
-    if (array.length > 0) {
-      try {
-        firstName.innerText = array[1].firstName;
-        lastName.innerText = array[1].lastName;
-
-        queueStatus.innerText = `${array.length - 1} people before you`;
-      } catch (error) {
-        firstName.innerText = array[0].firstName;
-        lastName.innerText = array[0].lastName;
-
-        queueStatus.innerText = `${array.length} people before you`;
-      }
-    } else {
-      firstName.innerText = 'Wait to be called';
-      lastName.innerText = '';
-
-      queueStatus.innerText = '0 people before you';
-    }
+  // Меняем текст подписей, соответсвующих реальности
+  if (clients.length > 1) {
+    firstName.textContent = clients[0].firstName;
+    lastName.textContent = clients[0].lastName;
+    queueStatus.innerText = `${clients.length} people before you`;
+  } else if (clients.length === 1) {
+    firstName.textContent = 'Wait to be called';
+    lastName.textContent = '';
+    queueStatus.innerText = `${clients.length - 1} people before you`;
   }
 };

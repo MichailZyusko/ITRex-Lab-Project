@@ -13,5 +13,6 @@ module.exports = {
   },
   rules: {
     'no-console': 'off',
+    'import/extensions': ['error', 'always', { js: 'never' }],
   },
 };

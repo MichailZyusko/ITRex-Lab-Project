@@ -1,16 +1,18 @@
 /* eslint-disable import/extensions */
+/* eslint-disable no-alert */
 // TODO Поясни пожалуйста почему он просит ставить расширени .js в конец импорта
 
-import nextPerson from './clinic/nextPerson.js';
-import setResolutionToClient from './clinic/setResolution.js';
-import searchClient from './client/searchClient.js';
+import { nextPerson } from './clinic/nextPerson.js';
+import setDiagnosToClient from './clinic/setDiagnos.js';
+import searchClient from './general/searchClient.js';
 import deleteClient from './clinic/deleteClient.js';
+import updateData from './general/updateData.js';
 import onMessage from './clinic/websoketMessage.js';
 
 const nextButton = document.getElementById('nextButton');
-const deleteInput = document.getElementById('deleteInput');
+const search = document.getElementById('search');
 const deleteButton = document.getElementById('deleteButton');
-const setResolution = document.getElementById('setResolution');
+const setDiagnos = document.getElementById('setDiagnos');
 const ws = new WebSocket('ws://localhost:3001');
 // Создаем новое websoket соединение
 
@@ -20,7 +22,8 @@ ws.onclose = () => console.log('Connection closed...');
 ws.onmessage = onMessage;
 
 // Вешаем обработчики событий на разные события
-deleteInput.addEventListener('change', () => searchClient('deleteInput'));
-deleteButton.addEventListener('click', () => deleteClient());
-nextButton.addEventListener('click', () => nextPerson(ws));
-setResolution.addEventListener('click', () => setResolutionToClient());
+search.addEventListener('change', () => searchClient('search'));
+deleteButton.addEventListener('click', async () => alert(await deleteClient()));
+nextButton.addEventListener('click', async () => alert(await nextPerson(ws)));
+setDiagnos.addEventListener('click', async () => alert(await setDiagnosToClient()));
+document.addEventListener('DOMContentLoaded', () => updateData());

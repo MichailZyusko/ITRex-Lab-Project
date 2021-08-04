@@ -1,50 +1,85 @@
+/* eslint-disable prefer-destructuring */
+/* eslint-disable import/no-mutable-exports */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-return-assign */
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-alert */
+/* eslint-disable import/extensions */
 
-function changeText(array) {
-  if (array.length !== 0) {
-    const queueStatus = document.getElementById('queueStatus');
-    queueStatus.innerText = `${array.length - 1} person in line`;
+import getQueue from '../general/getQueue.js';
+import setQueue from '../general/setQueue.js';
 
-    const currentPacient = array[0];
+const queueStatus = document.getElementById('queueStatus');
+const firstName = document.getElementById('firstName');
+const lastName = document.getElementById('lastName');
+const diagnosText = document.getElementById('diagnosText');
+const form = document.querySelector('form');
+const profileImg = document.getElementById('profileImg');
 
-    document.getElementById('firstName').innerText = currentPacient.firstName;
-    document.getElementById('lastName').innerText = currentPacient.lastName;
+let currentClient = null;
 
-    return currentPacient;
+function changeText(clients) {
+  if (clients.length !== 0) {
+    queueStatus.textContent = `${clients.length - 1} person in line`;
+
+    if (clients.length > 1) {
+      firstName.textContent = clients[1].firstName;
+      lastName.textContent = clients[1].lastName;
+    } else if (clients.length === 1) {
+      firstName.textContent = 'You don\'t have new pacients';
+      lastName.textContent = '';
+    }
+
+    for (const [key, value] of Object.entries(clients[0])) {
+      if (key !== 'resolution' && key !== 'picture') {
+        form.elements[key].value = value;
+      }
+    }
+
+    profileImg.src = clients[0].picture
+      ? clients[0].picture
+      : '../../html/src/img/profilePicture.svg';
+
+    return null;
   }
 
-  document.getElementById('firstName').innerText = 'You don\'t have new pacients';
-  document.getElementById('lastName').innerText = '';
-  document.getElementById('resolutionText').value = '';
+  Array.from(form).forEach((element) => element.value = '');
+
+  firstName.textContent = 'You don\'t have new pacients';
+  lastName.textContent = '';
+  profileImg.src = '../../html/src/img/profilePicture.svg';
+  diagnosText.value = '';
+
   return null;
 }
 
-export default function nextPerson(ws) {
+async function nextPerson(ws) {
   // Тригерем событие клика по кнопке для изменения состояния на другом сайте
   ws.send('clinic');
 
-  const array = JSON.parse(localStorage.getItem('arr'));
+  const clients = await getQueue('inputQueue');
 
-  // Проверка на первого пациента
-  if (document.getElementById('firstName').innerText === 'You don\'t have new pacients') {
-    changeText(array);
-  } else {
-    const result = JSON.parse(localStorage.getItem('result'));
+  if (currentClient) {
+    if (currentClient.resolution) {
+      await setQueue(currentClient, 'output/addClient');
 
-    if (array.length > 0) {
-      const currentPacient = changeText(array);
-      // Только если есть результат осмотра, то тогда вызываем следующего
-      if (currentPacient.resolution !== '') {
-        result.push(array.shift());
-
-        localStorage.setItem('arr', JSON.stringify(array));
-        localStorage.setItem('result', JSON.stringify(result));
-
-        changeText(array);
-        document.getElementById('resolutionText').value = '';
+      if (clients.length) {
+        currentClient = clients[0];
+        await setQueue(currentClient, 'input/removeClient');
+        diagnosText.value = '';
       } else {
-        alert('Please, fill resolution for this client');
+        currentClient = null;
       }
-    }
+
+      changeText(clients);
+    } else return 'Please, fill resolution for this client';
+  } if (clients.length) {
+    currentClient = clients[0];
+    changeText(clients);
+    await setQueue(currentClient, 'input/removeClient');
+    return 'The client is expecting you';
   }
+  return 'You don\'t have new pacients';
 }
+
+export { nextPerson, currentClient };
