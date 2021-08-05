@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/classes.css">
+  <link rel="stylesheet" href="../css/index.css">
+  <title>TheReseption</title>
+</head>
+<body>
+  <div class="frame">
+    <div class="h1">THE RESEPTION</div>
+     <form id="form" action="">
+      <span style="max-width: 40%; max-height: 20vh;">
+        <img src="./src/img/profilePicture.svg" alt="" id="profileImg">
+      </span>
+      <div id="fields">
+        <div class="h2">Personal Info</div>
+        <div class="field">
+          <div class="h6" style="margin-right: 30px;">FIRST NAME</div>
+          <input type="text" class="input" name="firstName">
+        </div>
+        <div class="field">
+          <div class="h6" style="margin-right: 30px;">LAST NAME</div>
+          <input type="text" class="input" name="lastName">
+        </div>
+        <div class="field">
+          <div class="h6" style="margin-right: 30px;">GENDER</div>
+          <input type="text" class="input" name="gender">
+        </div>
+        <div class="field">
+          <div class="h6" style="margin-right: 30px;">FULL AGE</div>
+          <input type="text" class="input" name="fullAge">
+        </div>
+        <div class="field">
+          <div class="h6" style="margin-right: 30px;">COUNTRY</div>
+          <input type="text" class="input" name="country">
+        </div>
+        <div class="field">
+          <div class="h6" style="margin-right: 30px;">ADDRESS</div>
+          <input type="text" class="input" name="address">
+        </div>
+        <div class="field">
+          <div class="h6" style="margin-right: 30px;">EMAIL</div>
+          <input type="text" class="input"name="email">
+        </div>
+        <div class="field">
+          <div class="h6" style="margin-right: 30px;">PHONE NUMBER</div>
+          <input type="text" class="input" name="phoneNumber">
+        </div>
+      </div> 
+    </form>
+  </div>
+  <div class="separator"></div>
+  <div id="docRightFrame">
+    <div style="display: flex; justify-content: flex-end;">
+      <input type="text" id="search" class="input h4" placeholder="Search" style="width: 30%;">
+    </div>
+    <div id="docNextClientinfo">
+      <div style="display: flex; flex: 3; justify-content: space-between;">
+        <div>
+          <div class="h5">Next client:</div>
+          <div style="margin: 20px 0px 20px 15px">
+            <div class="h6" id="firstName">You don't have new pacients</div>
+            <div class="h6" id="lastName"></div>
+          </div>
+        </div>
+        
+        <img src="./src/img/icn.svg" alt="" style="max-width: 25%;">
+      </div>
+      <div style="display: flex; flex: 1; justify-content: space-between;">
+        <div id="queueStatus" class="h2">0 persons in line</div>
+        <button class="button h3" id="nextButton" type="button" form="form">NEXT</button>
+      </div>
+    </div>
+  
+    <div style="display: flex; flex: 1; margin-top: 65px;">
+      <div style="display: flex; flex-direction: column; flex: 1;">
+        <div id="searchBlock">
+          <pre class="searchResult h4" id="searchResult"></pre>
+          <button class="button h3" style="margin-top: 15px" id="deleteButton">DELETE</button>
+        </div>
+      </div>
+      <div class="separator"></div>
+        <div style="display: flex; flex-direction: column; flex: 1;">
+        <div id="searchBlock">
+          <textarea class="searchResult h4" id="diagnosText"></textarea>
+          <button class="button h3" style="margin-top: 15px" id="setDiagnos">SET DIAGNOS</button>
+          <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+            <input type="checkbox" id="TTL">
+            <input type="text" class="input h4" id="time" placeholder="Input TTL. Example: 30000 (ms)" >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="../js/clinic.js"></script>
+</body>
+</html>
