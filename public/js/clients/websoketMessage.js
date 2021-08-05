@@ -10,7 +10,7 @@ const lastName = document.getElementById('lastName');
 export default async (res) => {
   // Смотрим с какого сайта пришел event и изменяем количество человек в очереди
   // и следующего пациента при приеме врача
-  if (res.data !== 'clinic') return null;
+  if (res.data !== 'clinic') { return null; }
 
   const clients = await getQueue('inputQueue');
 

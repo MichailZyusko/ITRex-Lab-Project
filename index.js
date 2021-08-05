@@ -3,12 +3,14 @@
 const express = require('express');
 const path = require('path');
 const WebSocket = require('ws');
-const Queue = require('./classes/Queue');
+// const Queue = require('./classes/Queue');
+const IncomingQueue = require('./classes/IncomingQueue');
+const OutgoingQueue = require('./classes/OutgoingQueue');
 
 const app = express();
 const port = process.env.PORT ?? 3000;
-const inputQueue = new Queue();
-const outputQueue = new Queue();
+const incomingQueue = new IncomingQueue();
+const outgoingQueue = new OutgoingQueue();
 const server = new WebSocket.Server({ port: 3001 }); // Создаем сервер на 3001 порту для WebSocet
 
 // Создаем события прослушивания connection and message
@@ -35,18 +37,18 @@ app.use(express.json());
 
 // Перейдя по пути http://localhost:3000/inputQueue можно получить инфу о клиентах в очереди
 app.get('/inputQueue', (req, res) => {
-  res.send(inputQueue._data);
+  res.send(incomingQueue._data);
 });
 
 // Перейдя по пути http://localhost:3000/outputQueue можно получить инфу о клиентах которые вышли из кабинета
 app.get('/outputQueue', (req, res) => {
-  res.send(outputQueue._data);
+  res.send(outgoingQueue._data);
 });
 
 // Добавляет клиента в конец очереди к врачу
 app.post('/input/addClient', (req, res) => {
   console.log('/input/addClient', req.body);
-  inputQueue.add(req.body);
+  incomingQueue.add(req.body);
 
   res.send(req.body);
 });
@@ -54,7 +56,7 @@ app.post('/input/addClient', (req, res) => {
 // Удаляет клиента из начала очереди к врачу
 app.post('/input/removeClient', (req, res) => {
   console.log('This item was successfuly delete');
-  console.log(inputQueue.remove());
+  console.log(incomingQueue.remove());
 
   res.send(req.body);
 });
@@ -62,7 +64,12 @@ app.post('/input/removeClient', (req, res) => {
 // Добавляет клиента в список людей, которые вышли из кабинета
 app.post('/output/addClient', (req, res) => {
   console.log('/output/addClient', req.body);
-  outputQueue.add(req.body);
+  outgoingQueue.add(req.body);
+  if (req.body.TTL >= 0) {
+    setTimeout(() => {
+      outgoingQueue.deleteElement({ search: req.body.firstName });
+    }, req.body.TTL);
+  }
 
   res.send(req.body);
 });
@@ -72,7 +79,7 @@ app.post('/output/addClient', (req, res) => {
 app.post('/output/searchClient', (req, res) => {
   console.log('/output/addClient', req.body);
 
-  res.send(outputQueue.findElement(req.body));
+  res.send(outgoingQueue.findElement(req.body));
 });
 
 // Удаляет из список людей, которые вышли из кабинета, человека,
@@ -80,7 +87,7 @@ app.post('/output/searchClient', (req, res) => {
 app.post('/output/deleteElement', (req, res) => {
   console.log('/output/deleteElement', req.body);
 
-  res.send(outputQueue.deleteElement(req.body));
+  res.send(outgoingQueue.deleteElement(req.body));
 });
 
 // Вешаем слушателя на 3000 порт или тот, который введут в консоль

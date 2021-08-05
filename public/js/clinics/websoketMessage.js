@@ -9,7 +9,7 @@ const lastName = document.getElementById('lastName');
 
 export default async (res) => {
   // Смотрим с какого сайта пришел event и изменяем количество человек в очереди при новой записи
-  if (res.data !== 'client') return null;
+  if (res.data !== 'client') { return null; }
 
   const clients = await getQueue('inputQueue');
 

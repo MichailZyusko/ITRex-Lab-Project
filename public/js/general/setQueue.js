@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 
 export default async (data, path) => {
-  if (!data) return null;
+  if (!data) { return null; }
 
   try {
     const response = await fetch(`/${path}`, {

@@ -12,6 +12,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    curly: ['error', 'all'],
     'no-console': 'off',
     'import/extensions': ['error', 'always', { js: 'never' }],
   },

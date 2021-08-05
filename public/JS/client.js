@@ -1,11 +1,11 @@
 /* eslint-disable import/extensions */
 // TODO Поясни пожалуйста почему он просит ставить расширени .js в конец импорта
 
-import addClient from './client/addClient.js';
-import randomUser from './client/randomUser.js';
+import addClient from './clients/addClient.js';
+import randomUser from './clients/randomUser.js';
 import searchClient from './general/searchClient.js';
 import updateData from './general/updateData.js';
-import onMessage from './client/websoketMessage.js';
+import onMessage from './clients/websoketMessage.js';
 
 const random = (min, max) => Math.floor(min + Math.random() * (max + 1 - min));
 const form = document.getElementById('submitButton');

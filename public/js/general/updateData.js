@@ -10,7 +10,7 @@ const lastName = document.getElementById('lastName');
 export default async () => {
   const clients = await getQueue('inputQueue');
 
-  if (!clients.length) return null;
+  if (!clients.length) { return null; }
 
   queueStatus.textContent = `${clients.length} people before you`;
   firstName.textContent = clients[0].firstName;

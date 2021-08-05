@@ -10,7 +10,7 @@ export default async function searchClient(ID) {
   const searchString = document.getElementById(ID).value.trim();
 
   // Проверяем исключения
-  if (!searchString) return null;
+  if (!searchString) { return null; }
 
   const searchResult = await setQueue({ search: searchString }, 'output/searchClient');
 

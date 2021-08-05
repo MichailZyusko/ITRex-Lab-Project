@@ -2,12 +2,12 @@
 /* eslint-disable no-alert */
 // TODO Поясни пожалуйста почему он просит ставить расширени .js в конец импорта
 
-import { nextPerson } from './clinic/nextPerson.js';
-import setDiagnosToClient from './clinic/setDiagnos.js';
+import { nextPerson } from './clinics/nextPerson.js';
+import setDiagnosToClient from './clinics/setDiagnos.js';
 import searchClient from './general/searchClient.js';
-import deleteClient from './clinic/deleteClient.js';
+import deleteClient from './clinics/deleteClient.js';
 import updateData from './general/updateData.js';
-import onMessage from './clinic/websoketMessage.js';
+import onMessage from './clinics/websoketMessage.js';
 
 const nextButton = document.getElementById('nextButton');
 const search = document.getElementById('search');

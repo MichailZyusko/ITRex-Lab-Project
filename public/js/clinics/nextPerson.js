@@ -31,7 +31,7 @@ function changeText(clients) {
     }
 
     for (const [key, value] of Object.entries(clients[0])) {
-      if (key !== 'resolution' && key !== 'picture') {
+      if (key !== 'resolution' && key !== 'picture' && key !== 'TTL') {
         form.elements[key].value = value;
       }
     }
@@ -72,7 +72,9 @@ async function nextPerson(ws) {
       }
 
       changeText(clients);
-    } else return 'Please, fill resolution for this client';
+    } else {
+      return 'Please, fill resolution for this client';
+    }
   } if (clients.length) {
     currentClient = clients[0];
     changeText(clients);

@@ -129,3 +129,12 @@ body{
 #nextButton{
   width: 25%;
 }
+
+#time{
+  width: 80%;
+}
+
+#TTL{
+  width: 25px;
+  height: 25px;
+}
