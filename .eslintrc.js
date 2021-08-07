@@ -14,6 +14,7 @@ module.exports = {
   rules: {
     curly: ['error', 'all'],
     'no-console': 'off',
-    'import/extensions': ['error', 'always', { js: 'never' }],
+    'import/extensions': ['error', 'always', { js: 'always' }],
+    'no-alert': 'off',
   },
 };

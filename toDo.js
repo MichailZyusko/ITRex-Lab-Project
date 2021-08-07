@@ -1,7 +1,5 @@
 // TODO immediately and important
-// 1. Добавить TTL (Done)
-// 2. Добавить докер
-// 3. Настроить маршрутизацию
+// 1. Добавить докер
 
 // TODO not immediately and important
 // 1. Добавить возможность загружать картинку пользователю
