@@ -1,5 +1,7 @@
-import getQueue from '../methods/GET.js';
+import { getIncomingQueue } from '../methods/GET.js';
 import { addClient } from '../services/index.js';
+
+// localStorage.setItem('id', '0');
 
 const queueStatus = document.getElementById('queueStatus');
 const firstName = document.getElementById('firstName');
@@ -16,7 +18,7 @@ export default async (ws) => {
   const data = Object.fromEntries(new FormData(form).entries());
 
   addClient(ws, data, null);
-  updateInformation(await getQueue('incomingQueue'));
+  updateInformation(await getIncomingQueue());
 
   return null;
 };

@@ -9,7 +9,7 @@ module.exports = class OutgoingQueue extends Queue {
       return { result: 'Nothing was found for your query' };
     }
 
-    return JSON.stringify(client, null, 4);
+    return { result: client };
   }
 
   deleteClient({ search }) {

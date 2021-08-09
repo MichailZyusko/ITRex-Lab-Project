@@ -1,6 +1,9 @@
+import { getCurrentClient } from '../methods/GET.js';
+import { setCurrentClient } from '../methods/POST.js';
+
 // Осуществляет запись результата осмотра врача в соответсвующее поле пациента
 export default async (status, timeToLive, resolutionText) => {
-  const currentClient = JSON.parse(localStorage.getItem('currentClient'));
+  const currentClient = (await getCurrentClient()).value;
 
   if (currentClient) {
     const actionStatus = currentClient.resolution ? 'update' : 'added';
@@ -11,7 +14,7 @@ export default async (status, timeToLive, resolutionText) => {
       currentClient.TTL = timeToLive;
     }
 
-    localStorage.setItem('currentClient', JSON.stringify(currentClient));
+    await setCurrentClient({ value: currentClient });
     return `Resolution successfully ${actionStatus}`;
   }
   return 'You don\'t have a patient to see right now.';

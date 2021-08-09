@@ -1,4 +1,4 @@
-import getQueue from '../methods/GET.js';
+import { getIncomingQueue } from '../methods/GET.js';
 
 const queueStatus = document.getElementById('queueStatus');
 const firstName = document.getElementById('firstName');
@@ -10,7 +10,7 @@ const updateInformation = (clients) => {
 };
 
 export default async () => {
-  const clients = await getQueue('incomingQueue');
+  const clients = await getIncomingQueue();
 
   if (!clients.length) {
     return null;

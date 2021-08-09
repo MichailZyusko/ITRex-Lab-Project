@@ -6,13 +6,13 @@ const reqObject = (data) => ({
   },
 });
 
-export default async (data, path) => {
+const makeDELETErequect = (route) => async (data) => {
   if (!data) {
     return null;
   }
 
   try {
-    const response = await fetch(`/${path}`, reqObject(data));
+    const response = await fetch(route, reqObject(data));
     const result = await response.json();
     console.log('The operation was successful');
     return result;
@@ -22,3 +22,8 @@ export default async (data, path) => {
 
   return null;
 };
+
+const deleteClientFromIncomingQueue = makeDELETErequect('/api/incomingQueue');
+const deleteClientFromOutgoingQueue = makeDELETErequect('/api/outgoingQueue');
+
+export { deleteClientFromIncomingQueue, deleteClientFromOutgoingQueue };

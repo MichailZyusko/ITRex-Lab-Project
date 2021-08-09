@@ -1,12 +1,10 @@
 import { nextClient } from '../services/index.js';
-import getQueue from '../methods/GET.js';
-
-localStorage.setItem('currentClient', JSON.stringify(null));
+import { getIncomingQueue, getCurrentClient } from '../methods/GET.js';
 
 export default async (ws) => {
   ws.send('clinic');
 
-  const currentClient = JSON.parse(localStorage.getItem('currentClient'));
+  const currentClient = (await getCurrentClient()).value;
 
-  return nextClient(currentClient, await getQueue('incomingQueue'));
+  return nextClient(currentClient, await getIncomingQueue());
 };

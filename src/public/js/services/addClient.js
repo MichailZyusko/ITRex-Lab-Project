@@ -1,4 +1,6 @@
-import setQueue from '../methods/POST.js';
+/* eslint-disable no-param-reassign */
+
+import { addClientToIncomingQueue } from '../methods/POST.js';
 
 // Добавляет нового пациента в очередь
 export default async (ws, formData = null, randomUser = null) => {
@@ -8,13 +10,19 @@ export default async (ws, formData = null, randomUser = null) => {
     // TODO Если мы оставим на 2 if, а заменим это на if/else.
     // TODO Может случиться что-нибудь страшное(необработка клиента)?
 
+    // const id = +localStorage.getItem('id');
+
+    // Можно возвращать первое тру значение и делать запрос
     if (randomUser) {
-      await setQueue(randomUser, 'incomingQueue');
+      // randomUser.id = id;
+      await addClientToIncomingQueue(randomUser);
     }
     if (formData) {
-      await setQueue(formData, 'incomingQueue');
+      // formData.id = id;
+      await addClientToIncomingQueue(formData);
     }
 
+    // localStorage.setItem('id', `${id + 1}`);
     ws.send('client');
 
     return true;

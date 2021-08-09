@@ -1,7 +1,7 @@
-import setQueue from '../methods/POST.js';
+import { searchClientInOutgoingQueue } from '../methods/POST.js';
 
 export default async (searchString) => {
-  const searchResult = await setQueue({ search: searchString }, 'output/searchClient');
+  const searchResult = await searchClientInOutgoingQueue({ search: searchString });
 
   return JSON.stringify(searchResult, null, 4);
 };

@@ -30,9 +30,10 @@ app.use(express.static(path.join(__dirname, 'src/public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use('/incomingQueue', incomingQueue);
+// add route api
+app.use('/api', incomingQueue);
 // app.use('/outgoingQueue', outgoingQueue); // Так как есть методот пост
-app.use('/', outgoingQueue);
+app.use('/api', outgoingQueue);
 
 app.listen(port, host, () => {
   console.log(`Example app listening at http://${host}:${port}:...`);

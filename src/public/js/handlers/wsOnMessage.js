@@ -1,4 +1,4 @@
-import getQueue from '../methods/GET.js';
+import { getIncomingQueue } from '../methods/GET.js';
 
 const queueStatus = document.getElementById('queueStatus');
 const firstName = document.getElementById('firstName');
@@ -9,7 +9,7 @@ const clientMessage = async (res) => {
     return null;
   }
 
-  const clients = await getQueue('incomingQueue');
+  const clients = await getIncomingQueue();
 
   if (clients.length > 1) {
     firstName.textContent = clients[0].firstName;
@@ -29,7 +29,7 @@ const clinicMessage = async (res) => {
     return null;
   }
 
-  const clients = await getQueue('incomingQueue');
+  const clients = await getIncomingQueue();
 
   if (clients.length) {
     firstName.textContent = clients[0].firstName;

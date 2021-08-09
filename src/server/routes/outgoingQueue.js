@@ -2,9 +2,12 @@ const express = require('express');
 
 const router = express.Router();
 
+const { outgoingQueue } = require('../../controllers/index.js');
+const { isValid, isExist, sendResponse } = require('../../middlewares/index.js');
+
 const {
-  addClient, getOutgoingQueue, removeClient, searchClient,
-} = require('../../controllers/outgoingQueueControllers.js');
+  addClient, deleteClient, getQueue, searchClient,
+} = outgoingQueue;
 
 // TODO Тут у меня к тебе есть один вопросик.Как правильно поступить? У меня есть 4 типа запроса
 // TODO на получения массива исходящей очереди(GET), добавление клиента(POST), удаление(DELETE).
@@ -16,10 +19,10 @@ const {
 // TODO у меня VS code подсказывает что это устарело, но когда я исправляю, то выдает ошибки
 
 router.route('/outgoingQueue')
-  .get(getOutgoingQueue)
-  .post(addClient)
-  .delete(removeClient);
+  .get(getQueue)
+  .post(isValid, isExist, addClient, sendResponse)
+  .delete(deleteClient, sendResponse);
 
-router.post('/output/searchClient', searchClient);
+router.post('/outgoingQueue/searchClient', searchClient, sendResponse);
 
 module.exports = router;

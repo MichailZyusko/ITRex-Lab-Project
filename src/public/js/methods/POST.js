@@ -6,11 +6,13 @@ const reqObject = (data) => ({
   },
 });
 
-export default async (data, path) => {
-  if (!data) { return null; }
+const makePOSTrequect = (route) => async (data) => {
+  if (!data) {
+    return null;
+  }
 
   try {
-    const response = await fetch(`/${path}`, reqObject(data));
+    const response = await fetch(route, reqObject(data));
     const result = await response.json();
     console.log('The operation was successful');
     return result;
@@ -19,4 +21,13 @@ export default async (data, path) => {
   }
 
   return null;
+};
+
+const addClientToIncomingQueue = makePOSTrequect('/api/incomingQueue');
+const addClientToOutgoingQueue = makePOSTrequect('/api/outgoingQueue');
+const setCurrentClient = makePOSTrequect('/api/incomingQueue/currentClient');
+const searchClientInOutgoingQueue = makePOSTrequect('/api/outgoingQueue/searchClient');
+
+export {
+  addClientToIncomingQueue, addClientToOutgoingQueue, searchClientInOutgoingQueue, setCurrentClient,
 };

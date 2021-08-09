@@ -1,8 +1,9 @@
+/* eslint-disable no-return-await */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-param-reassign */
 
-import setQueue from '../methods/POST.js';
-import deleteClient from '../methods/DELETE.js';
+import { addClientToOutgoingQueue, setCurrentClient } from '../methods/POST.js';
+import { deleteClientFromIncomingQueue } from '../methods/DELETE.js';
 
 const queueStatus = document.getElementById('queueStatus');
 const firstName = document.getElementById('firstName');
@@ -49,19 +50,19 @@ const changeText = (clients) => {
 };
 
 const сontinueReceiving = async (currentClient, clients) => {
-  localStorage.setItem('currentClient', JSON.stringify(clients[0]));
-  await deleteClient(currentClient, 'incomingQueue');
+  await setCurrentClient({ value: clients[0] });
+  await deleteClientFromIncomingQueue(currentClient);
   diagnosText.value = '';
 };
 
-const stopReceiving = () => localStorage.setItem('currentClient', JSON.stringify(null));
+const stopReceiving = async () => await setCurrentClient({ value: null });
 
 const checkClients = async (currentClient, clients) => {
   clients.length
     ? сontinueReceiving(currentClient, clients)
     : stopReceiving(currentClient, clients);
 
-  await setQueue(currentClient, 'outgoingQueue');
+  await addClientToOutgoingQueue(currentClient);
   changeText(clients);
 
   return 'Call the next patient';
@@ -81,8 +82,8 @@ export default async (currentClient, clients) => {
   }
 
   if (clients.length) {
-    localStorage.setItem('currentClient', JSON.stringify(clients[0]));
-    await deleteClient(clients[0], 'incomingQueue');
+    await setCurrentClient({ value: clients[0] });
+    await deleteClientFromIncomingQueue(clients[0]);
     changeText(clients);
 
     return 'The client is expecting you';

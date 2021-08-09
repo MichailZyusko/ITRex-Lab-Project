@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import {
   randomUser, updateData, addClient, searchClient, clientMessage,
 } from './handlers/index.js';
@@ -16,4 +18,4 @@ ws.addEventListener('close', () => console.log('Connection closed...'));
 form.addEventListener('click', () => addClient(ws));
 search.addEventListener('change', async () => alert(await searchClient()));
 document.addEventListener('DOMContentLoaded', () => updateData());
-setInterval(() => randomUser(ws), random(1e4, 1.5e4));
+setInterval(() => randomUser(ws), random(8e3, 1.2e4));
