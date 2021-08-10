@@ -1,19 +1,14 @@
 /* eslint-disable no-unused-vars */
 
 import {
-  randomUser, updateData, addClient, searchClient, clientMessage,
+  randomUser, updateData, addClient, searchClient, clinicMessage, clientMessage,
 } from './handlers/index.js';
+import websocket from './websocket/websocket.js';
 
 const random = (min, max) => Math.floor(min + Math.random() * (max + 1 - min));
 const form = document.getElementById('submitButton');
 const search = document.getElementById('search');
-const ws = new WebSocket('ws://localhost:3001');
-// Создаем новое websoket соединение
-
-ws.addEventListener('open', () => console.log('Connection opened...'));
-ws.addEventListener('message', clientMessage);
-ws.addEventListener('error', (err) => console.log(err));
-ws.addEventListener('close', () => console.log('Connection closed...'));
+const ws = websocket(clientMessage);
 
 form.addEventListener('click', () => addClient(ws));
 search.addEventListener('change', async () => alert(await searchClient()));

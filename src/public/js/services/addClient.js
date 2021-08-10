@@ -1,6 +1,16 @@
 /* eslint-disable no-param-reassign */
 
 import { addClientToIncomingQueue } from '../methods/POST.js';
+import { getIncomingQueue } from '../methods/GET.js';
+
+const queueStatus = document.getElementById('queueStatus');
+const firstName = document.getElementById('firstName');
+const lastName = document.getElementById('lastName');
+const updateInformation = (clients) => {
+  queueStatus.textContent = `${clients.length} people before you`;
+  firstName.textContent = clients[0].firstName;
+  lastName.textContent = clients[0].lastName;
+};
 
 // Добавляет нового пациента в очередь
 export default async (ws, formData = null, randomUser = null) => {
@@ -25,6 +35,7 @@ export default async (ws, formData = null, randomUser = null) => {
     // localStorage.setItem('id', `${id + 1}`);
     ws.send('client');
 
+    updateInformation(await getIncomingQueue());
     return true;
   } catch (error) {
     console.log(error);

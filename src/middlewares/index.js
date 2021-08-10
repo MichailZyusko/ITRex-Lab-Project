@@ -1,7 +1,7 @@
-const isValid = require('./isValid.js');
-const isExist = require('./isExist.js');
-const sendResponse = require('./sendResponse.js');
+import isValid from './isValid.js';
+import isExist from './isExist.js';
+import sendResponse from './sendResponse.js';
 
-module.exports = {
+export {
   isValid, isExist, sendResponse,
 };

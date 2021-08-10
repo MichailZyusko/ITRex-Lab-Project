@@ -1,24 +1,18 @@
 /* eslint-disable consistent-return */
 
-const validator = require('validator');
+import validator from 'validator';
 
-const isValid = (obj) => {
-  if (validator.isEmail(obj.email)
-  && validator.isAlpha(obj.firstName)
-  && validator.isAlpha(obj.lastName)
-  && validator.isIn(obj.gender, ['Male', 'Female', 'male', 'female'])
-  && validator.isInt(obj.fullAge.toString())
-  ) {
-    return true;
-  }
+// Мб можно убрать !!
+const isValid = (obj) => !!(validator.isEmail(obj.email)
+    && validator.isAlpha(obj.firstName)
+    && validator.isAlpha(obj.lastName)
+    && validator.isIn(obj.gender, ['Male', 'Female', 'male', 'female'])
+    && validator.isInt(obj.fullAge.toString()));
 
-  return false;
-};
-
-module.exports = async (req, res, next) => {
+export default async (req, res, next) => {
   try {
     if (!isValid(req.body)) {
-      res.status(404).send({ result: 'Not valid form data' });
+      res.status(400).send({ result: 'Not valid form data' });
       return null;
     }
 

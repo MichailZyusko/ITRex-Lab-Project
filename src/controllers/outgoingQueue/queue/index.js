@@ -1,8 +1,8 @@
-const addClient = require('./addClient.js');
-const deleteClient = require('./deleteClient.js');
-const getQueue = require('./getQueue.js');
-const searchClient = require('./searchClient.js');
+import searchClient from './searchClient.js';
+import addClient from './addClient.js';
+import deleteClient from './deleteClient.js';
+import getQueue from './getQueue.js';
 
-module.exports = {
+export default {
   addClient, deleteClient, getQueue, searchClient,
 };

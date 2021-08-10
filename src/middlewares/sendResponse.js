@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 
-module.exports = (req, res) => {
+export default (req, res) => {
   try {
     res.send(req.body);
   } catch (error) {

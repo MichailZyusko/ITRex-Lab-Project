@@ -1,4 +1,4 @@
-const getCurrentClient = require('./getCurrentClient.js');
-const setCurrentClient = require('./setCurrentClient.js');
+import getCurrentClient from './getCurrentClient.js';
+import setCurrentClient from './setCurrentClient.js';
 
-module.exports = { getCurrentClient, setCurrentClient };
+export default { getCurrentClient, setCurrentClient };

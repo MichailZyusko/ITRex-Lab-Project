@@ -1,1 +1,3 @@
-module.exports = require('./queue/index.js');
+import outgoingQueue from './queue/index.js';
+
+export default outgoingQueue;

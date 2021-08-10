@@ -1,8 +1,8 @@
 /* eslint-disable consistent-return */
 
-const outgoingQueue = require('../src/index.js');
+import outgoingQueue from '../storage/index.js';
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   try {
     res.send(outgoingQueue.data);
   } catch (error) {

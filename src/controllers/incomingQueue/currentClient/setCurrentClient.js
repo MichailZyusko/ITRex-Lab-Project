@@ -1,9 +1,9 @@
 /* eslint-disable consistent-return */
 
-const chalk = require('chalk');
-const incomingQueue = require('../src/index.js');
+import chalk from 'chalk';
+import incomingQueue from '../storage/index.js';
 
-module.exports = async (req, res, next) => {
+export default async (req, res, next) => {
   try {
     incomingQueue.setCurrentClient(req.body);
     req.body = incomingQueue.currentClient;

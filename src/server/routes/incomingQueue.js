@@ -1,20 +1,19 @@
-const express = require('express');
-
-const { incomingQueue, currentClient } = require('../../controllers/index.js');
-const { isValid, isExist, sendResponse } = require('../../middlewares/index.js');
+import express from 'express';
+import { currentClient, incomingQueue } from '../../controllers/index.js';
+import { isExist, isValid, sendResponse } from '../../middlewares/index.js';
 
 const { getCurrentClient, setCurrentClient } = currentClient;
 const { addClient, deleteClient, getQueue } = incomingQueue;
 
 const router = express.Router();
 
-router.route('/incomingQueue')
+router.route('/')
   .get(getQueue)
   .post(isValid, isExist, addClient, sendResponse)
   .delete(isValid, deleteClient, sendResponse);
 
-router.route('/incomingQueue/currentClient')
+router.route('/currentClient')
   .get(getCurrentClient)
   .post(setCurrentClient, sendResponse);
 
-module.exports = router;
+export default router;

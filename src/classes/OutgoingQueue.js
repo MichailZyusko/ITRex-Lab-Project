@@ -1,7 +1,6 @@
-const Queue = require('./Queue.js');
-
+import Queue from './Queue.js';
 // Исходящая очередь
-module.exports = class OutgoingQueue extends Queue {
+export default class OutgoingQueue extends Queue {
   findClient({ search }) {
     const client = this.data.find((item) => item.firstName === search);
 
@@ -23,4 +22,4 @@ module.exports = class OutgoingQueue extends Queue {
 
     return { result: 'The operation was successful' };
   }
-};
+}

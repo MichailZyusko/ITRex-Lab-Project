@@ -1,7 +1,6 @@
-const Queue = require('./Queue.js');
-
+import Queue from './Queue.js';
 // Входящая очередь
-module.exports = class IncomingQueue extends Queue {
+export default class IncomingQueue extends Queue {
   constructor() {
     super();
     this.currentClient = { value: null };
@@ -15,4 +14,4 @@ module.exports = class IncomingQueue extends Queue {
     this.currentClient = currentClient;
     return currentClient;
   }
-};
+}

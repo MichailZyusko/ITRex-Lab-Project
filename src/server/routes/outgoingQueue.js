@@ -1,9 +1,9 @@
-const express = require('express');
+import express from 'express';
+
+import { outgoingQueue } from '../../controllers/index.js';
+import { isExist, isValid, sendResponse } from '../../middlewares/index.js';
 
 const router = express.Router();
-
-const { outgoingQueue } = require('../../controllers/index.js');
-const { isValid, isExist, sendResponse } = require('../../middlewares/index.js');
 
 const {
   addClient, deleteClient, getQueue, searchClient,
@@ -18,11 +18,11 @@ const {
 // TODO Сразу еще один вопрос оставлю. Как использовать на node ES6 синтаксис при импорте/экспорте
 // TODO у меня VS code подсказывает что это устарело, но когда я исправляю, то выдает ошибки
 
-router.route('/outgoingQueue')
+router.route('/')
   .get(getQueue)
   .post(isValid, isExist, addClient, sendResponse)
   .delete(deleteClient, sendResponse);
 
-router.post('/outgoingQueue/searchClient', searchClient, sendResponse);
+router.post('/searchClient', searchClient, sendResponse);
 
-module.exports = router;
+export default router;

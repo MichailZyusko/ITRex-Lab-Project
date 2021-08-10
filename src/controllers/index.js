@@ -1,4 +1,4 @@
-const { incomingQueue, currentClient } = require('./incomingQueue/index.js');
-const outgoingQueue = require('./outgoingQueue/index.js');
+import { incomingQueue, currentClient } from './incomingQueue/index.js';
+import outgoingQueue from './outgoingQueue/index.js';
 
-module.exports = { incomingQueue, outgoingQueue, currentClient };
+export { incomingQueue, outgoingQueue, currentClient };

@@ -1,21 +1,27 @@
 # ITRex-Lab-Project
 This project will create an electronic doctor's waiting list. The project includes the creation of two websites with working functionality and the connection of databases.
 
-How to use it? Open the current directory in your terminal and type the command "npm start". Then open your browser and click on the following links:
-  1) http://localhost:3000/client.html
-  2) http://localhost:3000/clinic.html
+How to use? There are several options: 
+  1. Open the current directory in a terminal and type in the command "npm start". Then open browser and go to the following links:
+    1) http://localhost:3000/api/html/client.html
+    2) http://localhost:3000/api/html/clinic.html
+    
+  2. Open your terminal and enter the following commands:
+   1) docker build . -t queue/node-web-app1
+   2) docker build . -t websocket_server
+   3) docker-compose up
+ After that, see step one. Enjoy)
   
 Then emulate the doctor and the patient and watch the result :) 
 
 If you have any questions, feel free to ask me on the discord
-
 
 Versions:
  1.0.0
   1) Создание проекта. Новые файлы .html, .css, .js . Полностью рабочий функционал
   2) Сервер на express
   3) Хранение данных в localStorage
-  4) Добавление websoket для синхронизации данных на двух сайтах
+  4) Добавление websocket для синхронизации данных на двух сайтах
 
  1.1.0
   1) Новый дизайн для двух сайтов. 
@@ -42,3 +48,8 @@ Versions:
   4) Добавлена валидация(частично)
   5) Выделил обработчики для HTTP Req: Validate, Adapt, Process on middleware
   6) Добавил красивое и понятное логирование
+  
+ 1.1.4
+  1) Добавлен докер
+  2) Код стал чище
+  3) Вынес websocket server в отдельную папку т поднимаю там отдельный контейнер

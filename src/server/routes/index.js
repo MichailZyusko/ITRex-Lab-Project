@@ -1,4 +1,4 @@
-const incomingQueue = require('./incomingQueue.js');
-const outgoingQueue = require('./outgoingQueue.js');
+import incomingQueue from './incomingQueue.js';
+import outgoingQueue from './outgoingQueue.js';
 
-module.exports = { incomingQueue, outgoingQueue };
+export { incomingQueue, outgoingQueue };

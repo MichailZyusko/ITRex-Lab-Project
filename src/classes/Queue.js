@@ -1,4 +1,4 @@
-module.exports = class Queue {
+export default class Queue {
   constructor() {
     this.data = [];
   }
@@ -6,4 +6,4 @@ module.exports = class Queue {
   addClient(item) {
     return this.data.push(item);
   }
-};
+}

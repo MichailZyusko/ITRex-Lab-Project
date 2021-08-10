@@ -13,8 +13,8 @@ module.exports = {
   },
   rules: {
     curly: ['error', 'all'],
-    'no-console': 'off',
     'import/extensions': ['error', 'always', { js: 'always' }],
+    'no-console': 'off',
     'no-alert': 'off',
   },
 };
