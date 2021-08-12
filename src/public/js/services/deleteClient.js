@@ -1,12 +1,10 @@
-import { deleteClientFromOutgoingQueue } from '../methods/DELETE.js';
+import { deleteClient } from '../methods/index.js';
 
 // Удаляет пациента по его имени
 export default async (searchString) => {
-  const deletingResult = await deleteClientFromOutgoingQueue({ search: searchString });
+  const deletingResult = await deleteClient(searchString);
 
-  if (deletingResult === 'Nothing was found for your query') {
-    return 'Something went wrong';
-  }
-
-  return 'This client was successfuly delete';
+  return deletingResult === 'Nothing was found for your query'
+    ? 'Something went wrong'
+    : 'This client was successfully delete';
 };

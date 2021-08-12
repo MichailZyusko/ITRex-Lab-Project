@@ -1,9 +1,9 @@
 /* eslint-disable consistent-return */
 
 import validator from 'validator';
+import { ApiError } from '../classes/index.js';
 
-// Мб можно убрать !!
-const isValid = (obj) => !!(validator.isEmail(obj.email)
+const isValid = (obj) => (validator.isEmail(obj.email)
     && validator.isAlpha(obj.firstName)
     && validator.isAlpha(obj.lastName)
     && validator.isIn(obj.gender, ['Male', 'Female', 'male', 'female'])
@@ -12,13 +12,11 @@ const isValid = (obj) => !!(validator.isEmail(obj.email)
 export default async (req, res, next) => {
   try {
     if (!isValid(req.body)) {
-      res.status(400).send({ result: 'Not valid form data' });
-      return null;
+      throw new ApiError(400, 'Bad request: not valid form data');
     }
 
     next();
   } catch (error) {
-    console.error(error);
-    return null;
+    next(error);
   }
 };

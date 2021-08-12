@@ -1,6 +1,9 @@
 import WebSocket, { WebSocketServer } from 'ws';
 
-const server = new WebSocketServer({ host: '0.0.0.0', port: '3001' }); // Создаем сервер на 3001 порту для websocket
+const port = 3001;
+const host = '0.0.0.0';
+
+const server = new WebSocketServer({ host, port });
 
 // Создаем события прослушивания connection and message
 server.on('connection', (ws) => {
@@ -8,7 +11,7 @@ server.on('connection', (ws) => {
     server.clients.forEach((client) => {
       // Проверяем на "доступность" сервера
       if (client.readyState === WebSocket.OPEN) {
-        const message = res.toString('utf8');
+        const message = res.toString('UTF8');
 
         client.send(message);
       }

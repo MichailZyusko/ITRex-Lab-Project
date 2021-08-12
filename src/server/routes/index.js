@@ -1,4 +1,3 @@
-import incomingQueue from './incomingQueue.js';
-import outgoingQueue from './outgoingQueue.js';
+import clients from './clients.js';
 
-export { incomingQueue, outgoingQueue };
+export default clients;

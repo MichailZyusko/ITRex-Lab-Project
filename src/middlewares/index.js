@@ -1,7 +1,8 @@
+import errorHandler from './errorHandler.js';
 import isValid from './isValid.js';
 import isExist from './isExist.js';
-import sendResponse from './sendResponse.js';
+import DTO from './DTO.js';
 
 export {
-  isValid, isExist, sendResponse,
+  isValid, isExist, DTO, errorHandler,
 };

@@ -1,19 +1,26 @@
 /* eslint-disable consistent-return */
 
-import incomingQueue from '../controllers/incomingQueue/storage/index.js';
+import queue from '../controllers/storage/index.js';
+import { ApiError } from '../classes/index.js';
 
-const isExist = (obj) => incomingQueue.data.find((e) => JSON.stringify(e) === JSON.stringify(obj));
+const replacer = (key, value) => {
+  if (key === 'ID') {
+    return undefined;
+  }
+  return value;
+};
+
+// eslint-disable-next-line max-len
+const isExist = (obj) => queue.data.find((e) => JSON.stringify(e, replacer) === JSON.stringify(obj, replacer));
 
 export default async (req, res, next) => {
   try {
     if (isExist(req.body)) {
-      res.status(400).send({ result: 'This client exist' });
-      return null;
+      throw new ApiError(400, `Bad request: this ${req.body.firstName} ${req.body.lastName} exist`);
     }
 
     next();
   } catch (error) {
-    console.error(error);
-    return null;
+    next(error);
   }
 };

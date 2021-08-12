@@ -1,21 +1,20 @@
-import { getCurrentClient } from '../methods/GET.js';
-import { setCurrentClient } from '../methods/POST.js';
+import { getNextClient, setDiagnose } from '../methods/index.js';
 
-// Осуществляет запись результата осмотра врача в соответсвующее поле пациента
 export default async (status, timeToLive, resolutionText) => {
-  const currentClient = (await getCurrentClient()).value;
+  const { currentClient } = await getNextClient();
 
   if (currentClient) {
-    const actionStatus = currentClient.resolution ? 'update' : 'added';
+    const actionStatus = currentClient.diagnos ? 'update' : 'added';
 
-    currentClient.resolution = resolutionText;
+    currentClient.diagnos = resolutionText;
 
     if (status) {
       currentClient.TTL = timeToLive;
     }
 
-    await setCurrentClient({ value: currentClient });
+    await setDiagnose(currentClient.ID, { value: currentClient.diagnos, TTL: currentClient.TTL });
     return `Resolution successfully ${actionStatus}`;
   }
+
   return 'You don\'t have a patient to see right now.';
 };

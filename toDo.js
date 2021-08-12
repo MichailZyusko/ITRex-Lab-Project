@@ -13,3 +13,11 @@
 // TODO not immediately and not important
 // 1. Перейти на Linux
 // 2. Адаптивнаая верстка
+
+
+// "start": "start npm run server & start npm run websocket",
+//    "websocket": "node websocketServer/server.js",
+//    "server": "node index.js",
+//   "dev": "nodemon index.js",
+//   "lint": "eslint src/public/js --ext .js",
+//   "test": "echo \"Error: no test specified\" && exit 1"

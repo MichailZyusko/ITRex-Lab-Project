@@ -2,29 +2,28 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-param-reassign */
 
-import { addClientToOutgoingQueue, setCurrentClient } from '../methods/POST.js';
-import { deleteClientFromIncomingQueue } from '../methods/DELETE.js';
-
 const queueStatus = document.getElementById('queueStatus');
 const firstName = document.getElementById('firstName');
 const lastName = document.getElementById('lastName');
-const diagnosText = document.getElementById('diagnosText');
+const diagnoseText = document.getElementById('diagnoseText');
 const form = document.querySelector('form');
 const profileImg = document.getElementById('profileImg');
 
-const changeText = (clients) => {
-  if (clients.length) {
-    queueStatus.textContent = `${clients.length - 1} person in line`;
+let previousClient = null;
 
-    if (clients.length > 1) {
-      firstName.textContent = clients[1].firstName;
-      lastName.textContent = clients[1].lastName;
-    } else if (clients.length === 1) {
-      firstName.textContent = 'You don\'t have new pacients';
+const changeText = (currentClient, nextClients, queueLength) => {
+  if (currentClient) {
+    queueStatus.textContent = `${queueLength - 1} person in line`;
+
+    if (nextClients) {
+      firstName.textContent = nextClients.firstName;
+      lastName.textContent = nextClients.lastName;
+    } else if (currentClient) {
+      firstName.textContent = 'You don\'t have new patient\'s';
       lastName.textContent = '';
     }
 
-    Object.entries(clients[0]).forEach((item) => {
+    Object.entries(currentClient).forEach((item) => {
       const [key, value] = item;
 
       if (form.elements[key]) {
@@ -32,61 +31,40 @@ const changeText = (clients) => {
       }
     });
 
-    profileImg.src = clients[0].picture
-      ? clients[0].picture
+    profileImg.src = currentClient.picture
+      ? currentClient.picture
       : '../../html/src/img/profilePicture.svg';
 
+    diagnoseText.value = '';
     return null;
   }
 
   Array.from(form).forEach((element) => { element.value = ''; });
 
-  firstName.textContent = 'You don\'t have new pacients';
+  firstName.textContent = 'You don\'t have new patient\'s';
   lastName.textContent = '';
   profileImg.src = '../../html/src/img/profilePicture.svg';
-  diagnosText.value = '';
+  diagnoseText.value = '';
 
   return null;
 };
 
-const сontinueReceiving = async (currentClient, clients) => {
-  await setCurrentClient({ value: clients[0] });
-  await deleteClientFromIncomingQueue(currentClient);
-  diagnosText.value = '';
-};
-
-const stopReceiving = async () => await setCurrentClient({ value: null });
-
-const checkClients = async (currentClient, clients) => {
-  clients.length
-    ? сontinueReceiving(currentClient, clients)
-    : stopReceiving(currentClient, clients);
-
-  await addClientToOutgoingQueue(currentClient);
-  changeText(clients);
-
-  return 'Call the next patient';
-};
-
-const checkDiagnos = async (currentClient, clients) => {
-  if (currentClient.resolution) {
-    return checkClients(currentClient, clients);
+const checkDiagnose = async (currentClient) => {
+  if (previousClient !== currentClient) {
+    previousClient = currentClient;
+    return 'Call the next patient';
   }
 
   return 'Please, fill resolution for this client';
 };
 
-export default async (currentClient, clients) => {
+export default async (currentClient, nextClients, queueLength) => {
   if (currentClient) {
-    return checkDiagnos(currentClient, clients);
+    changeText(currentClient, nextClients, queueLength);
+    return checkDiagnose(currentClient);
   }
 
-  if (clients.length) {
-    await setCurrentClient({ value: clients[0] });
-    await deleteClientFromIncomingQueue(clients[0]);
-    changeText(clients);
+  changeText(currentClient, nextClients, queueLength);
 
-    return 'The client is expecting you';
-  }
-  return 'You don\'t have new pacients';
+  return 'You don\'t have new patient\'s';
 };

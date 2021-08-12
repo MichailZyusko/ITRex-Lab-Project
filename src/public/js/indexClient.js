@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 
 import {
-  randomUser, updateData, addClient, searchClient, clinicMessage, clientMessage,
-} from './handlers/index.js';
+  randomUser, updateData, addClient, searchClient, clientMessage,
+} from './controllers/index.js';
 import websocket from './websocket/websocket.js';
 
 const random = (min, max) => Math.floor(min + Math.random() * (max + 1 - min));

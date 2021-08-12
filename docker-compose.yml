@@ -1,12 +1,12 @@
-version: "1"
+version: "2.2"
 services:
   queue:
-    image: queue/node-web-app1
+    image: queue
     command: npm start
     ports:
       - "3000:3000"
   websocket:
-    image: websocket_server
+    image: server
     command: npm start
     ports:
       - "3001:3001"

@@ -1,7 +1,7 @@
-import { searchClientInOutgoingQueue } from '../methods/POST.js';
+import { getSearchingClient } from '../methods/index.js';
 
 export default async (searchString) => {
-  const searchResult = await searchClientInOutgoingQueue({ search: searchString });
+  const searchResult = await getSearchingClient(searchString);
 
-  return JSON.stringify(searchResult, null, 4);
+  return JSON.stringify(searchResult, null, 2);
 };
