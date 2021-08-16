@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/eslint": "^7.28.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-airbnb-base": "^14.2.1",
@@ -20,11 +21,13 @@
     "nodemon": "^2.0.12"
   },
   "dependencies": {
+    "bluebird": "^3.7.2",
     "cache": "^2.3.1",
     "chalk": "^3.0.0",
     "clean": "^4.0.2",
     "express": "^4.17.1",
     "npm": "^7.20.5",
+    "redis": "^3.1.2",
     "validator": "^13.6.0"
   }
 }

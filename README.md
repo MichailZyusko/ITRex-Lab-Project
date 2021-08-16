@@ -7,8 +7,8 @@ How to use? There are several options:
     2) http://localhost:3000/api/html/clinic.html
     
   2. Open your terminal and enter the following commands:
-   1) docker build . -t queue/node-web-app1
-   2) docker build . -t websocket_server
+   1) docker build . -t queue
+   2) docker build . -t websocket
    3) docker-compose up
  After that, see step one. Enjoy)
   
@@ -58,3 +58,9 @@ Versions:
   1) Удален лишний код
   2) Код сделан чище
   3) Добавлен обработчик ошибок
+
+ 1.1.6
+  1) Добавлен Redis
+  2) Изменена структура проекта
+  3) inMemory storage теперь Map, а не Array
+  4) Временно не работает Docker :(

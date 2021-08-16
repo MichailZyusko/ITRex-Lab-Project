@@ -6,7 +6,15 @@ services:
     ports:
       - "3000:3000"
   websocket:
-    image: server
+    image: websocket
     command: npm start
     ports:
       - "3001:3001"
+#  database:
+#    image: database
+#    command: npm start
+#    ports:
+#      - "3002:6379"
+
+
+#docker-compose up

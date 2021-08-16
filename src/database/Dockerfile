@@ -1,9 +1,9 @@
 FROM node:14
-WORKDIR /usr/src/app
+WORKDIR /usr/src/app/storage
 COPY package*.json ./
 RUN npm i
 COPY . .
-EXPOSE 3000
+EXPOSE 6379
 CMD ["npm","start"]
 
-#docker build . -t queue
+#docker build . -t database
