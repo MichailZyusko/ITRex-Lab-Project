@@ -10,11 +10,8 @@ services:
     command: npm start
     ports:
       - "3001:3001"
-#  database:
-#    image: database
-#    command: npm start
-#    ports:
-#      - "3002:6379"
+  storage:
+    image: 'redis:alpine'
 
 
 #docker-compose up

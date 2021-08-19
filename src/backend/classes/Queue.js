@@ -1,8 +1,7 @@
-/* eslint-disable prefer-destructuring,import/no-cycle */
-// TODO поясни пожалуйста про эти(вверху) жалобы линтера. Я гуглил, но немного не понял
-
-// Значения по умолчания запихнуть в конфиг файл
+import notFound from '../../errors/notFound.js';
+// import ApiError from './ApiError.js';
 // Добавить везде try/catch
+// throw new Error
 
 export default class Queue {
   constructor(data = null) {
@@ -14,20 +13,16 @@ export default class Queue {
   async getClients() {
     return Array
       .from(await this.storage.values())
-      .map((item) => JSON.parse(item))
       .sort((a, b) => a.ID - b.ID);
   }
 
   async addClient(ID, item) {
-    return this.storage.set(+ID, JSON.stringify(item));
+    return this.storage.set(ID, item);
   }
 
   async deleteClient(ID) {
-    const client = JSON.parse(await this.storage.get(+ID));
-
-    if (!client) {
-      return { result: 'Nothing was found for your query' };
-    }
+    const client = await this.storage.get(+ID);
+    notFound(client);
 
     await this.storage.delete(+ID);
     return { result: client };
@@ -35,9 +30,10 @@ export default class Queue {
 
   async findClient(ID) {
     try {
-      const client = JSON.parse(await this.storage.get(+ID));
+      const client = await this.storage.get(+ID);
 
-      if (!client?.diagnose) {
+      if (!client.diagnose) {
+        // throw new ApiError (204,'Nothing was found for your query' );
         return { result: 'Nothing was found for your query' };
       }
 
@@ -48,17 +44,16 @@ export default class Queue {
     }
   }
 
-  async setDiagnose(ID, diagnose) {
+  async setDiagnose(ID, diagnose, TTL) {
     try {
-      const client = JSON.parse(await this.storage.get(+ID));
+      const client = await this.storage.get(+ID);
+      notFound(client);
 
-      if (!client) {
-        return { result: 'Nothing was found for your query' };
-      }
+      client.diagnose = diagnose;
+      client.TTL = TTL;
 
-      client.diagnose = diagnose.value;
-      client.TTL = diagnose.TTL;
-      await this.storage.set(+ID, JSON.stringify(client));
+      await this.storage.set(+ID, client);
+      await this.storage.setTTL(+ID, TTL);
 
       return { result: client };
     } catch (e) {
@@ -70,8 +65,7 @@ export default class Queue {
   async callNextClient() {
     const incomingQueue = Array
       .from(await this.storage.values())
-      .map((item) => JSON.parse(item))
-      .filter((item) => !item?.diagnose)
+      .filter(({ diagnose }) => !diagnose)
       .sort((a, b) => a.ID - b.ID);
 
     const queueLength = incomingQueue.length;
@@ -80,11 +74,11 @@ export default class Queue {
       this.currentClient = null;
       this.nextClient = null;
     } else if (queueLength === 1) {
-      this.currentClient = incomingQueue[0];
+      [this.currentClient] = incomingQueue;
       this.nextClient = null;
     } else {
-      this.currentClient = incomingQueue[0];
-      this.nextClient = incomingQueue[1];
+      [this.currentClient] = incomingQueue;
+      [, this.nextClient] = incomingQueue;
     }
 
     const { currentClient, nextClient } = this;

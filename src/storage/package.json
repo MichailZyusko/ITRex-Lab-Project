@@ -1,16 +1,18 @@
 {
-  "name": "websocketserver",
+  "name": "storage",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "export NODE_ENV=dev && node server.js"
+    "start": "node index.js "
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ws": "^8.1.0"
+    "bluebird": "^3.7.2",
+    "redis": "^3.1.2"
   }
 }

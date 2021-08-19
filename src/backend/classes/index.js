@@ -1,5 +1,8 @@
-import DTO from './DTO.js';
 import ApiError from './ApiError.js';
 import Queue from './Queue.js';
+import MemoryStorage from './storage/MemoryStorage.js';
+import RedisStorage from './storage/RedisStorage.js';
 
-export { DTO, ApiError, Queue };
+export {
+  ApiError, Queue, MemoryStorage, RedisStorage,
+};

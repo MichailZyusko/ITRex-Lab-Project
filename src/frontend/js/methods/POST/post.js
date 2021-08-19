@@ -17,6 +17,10 @@ const makePOSTRequest = (route) => async (data = null) => {
     console.log('The operation was successful');
     return result;
   } catch (error) {
+    const { code, message } = error;
+    if (code > 300) {
+      alert(`Error: ${message}`);
+    }
     console.error('Error:', error);
   }
 

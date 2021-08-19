@@ -1,15 +1,13 @@
 import WebSocket, { WebSocketServer } from 'ws';
-// Сделать конфиг файл
-const port = 3001;
-const host = '0.0.0.0';
+import config from './config.js';
+
+const { socketServer: { port, host } } = config;
 
 const server = new WebSocketServer({ host, port });
 
-// Создаем события прослушивания connection and message
 server.on('connection', (ws) => {
   ws.on('message', (res) => {
     server.clients.forEach((client) => {
-      // Проверяем на "доступность" сервера
       if (client.readyState === WebSocket.OPEN) {
         const message = res.toString('UTF8');
 

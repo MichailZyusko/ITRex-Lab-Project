@@ -1,21 +1,15 @@
 /* eslint-disable no-param-reassign */
 import { addClient, getNextClient } from '../methods/index.js';
-
-const queueStatus = document.getElementById('queueStatus');
-const firstName = document.getElementById('firstName');
-const lastName = document.getElementById('lastName');
-
-// TODO Вынести в отдельный метод, так как часто используется
-const updateInformation = (currentClient, nextClients, queueLength) => {
-  queueStatus.textContent = `${queueLength} people before you`;
-  firstName.textContent = currentClient.firstName;
-  lastName.textContent = currentClient.lastName;
-};
+import updateInformation from '../helper/updateInformation.js';
 
 // Добавляет нового пациента в очередь
 export default async (ws, formData = null, randomUser = null) => {
   try {
-    await addClient(randomUser || formData);
+    const { code, message } = await addClient(randomUser || formData);
+    if (code > 300) {
+      alert(`Error: ${message}`);
+    }
+
     ws.send('client');
     const { currentClient, nextClients, queueLength } = await getNextClient();
 

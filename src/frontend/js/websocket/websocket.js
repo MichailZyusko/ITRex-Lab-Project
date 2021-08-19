@@ -1,5 +1,6 @@
-const port = '3001';
-const host = 'localhost';
+import config from './config.js';
+
+const { socketClient: { host, port } } = config;
 
 export default (handler) => {
   const ws = new WebSocket(`ws://${host}:${port}`);
