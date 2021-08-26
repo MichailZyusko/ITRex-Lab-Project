@@ -1,3 +1,11 @@
-import nextClientController from './controller.js';
+/* eslint-disable class-methods-use-this */
 
-export default nextClientController;
+import controller from './controller.js';
+
+class NextClient {
+  controller(req, res, next) {
+    return controller(req, res, next);
+  }
+}
+
+export default new NextClient();

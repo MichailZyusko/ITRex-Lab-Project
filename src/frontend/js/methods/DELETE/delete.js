@@ -5,9 +5,9 @@ const reqObject = () => ({
   },
 });
 
-const makeDELETERequest = (route) => async (ID = null) => {
+const makeDELETERequest = (route) => async (searchString) => {
   try {
-    const response = await fetch(`${route}${ID}`, reqObject());
+    const response = await fetch(`${route}?searchString=${searchString}`, reqObject());
     const result = await response.json();
     console.log('The operation was successful');
     return result;

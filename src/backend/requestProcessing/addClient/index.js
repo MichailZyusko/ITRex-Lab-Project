@@ -1,8 +1,21 @@
-import addClientController from './controller.js';
-import addClientDTO from './DTO.js';
-import addClientIsExistClient from './isExistClient.js';
-import addClientIsValidClientData from './isValidClientData.js';
+/* eslint-disable class-methods-use-this */
 
-export {
-  addClientController, addClientDTO, addClientIsExistClient, addClientIsValidClientData,
-};
+import controller from './controller.js';
+import IsExistClient from './isExistClient.js';
+import IsValidClientData from './isValidClientData.js';
+
+class AddClient {
+  controller(req, res, next) {
+    return controller(req, res, next);
+  }
+
+  isValidClientData(req, res, next) {
+    return IsValidClientData(req, res, next);
+  }
+
+  isExistClientData(req, res, next) {
+    return IsExistClient(req, res, next);
+  }
+}
+
+export default new AddClient();

@@ -1,8 +1,21 @@
-import deleteClientController from './controller.js';
-import deleteClientDTO from './DTO.js';
-import deleteClientIsExistID from './isExistID.js';
-import deleteClientIsValidID from './isValidID.js';
+/* eslint-disable class-methods-use-this */
 
-export {
-  deleteClientController, deleteClientDTO, deleteClientIsExistID, deleteClientIsValidID,
-};
+import controller from './controller.js';
+import IsExistID from './isExistID.js';
+import IsValidID from './isValidID.js';
+
+class DeleteClient {
+  controller(req, res, next) {
+    return controller(req, res, next);
+  }
+
+  isValidID(req, res, next) {
+    return IsValidID(req, res, next);
+  }
+
+  isExistID(req, res, next) {
+    return IsExistID(req, res, next);
+  }
+}
+
+export default new DeleteClient();

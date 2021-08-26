@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { getNextClient, setDiagnose } from '../methods/index.js';
 
 export default async (status, timeToLive, resolutionText) => {
@@ -12,7 +13,7 @@ export default async (status, timeToLive, resolutionText) => {
       currentClient.TTL = timeToLive;
     }
 
-    await setDiagnose(currentClient.ID, { value: currentClient.diagnos, TTL: currentClient.TTL });
+    await setDiagnose(currentClient.clientID, { value: currentClient.diagnos, TTL: currentClient.TTL });
     return `Resolution successfully ${actionStatus}`;
   }
 

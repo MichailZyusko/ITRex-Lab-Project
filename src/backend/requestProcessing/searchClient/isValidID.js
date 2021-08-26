@@ -1,14 +1,27 @@
 import validator from 'validator';
 import { ApiError } from '../../classes/index.js';
 
-const isValid = (ID) => validator.isInt(ID.toString());
+class SearchClientDto {
+  constructor({ query: { searchString: searchClient } } = {}) {
+    this.searchClient = searchClient;
+  }
+}
 
-export default async ({ ID }, res, next) => {
+const isValid = (searchString) => validator.isAlpha(searchString);
+
+export default async (req, res, next) => {
   try {
-    if (!isValid(ID)) {
-      throw new ApiError(400, 'ID does not valid');
+    const { searchClient } = new SearchClientDto(req);
+
+    if (!searchClient) {
+      throw new ApiError(400, 'Request searchString is empty');
     }
 
+    if (!isValid(searchClient)) {
+      throw new ApiError(400, 'searchString does not valid');
+    }
+
+    req.body.searchClient = searchClient;
     next();
   } catch (error) {
     next(error);

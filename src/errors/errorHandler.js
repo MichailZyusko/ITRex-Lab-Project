@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
+
 import { ApiError } from '../backend/classes/index.js';
 
-export default (err, req, res) => {
+export default (err, req, res, next) => {
   let message = 'Something went wrong';
   let status = 500;
 

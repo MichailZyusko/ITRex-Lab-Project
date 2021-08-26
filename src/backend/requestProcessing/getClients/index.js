@@ -1,3 +1,11 @@
-import getClientsController from './controller.js';
+/* eslint-disable class-methods-use-this */
 
-export default getClientsController;
+import controller from './controller.js';
+
+class GetClients {
+  controller(req, res, next) {
+    return controller(req, res, next);
+  }
+}
+
+export default new GetClients();

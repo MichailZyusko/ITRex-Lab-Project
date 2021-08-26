@@ -13,13 +13,22 @@ const dev = {
     port: +DEV_APP_PORT || 3000,
     host: DEV_APP_HOST || '0.0.0.0',
   },
-  // TODO Когда использую докер то ниже нужно указвать host : storage
-  // TODO А когда запускаю не докер, то 127.0.0.1. Как можно оптимизировать это
-  // Когда поднимаешь докер, то нужно указать host : storage
-  storage: {
+  redis: {
     host: DEV_DB_HOST || '127.0.0.1',
     port: +DEV_DB_PORT || 6379,
-    storageType: DEV_DB_STORAGE_TYPE || 'Redis',
+  },
+  database: {
+    host: DEV_DB_HOST || 'localhost',
+    port: +DEV_DB_PORT || 3306,
+    user: 'root',
+    dialect: 'mysql',
+    databaseName: 'queuedb',
+  },
+  // Когда поднимаешь докер, то нужно указать host : storage
+  storage: {
+    // host: DEV_DB_HOST || '127.0.0.1',
+    // port: +DEV_DB_PORT || 6379,
+    storageType: DEV_DB_STORAGE_TYPE || 'database',
   },
   client: {
     TTL: DEV_CLIENT_TTL || 60000,

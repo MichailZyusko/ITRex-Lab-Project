@@ -12,7 +12,7 @@ const makePATCHRequest = (route) => async (ID = null, data = null) => {
   }
 
   try {
-    const response = await fetch(`${route}${ID}`, reqObject(data));
+    const response = await fetch(`${route}?id=${ID}`, reqObject(data));
     const result = await response.json();
     console.log('The operation was successful');
     return result;

@@ -2,7 +2,7 @@ import { addClient } from '../services/index.js';
 
 const URL = 'https://randomuser.me/api/';
 
-const destructuring = (obj) => {
+const parser = (obj) => {
   const {
     gender,
     name: {
@@ -44,5 +44,5 @@ export default async (ws) => {
   const preresult = await fetch(URL);
   const result = await preresult.json();
 
-  await addClient(ws, null, destructuring(...result.results));
+  await addClient(ws, null, parser(...result.results));
 };

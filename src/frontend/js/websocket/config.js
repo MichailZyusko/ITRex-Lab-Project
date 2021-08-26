@@ -1,6 +1,6 @@
 export default {
   socketClient: {
-    port: null || 3001,
-    host: null || 'localhost',
+    port: 3001,
+    host: 'localhost',
   },
 };

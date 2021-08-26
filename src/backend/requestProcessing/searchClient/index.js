@@ -1,8 +1,21 @@
-import searchClientController from './controller.js';
-import searchClientDTO from './DTO.js';
-import searchClientIsExistID from './isExistID.js';
-import searchClientIsValidID from './isValidID.js';
+/* eslint-disable class-methods-use-this */
 
-export {
-  searchClientController, searchClientDTO, searchClientIsExistID, searchClientIsValidID,
-};
+import controller from './controller.js';
+import IsExistID from './isExistID.js';
+import IsValidID from './isValidID.js';
+
+class SearchClient {
+  controller(req, res, next) {
+    return controller(req, res, next);
+  }
+
+  isValidID(req, res, next) {
+    return IsValidID(req, res, next);
+  }
+
+  isExistID(req, res, next) {
+    return IsExistID(req, res, next);
+  }
+}
+
+export default new SearchClient();

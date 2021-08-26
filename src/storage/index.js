@@ -1,21 +1,22 @@
-import redis from 'redis';
-import bluebird from 'bluebird';
-import { MemoryStorage, RedisStorage, Queue } from '../backend/classes/index.js';
+import {
+  MemoryStorage, RedisStorage, DatabaseStorage, Queue,
+} from '../backend/classes/index.js';
 import config from '../../config.js';
 
-bluebird.promisifyAll(redis);
+const { storage: { storageType } } = config;
 
-const { storage: { port, host, storageType } } = config;
-
-const createStorage = (type) => {
+const createQueue = (type) => {
   console.log(`Create new ${type} storage`);
 
-  if (type === 'Redis') {
-    return new Queue(new RedisStorage(redis.createClient(port, host)));
+  if (type === 'database') {
+    return new Queue(new DatabaseStorage());
   }
   if (type === 'inMemory') {
-    return new Queue(new MemoryStorage(new Map()));
+    return new Queue(new MemoryStorage());
+  }
+  if (type === 'Redis') {
+    return new Queue(new RedisStorage());
   }
 };
 
-export default createStorage(storageType);
+export default createQueue(storageType);
