@@ -3,30 +3,30 @@ const reqObject = (data) => ({
   body: JSON.stringify(data),
   headers: {
     'Content-Type': 'application/json',
+    charset: 'UTF-8',
   },
 });
 
 const makePOSTRequest = (route) => async (data = null) => {
   if (!data) {
-    return null;
+    return false;
   }
 
   try {
     const response = await fetch(route, reqObject(data));
-    const result = await response.json();
-    console.log('The operation was successful');
-    return result;
-  } catch (error) {
-    const { code, message } = error;
-    if (code > 300) {
-      alert(`Error: ${message}`);
-    }
-    console.error('Error:', error);
-  }
 
-  return null;
+    if (!response.ok) {
+      const { message } = await response.json();
+
+      alert(`Error: ${message}`);
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.error('Error:', error);
+    return false;
+  }
 };
 
-const addClient = makePOSTRequest('/api/clients');
-
-export default addClient;
+export default makePOSTRequest('/api/clients');

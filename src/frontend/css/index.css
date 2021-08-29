@@ -36,6 +36,10 @@ body{
   /* Note: backdrop-filter has minimal browser support */
 }
 
+#setDiagnose{
+  width: 60%;
+}
+
 #icon{
   display: flex;
   align-self: center;
@@ -128,13 +132,4 @@ body{
 
 #nextButton{
   width: 25%;
-}
-
-#time{
-  width: 80%;
-}
-
-#TTL{
-  width: 25px;
-  height: 25px;
 }

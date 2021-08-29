@@ -1,25 +1,23 @@
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-param-reassign */
+/* eslint-disable no-restricted-syntax */
 
-import queue from '../../storage/index.js';
-
-export default async (refreshTime) => {
+export default async (queue) => {
   try {
-    // TODO Добавить булевский флаг, который будет ослеживать изменения и не дудусить лишний раз БД
-    for (const [key, value] of queue.storage.resolutions.entries()) {
-      const map = value.map((item) => {
-        if (item.TTL !== null && item.TTL - refreshTime <= 0) {
-          item.diagnose = null;
-          item.TTL = null;
-        } else {
-          item.TTL -= refreshTime;
-        }
-        return item;
-      });
+    const now = Date.parse(new Date());
 
-      queue.storage.resolutions.set(key, map);
-    }
+    const resolutions = Array.from(queue.storage.resolutions.entries());
+    resolutions.forEach(([key, value]) => {
+      if (now - Date.parse(value.TTL) >= 0) {
+        value.status = 'outdate';
+        queue.storage.resolutions.set(key, value);
+      }
+    });
+    // for (const [key, value] of queue.storage.resolutions.entries()) {
+    //   if (now - Date.parse(value.TTL) >= 0) {
+    //     value.status = 'outdate';
+    //     queue.storage.resolutions.set(key, value);
+    //   }
+    // }
   } catch (error) {
     console.log(error);
   }

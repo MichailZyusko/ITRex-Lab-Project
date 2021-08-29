@@ -1,9 +1,16 @@
 import { searchClient } from '../services/index.js';
 
 const searchBlock = document.getElementById('searchResult');
+
 const setSearchResult = async (searchString) => {
-  searchBlock.textContent = await searchClient(searchString);
-  return 'We found something for you';
+  const response = await searchClient(searchString);
+  try {
+    JSON.parse(response);
+    searchBlock.textContent = response;
+    return 'We found something for you';
+  } catch (error) {
+    return response;
+  }
 };
 
 export default () => {

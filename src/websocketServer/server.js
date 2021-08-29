@@ -17,7 +17,7 @@ server.on('connection', (ws) => {
   });
 
   console.log('Websocket server connect with smb');
-  ws.send('Is connected...');
+  ws.send('Is connected!');
 });
 
 console.log('Websocket server is running...');

@@ -1,6 +1,6 @@
 import express from 'express';
 import config from './config.js';
-import router from './src/backend/routes/index.js';
+import router from './src/api/routes/index.js';
 import errorHandler from './src/errors/errorHandler.js';
 
 const app = express();
@@ -16,5 +16,3 @@ app.use(errorHandler);
 app.listen(port, host, () => {
   console.log(`Example app listening at http://${host}:${port}...`);
 });
-
-export default app;

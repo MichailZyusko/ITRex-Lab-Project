@@ -1,18 +1,39 @@
 # ITRex-Lab-Project
 This project will create an electronic doctor's waiting list. The project includes the creation of two websites with working functionality and the connection of databases.
 
-How to use? There are several options: 
-  1. Open the current directory in a terminal and type in the command "npm start". Then open browser and go to the following links:
-    1) http://localhost:3000/api/html/client.html
-    2) http://localhost:3000/api/html/clinic.html
+How to use? There are several options:
+  If you want to run the application, follow these instructions: 
+    1. Сlone this repository.
+    2. Open the cloned repository folder in the terminal.
+    3. Run npm i
+    4. Run npm start
+    5. Open browser and go to the following links:
+     1) http://0.0.0.0:3000/html/client.html
+     2) http://0.0.0.0:3000/html/clinic.html
+
+  Then emulate the doctor and the patient and watch the result :) 
     
-  2. Open your terminal and enter the following commands:
-   1) docker build . -t queue
-   2) docker build . -t websocket
-   3) docker-compose up
- After that, see step one. Enjoy)
-  
-Then emulate the doctor and the patient and watch the result :) 
+  If you want to start Docker, follow these instructions:
+    1. Open your terminal and enter the following commands:
+     1) docker build . -t queue
+     2) docker build . -t websocket
+     3) docker-compose up
+    2. Open browser and go to the following links:
+     1) http://0.0.0.0:3000/html/client.html
+     2) http://0.0.0.0:3000/html/clinic.html
+
+  Then emulate the doctor and the patient and watch the result :) 
+
+  If you want to run unit tests, follow these instructions:
+    1. Сlone this repository.
+    2. Open the cloned repository folder in the terminal.
+    3. Run npm i 
+    4. Go to the next directory: 'ITRex-Lab-Project/src/api/classes'
+    5. Run this command: export NODE_ENV=dev && mocha --delay test.js
+
+  You may not be able to run a test. You probably do not have mocha for bash.
+   Open your terminal and type the following command: $ sudo apt install mocha
+
 
 If you have any questions, feel free to ask me on the discord
 
@@ -78,3 +99,13 @@ Versions:
       1. inMemory storage(работает, но с ограничениями)
       2. Docker
       3. Tests
+
+ 2.0.2
+  1) Временно не работает:
+      1. Docker
+  2) Добавлен scheduler
+  3) API по стандартам REST
+  4) Налажено общение между frontend - backend
+  5) Работает валидация и проверка на существование при запросах
+  6) Удален лишний код
+  7) Код сделан чище

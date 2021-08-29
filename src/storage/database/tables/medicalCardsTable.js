@@ -21,7 +21,12 @@ export default sequelize.define('medicalCard', {
     allowNull: true,
   },
   TTL: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DATE,
     allowNull: true,
+  },
+  status: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: 'relevant',
   },
 });

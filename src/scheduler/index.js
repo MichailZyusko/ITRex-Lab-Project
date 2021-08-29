@@ -1,6 +1,6 @@
+import databaseTTL from './databaseStorage/TTL.js';
 import memoryTTL from './memoryStorage/TTL.js';
 import redisTTL from './redisStorage/TTL.js';
-import databaseTTL from './databaseStorage/TTL.js';
 import config from '../../config.js';
 
 const { storage: { storageType } } = config;
@@ -18,6 +18,6 @@ const setTTL = () => {
 };
 
 const TTL = setTTL();
-const refreshTime = 1000;
+const refreshTime = 1e3;
 
-const interval = setInterval(() => TTL(refreshTime, interval), refreshTime);
+export default (queue) => setInterval(() => TTL(queue), refreshTime);

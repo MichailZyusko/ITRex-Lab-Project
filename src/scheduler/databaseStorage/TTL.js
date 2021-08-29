@@ -1,33 +1,19 @@
-/* eslint-disable no-param-reassign */
-
 import medicalCardsTable from '../../storage/database/tables/medicalCardsTable.js';
 
-export default async (refreshTime) => {
+export default async () => {
   try {
     const allData = await medicalCardsTable.findAll();
-    // TODO Добавить булевский флаг, который будет ослеживать изменения и не дудусить лишний раз БД
-    allData.map((item) => {
-      if (item.TTL !== 'NULL' && item.TTL - refreshTime <= 0) {
-        item.diagnose = null;
-        item.TTL = null;
-      } else {
-        item.TTL -= refreshTime;
-      }
+    const now = Date.parse(new Date());
 
-      return item;
-    }).forEach(async (item) => {
-      await medicalCardsTable.update(
-        {
-          diagnose: item.diagnose,
-          TTL: item.TTL,
-        },
-        {
+    allData
+      .filter((item) => item.TTL !== 'NULL' && item.status !== 'outdate' && now - Date.parse(item.TTL) >= 0)
+      .forEach(async (item) => {
+        await medicalCardsTable.update({ status: 'outdate' }, {
           where: {
             clientID: `${item.clientID}`,
           },
-        },
-      );
-    });
+        });
+      });
   } catch (error) {
     console.log(error);
   }

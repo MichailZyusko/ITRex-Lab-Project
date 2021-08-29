@@ -3,10 +3,9 @@ import config from '../../../config.js';
 
 const {
   database: {
-    host, user, databaseName, dialect,
+    host, user, databaseName, dialect, password,
   },
 } = config;
-const password = '';
 
 export default new Sequelize(databaseName, user, password, {
   host,

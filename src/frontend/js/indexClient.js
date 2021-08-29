@@ -5,7 +5,7 @@ import {
 } from './controllers/index.js';
 import websocket from './websocket/websocket.js';
 
-const random = (min, max) => Math.floor(min + Math.random() * (max + 1 - min));
+// const random = (min, max) => Math.floor(min + Math.random() * (max + 1 - min));
 const form = document.getElementById('submitButton');
 const search = document.getElementById('search');
 const ws = websocket(clientMessage);

@@ -5,17 +5,19 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "server_dev": "export NODE_ENV=dev && nodemon index.js",
     "server": "export NODE_ENV=dev && node index.js",
+    "websocket": "export NODE_ENV=dev && node ./src/websocketServer/server.js",
+
+    "server_dev": "export NODE_ENV=dev && nodemon index.js",
+    "websocket_dev": "export NODE_ENV=dev && node ./src/websocketServer/server.js",
+
     "server_debug": "export NODE_ENV=dev && node inspect index.js",
-    "scheduler" : "export NODE_ENV=dev && node ./src/scheduler/index.js",
-    "websocket" : "export NODE_ENV=dev && node ./src/websocketServer/server.js",
+    "websocket_debug": "export NODE_ENV=dev && node ./src/websocketServer/server.js",
 
     "prod": "export NODE_ENV=prod && node index.js & node ./src/scheduler/index.js",
-   
-    "dev": "concurrently --kill-others 'npm run server_dev' 'npm run scheduler' 'npm run websocket'",
-    "debug": "concurrently --kill-others 'npm run server_debug' 'npm run scheduler'",
-    "start": "concurrently --kill-others 'npm run server' 'npm run scheduler'",
+    "dev": "concurrently --kill-others 'npm run server_dev' 'npm run websocket_dev'",
+    "debug": "concurrently --kill-others 'npm run server_debug' 'npm run websocket_debug'",
+    "start": "concurrently --kill-others 'npm run server' 'npm run websocket' ",
     "lint": "eslint src/ --ext .js",
     "test": "export NODE_ENV=dev && mocha test.js"
   },

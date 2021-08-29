@@ -1,20 +1,19 @@
-/* eslint-disable no-param-reassign */
 import { addClient, getNextClient } from '../methods/index.js';
 import updateInformation from '../helper/updateInformation.js';
 
-// Добавляет нового пациента в очередь
 export default async (ws, formData = null, randomUser = null) => {
   try {
-    const { code, message } = await addClient(randomUser || formData);
-    if (code > 300) {
-      alert(`Error: ${message}`);
+    if (await addClient(randomUser || formData)) {
+      ws.send('client');
+      const { currentClient, nextClients, queueLength } = await getNextClient();
+
+      updateInformation(currentClient, nextClients, queueLength);
+      return true;
     }
 
-    ws.send('client');
-    const { currentClient, nextClients, queueLength } = await getNextClient();
-
-    updateInformation(currentClient, nextClients, queueLength);
-    return true;
+    // TODO Добавить алерт с уведомлением о том что клиент был кспешно добавлен
+    alert('Failed to add a client :(');
+    return false;
   } catch (error) {
     console.log(error);
     return false;

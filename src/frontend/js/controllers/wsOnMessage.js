@@ -4,8 +4,8 @@ const queueStatus = document.getElementById('queueStatus');
 const firstName = document.getElementById('firstName');
 const lastName = document.getElementById('lastName');
 
-const clientMessage = async (res) => {
-  if (res.data !== 'clinic') {
+const clientMessage = async ({ data }) => {
+  if (data !== 'clinic') {
     return null;
   }
 
@@ -24,8 +24,8 @@ const clientMessage = async (res) => {
   return null;
 };
 
-const clinicMessage = async (res) => {
-  if (res.data !== 'client') {
+const clinicMessage = async ({ data }) => {
+  if (data !== 'client') {
     return null;
   }
 

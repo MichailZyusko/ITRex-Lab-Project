@@ -1,7 +1,7 @@
-import {
-  MemoryStorage, RedisStorage, DatabaseStorage, Queue,
-} from '../backend/classes/index.js';
+import { MemoryStorage, RedisStorage, DatabaseStorage } from '../api/classes/storage/index.js';
+import { Queue } from '../api/classes/index.js';
 import config from '../../config.js';
+import scheduler from '../scheduler/index.js';
 
 const { storage: { storageType } } = config;
 
@@ -14,9 +14,12 @@ const createQueue = (type) => {
   if (type === 'inMemory') {
     return new Queue(new MemoryStorage());
   }
-  if (type === 'Redis') {
+  if (type === 'redis') {
     return new Queue(new RedisStorage());
   }
 };
 
-export default createQueue(storageType);
+const queue = createQueue(storageType);
+scheduler(queue);
+
+export default queue;

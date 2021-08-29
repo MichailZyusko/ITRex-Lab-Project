@@ -21,8 +21,4 @@ export default sequelize.define('queue', {
     defaultValue: false,
     allowNull: false,
   },
-  // priority: {
-  //   type: DataTypes.TINYINT,
-  //   allowNull: false,
-  // },
 });
