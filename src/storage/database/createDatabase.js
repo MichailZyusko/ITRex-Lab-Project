@@ -3,12 +3,14 @@ import config from '../../../config.js';
 
 const {
   database: {
-    port, host, user, databaseName,
+    port, host, user, databaseName, password,
   },
 } = config;
 
 export default async () => {
-  const connection = mysql.createConnection({ host, port, user }).promise();
+  const connection = mysql.createConnection({
+    host, port, user, password,
+  }).promise();
   const query = `CREATE DATABASE IF NOT EXISTS ${databaseName}`;
 
   try {

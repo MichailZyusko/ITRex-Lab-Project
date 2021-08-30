@@ -65,7 +65,7 @@ setTimeout(async () => {
         address: 'Minsk, Filatova street 9, apt 18',
         email: 'michail.zyusko@gmail.com',
         phoneNumber: '+375 (29) 935-77-10',
-        clientID: 'ef1a62d5-38e1-4687-b4c2-3be008dbad6a',
+        clientID: '7dd791ce-0962-11ec-9a03-0242ac130003',
       });
       await queue.addClient({
         firstName: 'Larisa',
@@ -76,7 +76,7 @@ setTimeout(async () => {
         address: 'Zhodino, Filatova street 9, apt 18',
         email: 'larisa.kiyna@gmail.com',
         phoneNumber: '+375 (29) 888-77-10',
-        clientID: 'db0f26e1-0525-4f74-83ab-4f14f0a90f41',
+        clientID: 'bf6b191c-0962-11ec-9a03-0242ac130003',
       });
     });
 
@@ -93,20 +93,20 @@ setTimeout(async () => {
     });
 
     it('Should delete client from queue', async () => {
-      await queue.setDiagnose('ef1a62d5-38e1-4687-b4c2-3be008dbad6a', 'diagnose1', 60000);
+      await queue.setDiagnose('7dd791ce-0962-11ec-9a03-0242ac130003', 'diagnose1', 60000);
       const result = await queue.deleteClient('Michail');
       expect(result).eql('OK');
     });
 
     it('Should find client in an queue', async () => {
-      await queue.setDiagnose('ef1a62d5-38e1-4687-b4c2-3be008dbad6a', 'diagnose1', 30000);
+      await queue.setDiagnose('7dd791ce-0962-11ec-9a03-0242ac130003', 'diagnose1', 30000);
       const result = await queue.findClient('Michail');
       expect(result).to.be.an('array');
     });
 
     it('Should set diagnose to client', async () => {
       const TTL = 30000;
-      const ID = 'ef1a62d5-38e1-4687-b4c2-3be008dbad6a';
+      const ID = '7dd791ce-0962-11ec-9a03-0242ac130003';
       const diagnose = 'sdfasdfasdfasdf';
       const result = await queue.setDiagnose(ID, diagnose, TTL);
 
@@ -123,7 +123,7 @@ setTimeout(async () => {
         address: 'Minsk, Filatova street 9, apt 18',
         email: 'anna.lagodich@gmail.com',
         phoneNumber: '+375 (29) 935-77-10',
-        clientID: '193e3cc6-2409-4eeb-8417-79b61c3e590d',
+        clientID: 'b040d67a-0962-11ec-9a03-0242ac130003',
       };
       const result = await queue.addClient(exampleOfClient);
       expect(result).eql('OK');

@@ -13,13 +13,21 @@
 // };
 
 import mysql from 'mysql2';
+import config from '../../../../../../config.js';
+
+const {
+  database: {
+    port, host, user, databaseName, password,
+  },
+} = config;
 
 export default async () => {
   const connection = mysql.createConnection({
-    host: 'localhost',
-    port: 3306,
-    user: 'root',
-    database: 'queuedb',
+    host,
+    port,
+    user,
+    password,
+    database: databaseName,
   }).promise();
 
   const query = `SELECT * FROM clients
