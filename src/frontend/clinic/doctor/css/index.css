@@ -1,0 +1,211 @@
+*{
+  border-radius: 10px;
+}
+
+textarea{
+  resize: none;
+}
+
+body{
+  display: flex;
+  flex: 1;
+  padding: 45px 58px;
+  margin: 0px;
+
+  background-color: #F3F9F2;
+}
+
+table {
+  display: flex;
+    flex-flow: column;
+    height: 100%;
+    width: 100%;
+ /* border-collapse: collapse;
+ width: 100%;
+ backdrop-filter: blur(15px); */
+}
+
+thead{
+  flex: 0 0 auto;
+  width: calc(100% - 0.9em);
+  color: white;
+  font-family: 'Montserrat Subrayada', sans-serif;
+  font-size: 20px;
+}
+
+tbody{
+  flex: 1 1 auto;
+  display: block;       
+  overflow-y: auto;    
+  overflow-x: hidden; 
+}
+
+table tbody tr {
+  border-radius: 0px;
+  width: 100%;
+  border-top: 1px solid #FFFFFF;
+  color: white;
+}
+table thead, table tbody tr {
+  display: table;
+  table-layout: fixed;
+}
+
+td, th {
+ text-align: center;
+}
+
+#search{
+  background: #F3F9F2;
+  box-shadow: 0px 4px 4px rgba(148, 145, 158, 0.25);
+  margin-bottom: 25px;
+}
+
+#searchBlock{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  padding: 20px 15px;
+  background: linear-gradient(168.12deg,
+   rgba(229, 225, 241, 0.16) 30.22%,
+   rgba(174, 236, 199, 0.2875) 48.95%,
+   rgba(97, 186, 77, 0.32) 70.18%);
+  border: 1px solid #FFFFFF;
+  backdrop-filter: blur(15px); 
+  /* Note: backdrop-filter has minimal browser support */
+}
+
+#setDiagnose{
+  width: 60%;
+}
+
+#icon{
+  display: flex;
+  align-self: center;
+  width: 60%;
+  height: 60%;
+  /* object-fit: cover; */
+}
+
+#submitButton{
+  margin-top: 30px;
+  margin-bottom: 85px;
+  align-self: center;
+  width: 100%;
+}
+
+#nextClientInfo{
+  display: flex;
+  align-items: center;
+  flex: 1;
+  flex-direction: column;
+  padding: 30px 20px;
+
+
+  background: linear-gradient(280.8deg,
+   rgba(97, 186, 77, 0.32) 19.39%,
+   rgba(174, 236, 199, 0.2875) 48.84%,
+   rgba(229, 225, 241, 0.16) 82.22%);
+  border: 1px solid #FFFFFF;
+  backdrop-filter: blur(15px);
+  /* Note: backdrop-filter has minimal browser support */
+}
+
+#profileImg{
+  position: relative;
+  top: -50%;
+  left: 70%;
+  z-index: 3;
+  border-radius: 50%;
+  width: 100%;
+}
+
+#form{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  margin-top: 80px;
+  padding: 0px 30px ;
+
+  text-align: center;
+
+  background: linear-gradient(347deg,
+   rgba(97, 186, 77, 0.32) 27.72%,
+   rgba(174, 236, 199, 0.2875) 52.67%, 
+   rgba(185, 234, 208, 0.260993) 52.68%,
+   rgba(229, 225, 241, 0.16) 73.42%);
+  mix-blend-mode: normal;
+  border: 1px solid #FFFFFF;
+  backdrop-filter: blur(15px);
+  /* Note: backdrop-filter has minimal browser support */
+}
+
+#fields{
+  position: relative;
+  top: -7%;
+}
+
+#docRightFrame{
+  display: flex;
+  flex: 2;
+  flex-direction: column;
+}
+
+#docNextClientinfo{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: center;
+  width: 70%;
+  padding: 10px 45px 25px 45px;
+
+  background: linear-gradient(280.8deg,
+   rgba(97, 186, 77, 0.32) 19.39%,
+   rgba(174, 236, 199, 0.2875) 48.84%,
+   rgba(229, 225, 241, 0.16) 82.22%);
+  border: 1px solid #FFFFFF;
+  backdrop-filter: blur(15px);
+/* Note: backdrop-filter has minimal browser support */
+
+}
+
+#nextButton{
+  width: 25%;
+}
+
+#recordField{
+  display: flex;
+  flex: 1; 
+  flex-direction: row;
+  background: linear-gradient(280.8deg, rgba(97, 186, 77, 0.32) 19.39%, rgba(174, 236, 199, 0.2875) 48.84%, rgba(154, 131, 232, 0.16) 82.22%);
+  border: 1px solid #FFFFFF;
+  backdrop-filter: blur(15px);
+
+  margin-bottom: 45px;
+}
+
+#queueStatus{
+  margin-top: 15px;
+}
+
+#medicalCard{
+  max-height: 50vh;
+  padding: 0px 35px;
+  display: flex;
+  flex: 2;
+  background: linear-gradient(212.42deg, rgba(97, 186, 77, 0.32) 32.72%, rgba(154, 131, 232, 0.16) 68.49%);
+  border: 5px solid #FFFFFF;
+}
+
+#recordField{
+  max-height: 25vh;
+  padding: 20px 0px;
+  justify-content: space-around;
+}
+
+/*Убрать полосу прокрутки для всей страницы*/
+::-webkit-scrollbar {
+  width: 0;
+}

@@ -7,13 +7,10 @@
   "scripts": {
     "server": "export NODE_ENV=dev && node index.js",
     "websocket": "export NODE_ENV=dev && node ./src/websocketServer/server.js",
-
     "server_dev": "export NODE_ENV=dev && nodemon index.js",
     "websocket_dev": "export NODE_ENV=dev && node ./src/websocketServer/server.js",
-
     "server_debug": "export NODE_ENV=dev && node inspect index.js",
     "websocket_debug": "export NODE_ENV=dev && node ./src/websocketServer/server.js",
-
     "prod": "export NODE_ENV=prod && node index.js & node ./src/scheduler/index.js",
     "dev": "concurrently --kill-others 'npm run server_dev' 'npm run websocket_dev'",
     "debug": "concurrently --kill-others 'npm run server_debug' 'npm run websocket_debug'",
@@ -40,11 +37,15 @@
     "chai": "^4.3.4",
     "chalk": "^3.0.0",
     "clean": "^4.0.2",
+    "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
+    "express-jwt": "^6.1.0",
+    "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.0",
     "node-redis-scan": "^1.3.3",
     "npm": "^7.20.5",
+    "passport": "^0.4.1",
     "redis": "^3.1.2",
     "sequelize": "^6.6.5",
     "uuid": "^8.3.2",

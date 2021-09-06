@@ -16,15 +16,11 @@ export default sequelize.define('doctor', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  fullAge: {
-    type: DataTypes.TINYINT,
+  birthday: {
+    type: DataTypes.DATE,
     allowNull: false,
   },
   position: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  phoneNumber: {
     type: DataTypes.STRING,
     allowNull: false,
   },

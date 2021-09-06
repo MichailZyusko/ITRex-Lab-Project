@@ -3,30 +3,13 @@ import sequelize from '../index.js';
 
 const { DataTypes } = pkg;
 
-export default sequelize.define('medicalCard', {
-  clientID: {
+export default sequelize.define('medical_card', {
+  patientID: {
     type: DataTypes.UUID,
     allowNull: false,
   },
-  doctorID: {
+  medicalCardID: {
     type: DataTypes.UUID,
     allowNull: false,
-  },
-  comingDate: {
-    type: DataTypes.DATE,
-    allowNull: true,
-  },
-  diagnose: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  TTL: {
-    type: DataTypes.DATE,
-    allowNull: true,
-  },
-  status: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    defaultValue: 'relevant',
   },
 });

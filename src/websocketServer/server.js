@@ -7,7 +7,7 @@ const server = new WebSocketServer({ host, port });
 
 server.on('connection', (ws) => {
   ws.on('message', (res) => {
-    server.clients.forEach((client) => {
+    server.clients.forEach(async (client) => {
       if (client.readyState === WebSocket.OPEN) {
         const message = res.toString('UTF8');
 

@@ -1,10 +1,10 @@
-import allQueuesTable from './allQueuesTable.js';
 import clientsTable from './clientsTable.js';
 import doctorsTable from './doctorsTable.js';
 import medicalCardsTable from './medicalCardsTable.js';
-import queuesTable from './queuesTable.js';
+import credentialsTable from './credentialsTable.js';
+import resolutionsTable from './resolutionsTable.js';
 
 export {
-  allQueuesTable, clientsTable,
-  doctorsTable, medicalCardsTable, queuesTable,
+  clientsTable, credentialsTable,
+  doctorsTable, medicalCardsTable, resolutionsTable,
 };

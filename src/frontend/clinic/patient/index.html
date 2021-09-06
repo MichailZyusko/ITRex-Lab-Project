@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/classes.css">
+  <link rel="stylesheet" href="css/index.css">
+  <title>TheQueue</title>
+</head>
+<body>
+  <div class="frame">
+    <div class="h1">THE QUEUE</div>
+    <form id="form"  >
+      <span style="max-width: 40%; max-height: 20vh;">
+        <img src="img/profilePicture.svg" alt="" id="profileImg">
+      </span>
+      <div id="fields">
+        <div class="h2">Personal Info</div>
+        <div class="field">
+          <div class="h6" style="margin-right: 30px;">FIRST NAME</div>
+          <input type="text" class="input" name="firstName">
+        </div>
+        <div class="field">
+          <div class="h6" style="margin-right: 30px;">LAST NAME</div>
+          <input type="text" class="input" name="lastName">
+        </div>
+        <div class="field">
+          <div class="h6" style="margin-right: 30px;">GENDER</div>
+          <input type="text" class="input" name="gender">
+        </div>
+        <div class="field">
+          <div class="h6" style="margin-right: 30px;">BIRTHDAY</div>
+          <input type="text" class="input" name="birthday">
+        </div>
+        <div class="field">
+          <div class="h6" style="margin-right: 30px;">EMAIL</div>
+          <input type="text" class="input" name="email">
+        </div>
+        <div class="field">
+          <div class="h6" style="margin-right: 30px;">PASSWORD</div>
+          <input type="password" class="input" name="password">
+        </div>
+        <br>
+        <br>
+        <button class="button h3" style="width: 75%;">Save changes</button>
+      </div> 
+    </form>
+  </div>
+  <div class="separator"></div>
+  <div class="frame" style="flex: 2; flex-direction: column;" >
+    <div id="recordField">
+      <div style= "display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <img src="img/icn.svg" alt="icon" id="icon">
+        <div id="queueStatus" class="h2">0 PEOPLE BEFORE YOU</div>
+      </div>
+      <div style="margin-top: 15px; ">
+        <div>
+          <label for="doctorName" class="h6" style="margin-right:20px">Doctor: </label>
+          <input list="doctors" name="doctorName" class="input h4" placeholder="Doctor name">
+          <datalist id="doctors">
+            <option value="Иванов Иван Иванович"></option>
+            <option value="Петров Петр Петрович"></option>
+          </datalist>
+        </div>
+        <div style="margin-top: 30px;">
+          <label for="dateTime" class="h6" style="margin-right:26px">Date:</label>
+          <input type="datetime-local" name="dateTime" class="input h4" id="datetime" >
+        </div>
+        <button class="button h3" id="submitButton">queue up</button>
+      </div>
+    </div>
+
+    <div id="medicalCard">
+      <table>
+        <caption style="margin: 20px 0; color: white;" class="h1">Medical cards</caption>
+        <thead>
+          <tr><td>№</td><td>Doctor</td><td>Resolution</td><td>Status</td><td>Date</td></tr>
+        </thead>
+        <tbody id="table"></tbody>
+      </table>
+    </div>
+    <button class="button h3" id="reload" style="width: 35%; align-self: center;">Refresh table content</button>
+  </div>
+  <script type="module" src="./index.js"></script>
+</body>
+</html>

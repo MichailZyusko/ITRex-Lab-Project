@@ -11,7 +11,7 @@ const {
 const dev = {
   app: {
     port: +DEV_APP_PORT || 3000,
-    host: DEV_APP_HOST || '0.0.0.0',
+    host: DEV_APP_HOST || 'localhost',
   },
   redis: {
     host: DEV_DB_HOST || '127.0.0.1',
@@ -25,9 +25,10 @@ const dev = {
     dialect: 'mysql',
     databaseName: 'queuedb',
   },
+  secretKey: 'SECRET_KEY',
   // Когда поднимаешь докер, то нужно указать host : storage
   storage: {
-    storageType: DEV_DB_STORAGE_TYPE || 'database',
+    storageType: DEV_DB_STORAGE_TYPE || 'redis',
   },
   client: {
     TTL: DEV_CLIENT_TTL || 60000,

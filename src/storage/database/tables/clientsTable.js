@@ -16,27 +16,15 @@ export default sequelize.define('client', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  fullAge: {
-    type: DataTypes.TINYINT,
-    allowNull: false,
-  },
-  country: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  address: {
-    type: DataTypes.STRING,
+  birthday: {
+    type: DataTypes.DATE,
     allowNull: false,
   },
   email: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  phoneNumber: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  clientID: {
+  patientID: {
     type: DataTypes.UUID,
     allowNull: false,
   },

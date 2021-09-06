@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/classes.css">
+  <link rel="stylesheet" href="css/index.css">
+  <title>TheReseption</title>
+</head>
+<body>
+  <div class="frame">
+    <div class="h1">THE RESEPTION</div>
+     <form id="form" action="">
+      <span style="max-width: 40%; max-height: 20vh;">
+        <img src="img/profilePicture.svg" alt="" id="profileImg">
+      </span>
+         <div id="fields">
+        <div class="h2">Personal Info</div>
+        <div class="field">
+          <div class="h6" style="margin-right: 30px;">FIRST NAME</div>
+          <input type="text" class="input" name="firstName">
+        </div>
+        <div class="field">
+          <div class="h6" style="margin-right: 30px;">LAST NAME</div>
+          <input type="text" class="input" name="lastName">
+        </div>
+        <div class="field">
+          <div class="h6" style="margin-right: 30px;">GENDER</div>
+          <input type="text" class="input" name="gender">
+        </div>
+        <div class="field">
+          <div class="h6" style="margin-right: 30px;">BIRTHDAY</div>
+          <input type="text" class="input" name="birthday">
+        </div>
+        <div class="field">
+          <div class="h6" style="margin-right: 30px;">EMAIL</div>
+          <input type="text" class="input" name="email">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="separator"></div>
+  <div id="docRightFrame">
+    <div style="display: flex; justify-content: flex-end;">
+      <input list="patients" id="search" class="input h4" placeholder="Search" style="width: 30%;">
+      <datalist id="patients"></datalist>
+    </div>
+    <div id="docNextClientinfo">
+      <div style="display: flex; flex: 3; justify-content: space-between;">
+        <img src="img/icn.svg" alt="" style="max-width: 25%;">
+      </div>
+      <div style="display: flex; flex: 1; justify-content: space-between;">
+        <div id="queueStatus" class="h2">0 persons in line</div>
+        <button class="button h3" id="nextButton" type="button" form="form">NEXT</button>
+      </div>
+    </div>
+
+    <div style="display: flex; flex: 1; margin-top: 65px;">
+      <div style="display: flex; flex-direction: column; flex: 1;">
+        <input list="resolutions" id="resolutionSelector"
+        class="input h4" placeholder="Select resolution" style="margin-bottom: 20px;">
+        <datalist id="resolutions"></datalist>
+        <div id="searchBlock">
+          <pre class="searchResult h4" id="searchResult"></pre>
+          <button class="button h3" style="margin-top: 15px" id="deleteButton">DELETE</button>
+        </div>
+      </div>
+      <div class="separator"></div>
+        <div style="display: flex; flex-direction: column; flex: 1;">
+        <div id="searchBlock">
+          <textarea class="searchResult h4" id="diagnoseText"></textarea>
+          <div style="display: flex; justify-content:space-around; align-items: center; margin-top: 20px;">
+            <button class="button h3" id="setDiagnose">SET DIAGNOSE</button>
+            <select name="dropdown" class="input h4" id="time">
+              <option value="10000">10 sec</option>
+              <option value="30000">30 sec</option>
+              <option value="60000">1 min</option>
+              <option value="300000">5 min</option>
+              <option value="600000">10 min</option>
+              <option value="1800000">30 min</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="./index.js"></script>
+</body>
+</html>

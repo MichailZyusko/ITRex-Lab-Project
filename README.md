@@ -1,6 +1,7 @@
 # ITRex-Lab-Project
 This project will create an electronic doctor's waiting list. The project includes the creation of two websites with working functionality and the connection of databases.
 
+// TODO Добавить запись, что нужно также npm i websocket
 How to use? There are several options:
   If you want to run the application, follow these instructions: 
     1. Сlone this repository.
@@ -110,6 +111,22 @@ Versions:
   6) Удален лишний код
   7) Код сделан чище
 
-2.0.3
+ 2.0.3
   1) Добавлен пароль в базу данных
   2) Вся информация берется из конфиг файла
+
+ 2.0.4
+  1) Удален весь inMemory, Redis, database 
+  2) Redis используется только для хранения очереди(id пациента) использую осортированный set
+  3) Немного измененна структура БД. Добавлены/удалены некоторые таблицы
+  4) Изменился frontend:
+      1. Добавлена таблица со всеми резолюциями на странице клиента
+      2. Search as you type
+      3. Добавлены страницы авторизации/аунтефикации
+  5) Изменилась структура проекта
+  6) Добавлено много новых маршрутов
+  7) Временно не работает:
+      1. Docker
+      2. Tests
+      3. Websoket
+  
