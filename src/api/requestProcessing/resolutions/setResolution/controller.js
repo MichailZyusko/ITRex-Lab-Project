@@ -1,5 +1,3 @@
-// import queue from '../../../storage/index.js';
-// import MedicalCardsTable from '../../database/tables/medicalCardsTable/MedicalCardsTable.js';
 import database from '../../../database/DatabaseStorage.js';
 
 export default async ({ data: { diagnose, ID, TTL } }, res, next) => {

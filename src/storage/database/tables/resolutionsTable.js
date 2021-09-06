@@ -1,5 +1,6 @@
 import pkg from 'sequelize';
 import sequelize from '../index.js';
+import resolutionStatus from '../../../api/database/tables/resolutionStatus.js';
 
 const { DataTypes } = pkg;
 
@@ -23,7 +24,7 @@ export default sequelize.define('resolution', {
   status: {
     type: DataTypes.STRING,
     allowNull: false,
-    defaultValue: 'relevant',
+    defaultValue: resolutionStatus.relevant,
   },
   date: {
     type: DataTypes.DATE,

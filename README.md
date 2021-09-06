@@ -130,3 +130,6 @@ Versions:
       2. Tests
       3. Websoket
   
+
+  2.0.5
+   1) Fix bugs 
