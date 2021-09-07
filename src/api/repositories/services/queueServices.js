@@ -2,13 +2,13 @@
 /* eslint-disable no-plusplus */
 
 import { v4 as uuidv4 } from 'uuid';
-import RedisStorage from './RedisStorage.js';
-import DatabaseStorage from '../database/DatabaseStorage.js';
+import RedisStorage from '../storage/queueStorage.js';
+import DatabaseStorage from '../../database/DatabaseStorage.js';
 
 export default class Queue {
-  constructor() {
-    this.storage = RedisStorage;
-    this.queueID = uuidv4();
+  constructor(queueID, storage) {
+    this.storage = storage || new RedisStorage();
+    this.queueID = queueID || uuidv4();
     this.count = 0;
   }
 
@@ -36,7 +36,7 @@ export default class Queue {
 
   async deleteCurrentPatient() {
     try {
-      await this.storage.deleteCurrentPatient(this.queueID);
+      return await this.storage.deleteCurrentPatient(this.queueID);
     } catch (error) {
       console.error(error);
     }
@@ -49,16 +49,6 @@ export default class Queue {
       }
 
       return false;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async getPopsitionInQueue() {
-    try {
-      const positions = await this.storage.getPopsitionInQueue(this.queueID);
-
-      return positions;
     } catch (error) {
       console.error(error);
     }

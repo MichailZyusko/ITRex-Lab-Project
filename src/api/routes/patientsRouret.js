@@ -4,7 +4,6 @@ import currentPatient from '../requestProcessing/patients/currentPatient/index.j
 import getInQueue from '../requestProcessing/patients/queueUp/index.js';
 import getAllPatient from '../requestProcessing/patients/getAllPatientsLikeValue/index.js';
 import getPatientByID from '../requestProcessing/patients/getPatientByID/index.js';
-import getPositionInQueue from '../requestProcessing/patients/getPositionInQueue/index.js';
 
 const router = Router();
 
@@ -31,11 +30,6 @@ router.route('/id')
   .get(
     getPatientByID.isValidQueryParams,
     getPatientByID.controller,
-  );
-
-router.route('/positions')
-  .get(
-    getPositionInQueue.controller,
   );
 
 export default router;

@@ -2,15 +2,15 @@
 
 import redis from 'redis';
 import bluebird from 'bluebird';
-import config from '../../../config.js';
+import config from '../../../../config.js';
 
 const { redis: { port, host } } = config;
 
 bluebird.promisifyAll(redis);
 
-class RedisStorage {
-  constructor() {
-    this.data = redis.createClient(port, host);
+export default class RedisStorage {
+  constructor(redisClient) {
+    this.data = redisClient || redis.createClient(port, host);
   }
 
   async setPatient(patientID, queueID, count) {
@@ -37,5 +37,3 @@ class RedisStorage {
     return await this.data.zrangebyscoreAsync(`queues:${queueID}`, -Infinity, +Infinity);
   }
 }
-
-export default new RedisStorage();
