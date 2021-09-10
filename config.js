@@ -11,7 +11,7 @@ const dev = {
     host: process.env.DEV_DB_HOST || 'localhost',
     port: +process.env.DEV_DB_PORT || 3306,
     user: 'root',
-    password: '',
+    password: 'Timafifa14',
     dialect: 'mysql',
     databaseName: 'queuedb',
   },

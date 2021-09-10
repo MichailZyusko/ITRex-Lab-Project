@@ -14,6 +14,7 @@ export default class RedisStorage {
   }
 
   async setPatient(patientID, queueID, count) {
+    console.log(await this.data.zrangeAsync(`queues:${queueID}`, 0, 0));
     return await this.data.zaddAsync(`queues:${queueID}`, 'NX', count, patientID);
   }
 

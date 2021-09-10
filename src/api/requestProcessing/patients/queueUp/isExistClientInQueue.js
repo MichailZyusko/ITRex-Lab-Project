@@ -3,11 +3,11 @@
 import queue from '../../../../storage/index.js';
 import ApiError from '../../../../errors/ApiError.js';
 
-const isExistInIncomingQueue = async (patientID) => !await queue.addPatient(patientID);
+const isExistInIncomingQueue = async (patientID, queueID) => !await queue.addPatient(patientID, queueID);
 
-export default async ({ data: patientID }, res, next) => {
+export default async ({ data: patientID, queue: queueID }, res, next) => {
   try {
-    if (await isExistInIncomingQueue(patientID)) {
+    if (await isExistInIncomingQueue(patientID, queueID)) {
       throw new ApiError(400, 'I\'m sorry, but at this moment you are already in the queue');
     }
 

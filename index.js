@@ -3,6 +3,7 @@ import cookieParser from 'cookie-parser';
 
 import config from './config.js';
 import patientsRouret from './src/api/routes/patientsRouret.js';
+import specializationsRouter from './src/api/routes/specializationsRouter.js';
 import resolutionsRouter from './src/api/routes/resolutionsRouter.js';
 import authorizationRouter from './src/api/routes/authorizationRouter.js';
 import errorHandler from './src/errors/errorHandler.js';
@@ -14,7 +15,8 @@ const { app: { port, host } } = config;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use('/sign-in', express.static('src/frontend/authorization/sign-in'));
+app.use('/patient-sign-in', express.static('src/frontend/authorization/patient-sign-in'));
+app.use('/doctor-sign-in', express.static('src/frontend/authorization/doctor-sign-in'));
 app.use('/sign-up', express.static('src/frontend/authorization/sign-up'));
 app.use('/api/authorization', authorizationRouter);
 
@@ -26,8 +28,9 @@ app.use('/patient', express.static('src/frontend/clinic/patient'));
 
 app.use('/api/resolutions', resolutionsRouter);
 app.use('/api/clients', patientsRouret);
+app.use('/api/specializations', specializationsRouter);
 app.use(errorHandler);
 
 app.listen(port, host, () => {
-  console.log(`Example app listening at http://${host}:${port}/sign-in/...`);
+  console.log(`Example app listening at http://${host}:${port}/patient-sign-in/...`);
 });

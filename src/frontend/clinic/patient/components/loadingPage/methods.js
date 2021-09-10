@@ -1,4 +1,4 @@
-const getPatientDataByID = (route) => async () => {
+const getPatientDataByIDFunc = (route) => async () => {
   try {
     const response = await fetch(route);
     const result = await response.json();
@@ -16,4 +16,24 @@ const getPatientDataByID = (route) => async () => {
   }
 };
 
-export default getPatientDataByID('/api/clients/id');
+const getAllSpecializationsFunc = (route) => async () => {
+  try {
+    const response = await fetch(route);
+    const result = await response.json();
+
+    if (!response.ok) {
+      const { result: message } = result;
+
+      alert(`Error ${message}`);
+      return false;
+    }
+    return result;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+const getAllSpecializations = getAllSpecializationsFunc('/api/specializations');
+const getPatientDataByID = getPatientDataByIDFunc('/api/clients/id');
+export { getAllSpecializations, getPatientDataByID };

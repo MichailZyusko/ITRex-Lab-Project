@@ -14,7 +14,7 @@ export default sequelize.define('resolution', {
     allowNull: false,
   },
   doctorID: {
-    type: DataTypes.UUID,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   resolutionText: {

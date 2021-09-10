@@ -8,6 +8,8 @@ import ClientsTable from './tables/clientsTable/ClientsTable.js';
 import CredentialsTable from './tables/credentialsTable/credentialsTable.js';
 import MedicalCardsTable from './tables/medicalCardsTable/MedicalCardsTable.js';
 import ResolutionsTable from './tables/resolutionsTable/ResolutionsTable.js';
+import SpecializationsTable from './tables/specializationsTable/SpecializationsTable.js';
+import DoctorsTable from './tables/doctorsTable/DoctorsTable.js';
 
 import createDatabase from '../../storage/database/createDatabase.js';
 import sequelize from '../../storage/database/index.js';
@@ -52,8 +54,30 @@ class DatabaseStorage {
     return { token };
   }
 
+  async findDoctorByLogin(password, login) {
+    const record = await CredentialsTable.findDoctorByLogin(login);
+
+    if (!record) {
+      throw new ApiError(403, 'Wrong password or login');
+    }
+
+    const { userID, password: passwordFromDB } = record;
+
+    if (passwordFromDB !== password) {
+      throw new ApiError(403, 'Wrong password or login');
+    }
+
+    const token = jwt.sign({ id: userID }, secretKey);
+
+    return { token };
+  }
+
   async getPatientByID(ID) {
     return await ClientsTable.getPatientByID(ID);
+  }
+
+  async getAllSpecializations() {
+    return await SpecializationsTable.getAllSpecializations();
   }
 
   async setDiagnose(ID, doctorID, diagnose, comingDate, TTL) {
@@ -82,6 +106,10 @@ class DatabaseStorage {
 
   async deleteResolutionByID(resolutionID) {
     return await ResolutionsTable.deleteResolutionByID(resolutionID);
+  }
+
+  async findSpecialization(userID) {
+    return await DoctorsTable.findSpecialization(userID);
   }
 }
 

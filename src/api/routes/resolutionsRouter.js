@@ -14,6 +14,7 @@ router.route('/')
   )
   .post(
     setResolution.isValidQueryParams,
+    setResolution.findDoctorSpecialization,
     setResolution.isExistClient,
     setResolution.controller,
   );

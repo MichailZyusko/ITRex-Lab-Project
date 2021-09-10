@@ -3,6 +3,7 @@
 import controller from './controller.js';
 import isExistClient from './isExistClient.js';
 import isValidQueryParams from './isValidQueryParams.js';
+import findDoctorSpecialization from './findDoctorSpecialization.js';
 
 class SetDiagnose {
   controller(req, res, next) {
@@ -15,6 +16,10 @@ class SetDiagnose {
 
   isExistClient(req, res, next) {
     return isExistClient(req, res, next);
+  }
+
+  findDoctorSpecialization(req, res, next) {
+    return findDoctorSpecialization(req, res, next);
   }
 }
 

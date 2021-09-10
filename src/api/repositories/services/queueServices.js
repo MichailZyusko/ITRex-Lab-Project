@@ -12,9 +12,10 @@ export default class Queue {
     this.count = 0;
   }
 
-  async addPatient(patientID) {
+  async addPatient(patientID, queueID) {
     try {
-      const result = await this.storage.setPatient(patientID, this.queueID, this.count + 1);
+      console.log(patientID, queueID);
+      const result = await this.storage.setPatient(patientID, queueID, this.count + 1);
       if (result) {
         this.count++;
       }
@@ -25,26 +26,28 @@ export default class Queue {
     }
   }
 
-  async getCurrentPatient() {
+  async getCurrentPatient(queueID) {
     try {
-      const [patientID] = await this.storage.getCurrentPatient(this.queueID);
+      console.log('queueID: ', queueID);
+      const [patientID] = await this.storage.getCurrentPatient(queueID);
+      console.log(patientID);
       return await DatabaseStorage.getPatientByID(patientID);
     } catch (error) {
       console.error(error);
     }
   }
 
-  async deleteCurrentPatient() {
+  async deleteCurrentPatient(queueID) {
     try {
-      return await this.storage.deleteCurrentPatient(this.queueID);
+      return await this.storage.deleteCurrentPatient(queueID);
     } catch (error) {
       console.error(error);
     }
   }
 
-  async isExistPatient(patientID) {
+  async isExistPatient(patientID, queueID) {
     try {
-      if (await this.storage.isExistPatient(this.queueID, patientID)) {
+      if (await this.storage.isExistPatient(queueID, patientID)) {
         return true;
       }
 

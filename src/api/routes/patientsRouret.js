@@ -20,9 +20,13 @@ router.route('/')
 
 router.route('/currentPatient')
   .get(
+    currentPatient.isValidDoctorData,
+    currentPatient.findDoctorQueueID,
     currentPatient.getController,
   )
   .delete(
+    currentPatient.isValidDoctorData,
+    currentPatient.findDoctorQueueID,
     currentPatient.deleteController,
   );
 

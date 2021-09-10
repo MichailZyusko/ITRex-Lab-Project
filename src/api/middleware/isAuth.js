@@ -15,7 +15,7 @@ export default (req, res, next) => {
     const { token } = new GetTokenDTO(req);
 
     if (!token) {
-      return res.redirect('http://localhost:3000/sign-in/');
+      return res.redirect('http://localhost:3000/patient-sign-in/');
     }
     try {
       const { id: patientID } = jwt.verify(token, secretKey);

@@ -1,7 +1,8 @@
 import { Router } from 'express';
 
 import signUp from '../requestProcessing/authorization/signUp/index.js';
-import signIn from '../requestProcessing/authorization/signIn/index.js';
+import patientSignIn from '../requestProcessing/authorization/patientSignIn/index.js';
+import doctorSignIn from '../requestProcessing/authorization/doctorSignIn/index.js';
 
 const router = Router();
 
@@ -12,10 +13,16 @@ router.route('/signUp')
     signUp.controller,
   );
 
-router.route('/signIn')
+router.route('/patient/signIn')
   .post(
-    signIn.isValidPasswordLogin,
-    signIn.controller,
+    patientSignIn.isValidPasswordLogin,
+    patientSignIn.controller,
+  );
+
+router.route('/doctor/signIn')
+  .post(
+    doctorSignIn.isValidPasswordLogin,
+    doctorSignIn.controller,
   );
 
 export default router;
