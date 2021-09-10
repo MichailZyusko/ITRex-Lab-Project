@@ -14,7 +14,6 @@ export default class Queue {
 
   async addPatient(patientID, queueID) {
     try {
-      console.log(patientID, queueID);
       const result = await this.storage.setPatient(patientID, queueID, this.count + 1);
       if (result) {
         this.count++;
@@ -28,9 +27,7 @@ export default class Queue {
 
   async getCurrentPatient(queueID) {
     try {
-      console.log('queueID: ', queueID);
       const [patientID] = await this.storage.getCurrentPatient(queueID);
-      console.log(patientID);
       return await DatabaseStorage.getPatientByID(patientID);
     } catch (error) {
       console.error(error);

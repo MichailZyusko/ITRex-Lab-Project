@@ -21,9 +21,7 @@ class ClientsTable {
   }
 
   async getPatientByID(ID) {
-    const result = await getPatientByID(ID);
-    console.log(result);
-    return result;
+    return await getPatientByID(ID);
   }
 }
 
