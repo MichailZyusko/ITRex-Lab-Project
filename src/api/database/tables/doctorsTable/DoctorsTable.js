@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 
-import { addDoctor, findSpecialization } from './index.js';
+import { addDoctor, findSpecialization, getDoctor } from './index.js';
 
 class DoctorsTable {
   async addDoctor(doctor) {
@@ -9,6 +9,10 @@ class DoctorsTable {
 
   async findSpecialization(userID) {
     return await findSpecialization(userID);
+  }
+
+  async getDoctor(userID) {
+    return await getDoctor(userID);
   }
 }
 

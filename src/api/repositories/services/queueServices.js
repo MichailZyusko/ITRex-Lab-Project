@@ -8,7 +8,6 @@ import DatabaseStorage from '../../database/DatabaseStorage.js';
 export default class Queue {
   constructor(queueID, storage) {
     this.storage = storage || new RedisStorage();
-    this.queueID = queueID || uuidv4();
     this.count = 0;
   }
 

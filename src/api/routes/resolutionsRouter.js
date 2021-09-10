@@ -4,6 +4,7 @@ import getAllResolutions from '../requestProcessing/resolutions/getAllResolution
 import setResolution from '../requestProcessing/resolutions/setResolution/index.js';
 import deleteResolutionByID from '../requestProcessing/resolutions/deleteResolution/index.js';
 import getResolutionByID from '../requestProcessing/resolutions/getResolutionByID/index.js';
+import getAllResolutionsByID from '../requestProcessing/resolutions/getAllResolutionsByID/index.js';
 
 const router = Router();
 
@@ -15,6 +16,7 @@ router.route('/')
   .post(
     setResolution.isValidQueryParams,
     setResolution.findDoctorSpecialization,
+    setResolution.findDoctorName,
     setResolution.isExistClient,
     setResolution.controller,
   );
@@ -29,4 +31,9 @@ router.route('/id')
     deleteResolutionByID.controller,
   );
 
+router.route('/patient/:id')
+  .get(
+    getAllResolutionsByID.isValidParams,
+    getAllResolutionsByID.controller,
+  );
 export default router;

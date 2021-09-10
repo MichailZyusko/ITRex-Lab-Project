@@ -1,26 +1,27 @@
 import validator from 'validator';
 import ApiError from '../../../../errors/ApiError.js';
 
-class DeletePatientDTO {
-  constructor({ query: { resolutionID } } = {}) {
-    this.resolutionID = resolutionID;
+class FindResolutionDTO {
+  constructor({ params: { id } } = {}) {
+    this.patientID = id;
   }
 }
 
-const isValid = (resolutionID) => validator.isUUID(resolutionID);
+const isValid = (patientID) => validator.isUUID(patientID);
 
 export default async (req, res, next) => {
   try {
-    const { resolutionID } = new DeletePatientDTO(req);
-    if (!resolutionID) {
+    const { patientID } = new FindResolutionDTO(req);
+
+    if (!patientID) {
       throw new ApiError(400, 'Request searchString is empty');
     }
 
-    if (!isValid(resolutionID)) {
+    if (!isValid(patientID)) {
       throw new ApiError(400, 'searchString does not valid');
     }
 
-    req.data = resolutionID;
+    req.data = patientID;
     next();
   } catch (error) {
     next(error);

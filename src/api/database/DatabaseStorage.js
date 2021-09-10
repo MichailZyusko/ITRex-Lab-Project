@@ -80,12 +80,12 @@ class DatabaseStorage {
     return await SpecializationsTable.getAllSpecializations();
   }
 
-  async setDiagnose(ID, doctorID, diagnose, comingDate, TTL) {
+  async setDiagnose(ID, doctorID, diagnose, comingDate, TTL, name) {
     const medicalCardID = uuidv4();
     const resolutionID = uuidv4();
     await MedicalCardsTable.addRecord(ID, medicalCardID);
     return await ResolutionsTable.addRecord(resolutionID, medicalCardID,
-      doctorID, diagnose, comingDate, TTL);
+      doctorID, diagnose, comingDate, TTL, name);
   }
 
   async getAllResolutionsByID(patientID) {
@@ -110,6 +110,10 @@ class DatabaseStorage {
 
   async findSpecialization(userID) {
     return await DoctorsTable.findSpecialization(userID);
+  }
+
+  async getDoctor(userID) {
+    return await DoctorsTable.getDoctor(userID);
   }
 }
 

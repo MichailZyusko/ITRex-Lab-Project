@@ -13,7 +13,11 @@ export default sequelize.define('resolution', {
     type: DataTypes.UUID,
     allowNull: false,
   },
-  doctorID: {
+  doctorSpecialization: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  doctorName: {
     type: DataTypes.STRING,
     allowNull: false,
   },

@@ -17,9 +17,9 @@ export default async (req, res, next) => {
       throw new ApiError(400, 'Invalid request body');
     }
 
-    if (!isValid(text)) {
+    /*    if (!isValid(text)) {
       throw new ApiError(400, 'Not valid diagnose');
-    }
+    } */
 
     req.data = text;
     next();
