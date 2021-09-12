@@ -7,8 +7,8 @@ class DoctorsTable {
     await addDoctor(doctor);
   }
 
-  async findSpecialization(userID) {
-    return await findSpecialization(userID);
+  async findSpecialization(doctorID) {
+    return await findSpecialization(doctorID);
   }
 
   async getDoctor(userID) {

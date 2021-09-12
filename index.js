@@ -2,8 +2,8 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 
 import config from './config.js';
-import patientsRouret from './src/api/routes/patientsRouret.js';
-import specializationsRouter from './src/api/routes/specializationsRouter.js';
+import patientsRouter from './src/api/routes/patientsRouter.js';
+import doctorsRouter from './src/api/routes/doctorsRouter.js';
 import resolutionsRouter from './src/api/routes/resolutionsRouter.js';
 import authorizationRouter from './src/api/routes/authorizationRouter.js';
 import errorHandler from './src/errors/errorHandler.js';
@@ -27,8 +27,8 @@ app.use('/doctor', express.static('src/frontend/clinic/doctor'));
 app.use('/patient', express.static('src/frontend/clinic/patient'));
 
 app.use('/api/resolutions', resolutionsRouter);
-app.use('/api/clients', patientsRouret);
-app.use('/api/specializations', specializationsRouter);
+app.use('/api/clients', patientsRouter);
+app.use('/api/doctors', doctorsRouter);
 app.use(errorHandler);
 
 app.listen(port, host, () => {

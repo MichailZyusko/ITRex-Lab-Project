@@ -2,7 +2,7 @@ import DatabaseStorage from '../../../database/DatabaseStorage.js';
 
 export default async (req, res, next) => {
   try {
-    const result = await DatabaseStorage.findSpecialization(req.data.userID);
+    const result = await DatabaseStorage.findSpecialization(req.data.doctorID);
     req.doctor = result.specializationName;
     next();
   } catch (error) {

@@ -34,6 +34,6 @@ const getAllSpecializationsFunc = (route) => async () => {
   }
 };
 
-const getAllSpecializations = getAllSpecializationsFunc('/api/specializations');
+const getAllSpecializations = getAllSpecializationsFunc('/api/doctors/specializations');
 const getPatientDataByID = getPatientDataByIDFunc('/api/clients/id');
 export { getAllSpecializations, getPatientDataByID };

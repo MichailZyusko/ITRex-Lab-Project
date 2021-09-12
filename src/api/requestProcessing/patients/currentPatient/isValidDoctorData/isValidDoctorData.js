@@ -2,26 +2,26 @@ import validator from 'validator';
 import ApiError from '../../../../../errors/ApiError.js';
 
 class GetDoctorDto {
-  constructor({ patientID } = {}) {
-    this.patientID = patientID;
+  constructor({ doctorID } = {}) {
+    this.doctorID = doctorID;
   }
 }
 
-const isValid = (patientID) => validator.isUUID(patientID);
+const isValid = (doctorID) => validator.isUUID(doctorID);
 
 export default async (req, res, next) => {
   try {
-    const { patientID } = new GetDoctorDto(req);
+    const { doctorID } = new GetDoctorDto(req);
 
-    if (!patientID) {
+    if (!doctorID) {
       throw new ApiError(400, 'Request body is empty');
     }
 
-    if (!isValid(patientID)) {
+    if (!isValid(doctorID)) {
       throw new ApiError(400, 'Not valid form data');
     }
 
-    req.data = patientID;
+    req.data = doctorID;
     next();
   } catch (error) {
     next(error);

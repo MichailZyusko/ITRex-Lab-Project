@@ -7,7 +7,10 @@ class AddClientDto {
   }
 }
 
-const isValid = (patientID, specializationID) => (validator.isUUID(patientID) && validator.isUUID(specializationID));
+const isValid = (patientID, specializationID) => (
+  validator.isUUID(patientID)
+    && validator.isUUID(specializationID)
+);
 
 export default async (req, res, next) => {
   try {

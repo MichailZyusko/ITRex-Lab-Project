@@ -1,24 +1,17 @@
 /* eslint-disable no-return-await */
 /* eslint-disable no-plusplus */
 
-import { v4 as uuidv4 } from 'uuid';
 import RedisStorage from '../storage/queueStorage.js';
 import DatabaseStorage from '../../database/DatabaseStorage.js';
 
 export default class Queue {
-  constructor(queueID, storage) {
+  constructor(storage) {
     this.storage = storage || new RedisStorage();
-    this.count = 0;
   }
 
   async addPatient(patientID, queueID) {
     try {
-      const result = await this.storage.setPatient(patientID, queueID, this.count + 1);
-      if (result) {
-        this.count++;
-      }
-
-      return result;
+      return await this.storage.setPatient(patientID, queueID, new Date().getTime());
     } catch (error) {
       console.error(error);
     }

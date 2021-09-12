@@ -22,8 +22,17 @@ export default async () => {
     const specializations = await getAllSpecializations();
     if (specializations) {
       specializations.forEach((item) => {
-        const option = new Option(item.specializationName, item.specializationID);
-        datalist.append(option);
+        const option = document.createElement('option');
+
+        const { specializationName, specializationID } = item;
+
+        option.value = `${specializationName}`;
+
+        option.id = `${specializationName}`;
+
+        option.specializationID = specializationID;
+
+        datalist.appendChild(option);
       });
     }
   } catch (error) {

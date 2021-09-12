@@ -7,7 +7,7 @@ const {
   },
 } = config;
 
-export default async (userID) => {
+export default async (doctorID) => {
   const connection = mysql.createConnection({
     host,
     port,
@@ -21,7 +21,7 @@ export default async (userID) => {
                     specializations.specializationID=doctor_specialization.specializationID
                     INNER JOIN doctors ON
                     doctors.doctorID = doctor_specialization.doctorID AND
-                    doctors.userID = '${userID}';`;
+                    doctors.userID = '${doctorID}';`;
 
   try {
     const result = await connection.query(query);

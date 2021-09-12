@@ -1,10 +1,10 @@
 import { Router } from 'express';
 
-import getAllSpecializations from '../requestProcessing/specialization/getAllspecializations/index.js';
+import getAllSpecializations from '../requestProcessing/doctors/getAllspecializations/index.js';
 
 const router = Router();
 
-router.route('/')
+router.route('/specializations')
   .get(
     getAllSpecializations.controller,
   );

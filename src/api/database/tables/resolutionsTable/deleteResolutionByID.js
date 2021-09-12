@@ -4,7 +4,7 @@ import resolutionStatus from '../resolutionStatus.js';
 export default async (resolutionID) => {
   try {
     await resolutionsTable.update(
-      { status: resolutionStatus.outdate },
+      { status: resolutionStatus.deleted },
       {
         where: { resolutionID: `${resolutionID}` },
       },

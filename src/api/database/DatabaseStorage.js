@@ -108,8 +108,8 @@ class DatabaseStorage {
     return await ResolutionsTable.deleteResolutionByID(resolutionID);
   }
 
-  async findSpecialization(userID) {
-    return await DoctorsTable.findSpecialization(userID);
+  async findSpecialization(doctorID) {
+    return await DoctorsTable.findSpecialization(doctorID);
   }
 
   async getDoctor(userID) {

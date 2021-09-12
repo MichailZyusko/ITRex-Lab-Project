@@ -7,7 +7,7 @@ export default async ({ data: { password, login } }, res, next) => {
     // TODO Занести время жизни в конфиг
     if (result) {
       res
-        .cookie('token', `${result.token}`, {
+        .cookie('patientToken', `${result.token}`, {
           path: '/',
           maxAge: 5 * 60 * 1e3,
         })
