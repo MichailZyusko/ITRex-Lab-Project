@@ -1,6 +1,5 @@
 import resolutionsTable from '../storage/database/tables/resolutionsTable.js';
 import resolutionStatus from '../api/database/tables/resolutionStatus.js';
-import { Op } from 'sequelize'
 
 export default async () => {
   try {

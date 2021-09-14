@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-return-await */
 /* eslint-disable class-methods-use-this */
+import { compareSync, hashSync } from 'bcrypt'
 
 import { v4 as uuidv4 } from 'uuid';
 import jwt from 'jsonwebtoken';
@@ -30,6 +31,7 @@ const { secretKey } = config;
 class DatabaseStorage {
   async setPatient(patient) {
     patient.patientID = uuidv4();
+    patient.password = hashSync(patient.password, 10);
     await ClientsTable.setPatient(patient);
     await CredentialsTable.addUser(patient);
 
@@ -45,7 +47,7 @@ class DatabaseStorage {
 
     const { userID, password: passwordFromDB } = record;
 
-    if (passwordFromDB !== password) {
+    if (!compareSync( password, passwordFromDB )) {
       throw new ApiError(403, 'Wrong password or login');
     }
 
@@ -63,7 +65,7 @@ class DatabaseStorage {
 
     const { userID, password: passwordFromDB } = record;
 
-    if (passwordFromDB !== password) {
+    if (!compareSync( password, passwordFromDB )) {
       throw new ApiError(403, 'Wrong password or login');
     }
 
