@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Sign up</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="./css/util.css">
+	<link rel="stylesheet" type="text/css" href="./css/main.css">
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" 
+				 method="POST" action="http://localhost:3000/api/authorization/patient/signUp">
+					<span class="login100-form-title">
+						Sign Up
+					</span>
+
+					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+						<input class="input100" type="text" name="username" placeholder="First name" value="Michail">
+						<span class="focus-input100"></span>
+					</div>
+
+			    <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+						<input class="input100" type="text" name="username" placeholder="Last name" value="Zyusko">
+						<span class="focus-input100"></span>
+					</div>
+
+          <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+						<input class="input100" type="datetime-local" name="username" placeholder="Birthday">
+						<span class="focus-input100"></span>
+					</div>
+
+	        <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+						<input class="input100" type="text" name="username" placeholder="Gender" value="Male">
+						<span class="focus-input100"></span>
+					</div>
+
+    	    <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+						<input class="input100" type="text" name="username" placeholder="Email" value="michail.zyusko@gmail.com">
+						<span class="focus-input100"></span>
+					</div>
+
+        	<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+						<input class="input100" type="password" name="username" placeholder="Password" value="123456">
+						<span class="focus-input100"></span>
+					</div>
+
+          <div style="margin-bottom: 25px; margin-top: 50px;">
+	        	<div class="container-login100-form-btn">
+		  				<button type="submit" class="login100-form-btn">
+			  				Sign up
+		  				</button>
+		  			</div>
+          </div>
+			
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+version: "2.2"
+services:
+  queue:
+    image: queue
+    command: npm start
+    ports:
+      - "3000:3000"
+  websocket:
+    image: websocket
+    command: npm start
+    ports:
+      - "3001:3001"
+  storage:
+    image: 'redis:alpine'
+
+
+#docker-compose up

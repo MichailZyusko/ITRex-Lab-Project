@@ -1,0 +1,42 @@
+{
+  "name": "itrex-lab-project",
+  "version": "1.0.0",
+  "description": "The project implements an online appointment at the clinic",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "export NODE_ENV=dev && node index.js",
+    "dev": "export NODE_ENV=dev && nodemon index.js",
+    "lint": "eslint src/ --ext .js --fix",
+    "test": "export NODE_ENV=dev && mocha test.js"
+  },
+  "author": "Michail Zyusko",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/eslint": "^7.28.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4",
+    "mocha": "^9.0.3",
+    "nodemon": "^2.0.12",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bluebird": "^3.7.2",
+    "chai": "^4.3.4",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^10.0.0",
+    "execsql": "^0.0.3",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.0",
+    "node-cron": "^3.0.0",
+    "npm": "^7.22.0",
+    "redis": "^3.1.2",
+    "sinon": "^11.1.2",
+    "uuid": "^8.3.2",
+    "validator": "^13.6.0"
+  }
+}
