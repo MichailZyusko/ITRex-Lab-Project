@@ -18,3 +18,5 @@ yarn-error.log*
 
 # ENV
 .env
+
+dump.rdb

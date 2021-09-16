@@ -1,8 +1,7 @@
 import queueUp from './methods.js';
 
-export default async (/* ws */) => {
+export default async () => {
   try {
-    // ws.send()
     const doctor = document.getElementById('doctorSpecialization').value.trim();
     const optionWithID = document.getElementById(doctor);
     const { specializationID } = optionWithID;
@@ -10,7 +9,7 @@ export default async (/* ws */) => {
 
     if (positionInQueue) {
       document.getElementById('queueStatus').innerText = `${positionInQueue} people before You`;
-      alert('Client succsessfully add :)');
+      alert('Client successfully add :)');
       return true;
     }
 

@@ -1,15 +1,14 @@
 import { setResolution, deletePatient } from './methods.js';
 
-export default async (timeToLive, resolutionText, currentPatient, ws) => {
+export default async (timeToLive, resolutionText, currentPatient) => {
   if (currentPatient) {
-    const patient = await setResolution(currentPatient.patientID, {
+    const patient = await setResolution(currentPatient.id, {
       value: resolutionText,
       TTL: new Date(new Date().getTime() + timeToLive),
     });
 
     if (patient) {
       await deletePatient();
-      // ws.send(currentPatient.patientID);
       return 'Resolution successfully added';
     }
 

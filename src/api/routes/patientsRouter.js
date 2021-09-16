@@ -1,24 +1,19 @@
 import { Router } from 'express';
 
 import currentPatient from '../requestProcessing/patients/currentPatient/index.js';
-import getInQueue from '../requestProcessing/patients/queueUp/index.js';
-import getAllPatient from '../requestProcessing/patients/getAllPatientsLikeValue/index.js';
+import queueUp from '../requestProcessing/patients/queueUp/index.js';
+import getPatients from '../requestProcessing/patients/getPatients/index.js';
 import getPatientByID from '../requestProcessing/patients/getPatientByID/index.js';
 
 const router = Router();
 
 router.route('/')
   .get(
-    getAllPatient.isValidQueryParams,
-    getAllPatient.controller,
-  )
-  .post(
-    getInQueue.isValidClientData,
-    getInQueue.isExistClientInQueue,
-    getInQueue.controller,
+    getPatients.isValidSearchingParams,
+    getPatients.controller,
   );
 
-router.route('/currentPatient')
+router.route('/waiting/current')
   .get(
     currentPatient.isValidDoctorData,
     currentPatient.findDoctorQueueID,
@@ -30,10 +25,15 @@ router.route('/currentPatient')
     currentPatient.deleteController,
   );
 
-router.route('/id')
+router.route('/me')
   .get(
-    getPatientByID.isValidQueryParams,
+    getPatientByID.isValidPatientID,
     getPatientByID.controller,
+  )
+  .post(
+    queueUp.isValidPatientData,
+    queueUp.isExistPatientInQueue,
+    queueUp.controller,
   );
 
 export default router;

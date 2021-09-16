@@ -14,6 +14,7 @@ export default async () => {
   const query = `CREATE DATABASE IF NOT EXISTS ${databaseName}`;
 
   try {
+    // await connection.query('DROP DATABASE queuedb');
     await connection.query(query);
     return true;
   } catch (error) {

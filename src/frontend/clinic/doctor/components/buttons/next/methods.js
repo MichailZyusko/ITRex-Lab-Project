@@ -10,4 +10,4 @@ const getCurrentPatient = (route) => async () => {
   }
 };
 
-export default getCurrentPatient('/api/clients/currentPatient');
+export default getCurrentPatient('/api/patients/waiting/current');

@@ -33,13 +33,13 @@ const DELETERequest = (route) => async () => {
   }
 };
 
-const setResolutionRequest = (route) => async (ID = null, data = null) => {
+const setResolutionRequest = (route) => async (patientID = null, data = null) => {
   if (!data) {
     return false;
   }
 
   try {
-    const response = await fetch(`${route}?id=${ID}`, postReqObject(data));
+    const response = await fetch(`${route}/${patientID}`, postReqObject(data));
     const result = await response.json();
 
     if (!response.ok) {
@@ -68,8 +68,8 @@ const makeGERequest = (route) => async () => {
   }
 };
 
-const getCurrentPatient = makeGERequest('/api/clients/currentPatient');
-const setResolution = setResolutionRequest('/api/resolutions');
-const deletePatient = DELETERequest('/api/clients/currentPatient');
+const getCurrentPatient = makeGERequest('/api/patients/waiting/current');
+const setResolution = setResolutionRequest('/api/resolutions/patient');
+const deletePatient = DELETERequest('/api/patients/waiting/current');
 
 export { setResolution, deletePatient, getCurrentPatient };

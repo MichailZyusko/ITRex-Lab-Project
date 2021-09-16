@@ -1,8 +1,8 @@
 import queue from '../../../../storage/index.js';
 
-export default async ({ queue: queueID }, res, next) => {
+export default async ({ data: { specializationID: queueID } }, res, next) => {
   try {
-    const positionInQueue = await queue.storage.getQueueLengt(queueID);
+    const positionInQueue = await queue.storage.getQueueLength(queueID);
 
     res.status(201).send({ positionInQueue });
   } catch (error) {

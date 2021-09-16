@@ -1,21 +1,39 @@
-import clientsTable from '../../../../storage/database/tables/clientsTable.js';
+import mysql from 'mysql2';
+import config from '../../../../../config.js';
+
+const {
+  database: {
+    port, host, user, databaseName, password,
+  },
+} = config;
 
 export default async ({
   firstName, lastName, birthday, gender,
 }) => {
-  try {
-    const patient = await clientsTable.findOne({
-      where: {
-        firstName: `${firstName}`,
-        lastName: `${lastName}`,
-        birthday: `${birthday}`,
-        gender: `${gender}`,
-      },
-    });
+  const connection = mysql.createConnection({
+    host,
+    port,
+    user,
+    password,
+    database: databaseName,
+  }).promise();
 
-    return patient;
+  const query = `
+    SELECT * 
+    FROM patients 
+    WHERE first_name = '${firstName}' 
+    AND last_name = '${lastName}'
+#     AND birthday = '${birthday}'
+    AND gender = '${gender}'
+  `;
+
+  try {
+    const [result] = await connection.query(query);
+
+    return result.length;
   } catch (error) {
     console.log(error);
-    return null;
+  } finally {
+    await connection.end();
   }
 };

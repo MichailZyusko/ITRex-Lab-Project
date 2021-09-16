@@ -1,15 +1,10 @@
-/* eslint-disable class-methods-use-this */
-
 import controller from './controller.js';
-import isValidQueryParams from './isValidQueryParams.js';
+import isValidPatientID from './isValidPatientID.js';
 
 class GetPatientByID {
-  controller(req, res, next) {
-    return controller(req, res, next);
-  }
-
-  isValidQueryParams(req, res, next) {
-    return isValidQueryParams(req, res, next);
+  constructor() {
+    this.controller = controller;
+    this.isValidPatientID = isValidPatientID;
   }
 }
 

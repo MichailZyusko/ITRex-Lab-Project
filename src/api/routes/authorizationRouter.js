@@ -1,15 +1,15 @@
 import { Router } from 'express';
 
-import signUp from '../requestProcessing/authorization/signUp/index.js';
-import patientSignIn from '../requestProcessing/authorization/patientSignIn/index.js';
-import doctorSignIn from '../requestProcessing/authorization/doctorSignIn/index.js';
+import signUp from '../requestProcessing/authorization/patient/signUp/index.js';
+import patientSignIn from '../requestProcessing/authorization/patient/signIn/index.js';
+import doctorSignIn from '../requestProcessing/authorization/doctor/signIn/index.js';
 
 const router = Router();
 
-router.route('/signUp')
+router.route('/patient/signUp')
   .post(
     signUp.isValidPatientData,
-    signUp.isExistClient,
+    signUp.isExistPatient,
     signUp.controller,
   );
 

@@ -1,16 +1,3 @@
-// import clientsTable from '../../../../storage/database/tables/clientsTable.js';
-
-// export default async (ID) => {
-//   try {
-//     const patient = await clientsTable.findOne({ where: { patientID: `${ID}` } });
-
-//     return patient;
-//   } catch (error) {
-//     console.log(error);
-//     return null;
-//   }
-// };
-
 import mysql from 'mysql2';
 import config from '../../../../../config.js';
 
@@ -20,7 +7,7 @@ const {
   },
 } = config;
 
-export default async (patientID) => {
+export default async (user_id) => {
   const connection = mysql.createConnection({
     host,
     port,
@@ -30,10 +17,10 @@ export default async (patientID) => {
   }).promise();
 
   const query = `SELECT *
-  FROM clients
+  FROM patients
   JOIN credentials
-  ON patientID = userID
-  WHERE patientID = '${patientID}'`;
+  ON patients.id = credentials.user_id
+  AND credentials.user_id = '${user_id}'`;
 
   try {
     const [[result]] = await connection.query(query);

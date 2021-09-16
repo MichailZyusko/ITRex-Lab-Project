@@ -1,48 +1,51 @@
-/* eslint-disable no-plusplus */
-/* eslint-disable no-restricted-syntax */
-
 import getMedicalCardContent from './methods.js';
 
 const table = document.getElementById('table');
 
 export default async () => {
   const tableContent = await getMedicalCardContent();
+  function addTD(data, tr, isDate) {
+    const td = document.createElement('td');
+    if (data) {
+      td.innerText = data;
+    } else {
+      td.innerText = '---';
+    }
 
-  if (tableContent) {
-    table.innerHTML = '';
-    let id = 1;
+    if (isDate) {
+      td.innerText = data.slice(0, 10);
+    }
 
-    tableContent.forEach((element) => {
-      const tr = document.createElement('tr');
-      for (const [key, value] of Object.entries(element)) {
-        if (key === 'id') {
-          const td = document.createElement('td');
-          td.innerText = id++;
-          tr.appendChild(td);
-        } else if (key === 'doctorSpecialization') {
-          const td = document.createElement('td');
-          td.innerText = value;
-          tr.appendChild(td);
-        } else if (key === 'doctorName') {
-          const td = document.createElement('td');
-          td.innerText = value;
-          tr.appendChild(td);
-        } else if (key === 'date') {
-          const td = document.createElement('td');
-          td.innerText = value.slice(0, 19).replace('T', ' ');
-          tr.appendChild(td);
-        } else if (key === 'resolutionText') {
-          const td = document.createElement('td');
-          td.innerText = value;
-          tr.appendChild(td);
-        } else if (key === 'status') {
-          const td = document.createElement('td');
-          td.innerText = value;
-          tr.appendChild(td);
-        }
-      }
+    tr.appendChild(td);
+  }
 
-      table.appendChild(tr);
-    });
+  try {
+    if (tableContent) {
+      table.innerHTML = '';
+      let id = 0;
+
+      console.log(tableContent);
+
+      tableContent.forEach((element) => {
+        const {
+          date, resolution_text: resText,
+          status, doctor_specialization: docSpec, doctor_full_name: docName,
+        } = element;
+        const tr = document.createElement('tr');
+
+        id += 1;
+        addTD(id, tr);
+        addTD(docSpec, tr);
+        addTD(docName, tr);
+        addTD(resText, tr);
+        addTD(status, tr);
+        addTD(date, tr, true);
+
+        table.appendChild(tr);
+      });
+    }
+    return 'We found something for you';
+  } catch (error) {
+    console.error(error);
   }
 };

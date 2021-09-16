@@ -3,17 +3,13 @@ import searchInputServices from './services.js';
 const addOption = (patient, datalist) => {
   const option = document.createElement('option');
   const {
-    firstName, lastName, email, patientID,
+    first_name: firstName, last_name: lastName, email, id,
   } = patient;
 
-  option.value = `${lastName} | ${firstName} | ${email}`;
-
-  option.id = `${lastName} | ${firstName} | ${email}`;
-
-  option.patientID = patientID;
-
-  // option.value = `${lastName} ${firstName}`;
-  // option.label = `${email}`;
+  option.value = email;
+  option.label = `${lastName} ${firstName}`;
+  option.id = email;
+  option.patient_id = id;
 
   datalist.appendChild(option);
 };

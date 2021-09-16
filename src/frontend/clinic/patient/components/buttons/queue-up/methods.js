@@ -13,7 +13,7 @@ const queueUp = (route) => async (doctorID) => {
       return false;
     }
 
-    const response = await fetch(`${route}/?specializationID=${doctorID}`, reqObject);
+    const response = await fetch(`${route}?specializationID=${doctorID}`, reqObject);
     const result = await response.json();
 
     if (!response.ok) {
@@ -30,4 +30,4 @@ const queueUp = (route) => async (doctorID) => {
   }
 };
 
-export default queueUp('/api/clients');
+export default queueUp('/api/patients/me/');

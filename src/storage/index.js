@@ -1,7 +1,3 @@
-import Queue from '../api/repositories/services/queueServices.js';
-import scheduler from '../scheduler/index.js';
+import QueueCollection from '../api/services/queueServices.js';
 
-const queue = new Queue();
-scheduler(queue);
-
-export default queue;
+export default new QueueCollection();

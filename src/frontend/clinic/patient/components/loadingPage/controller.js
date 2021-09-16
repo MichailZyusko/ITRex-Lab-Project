@@ -16,7 +16,7 @@ export default async () => {
         }
       });
 
-      refreshTableContentClick();
+      await refreshTableContentClick();
     }
 
     const specializations = await getAllSpecializations();
@@ -24,13 +24,11 @@ export default async () => {
       specializations.forEach((item) => {
         const option = document.createElement('option');
 
-        const { specializationName, specializationID } = item;
+        const { specialization_name: specName, specialization_id: specID } = item;
 
-        option.value = `${specializationName}`;
-
-        option.id = `${specializationName}`;
-
-        option.specializationID = specializationID;
+        option.value = `${specName}`;
+        option.id = `${specName}`;
+        option.specializationID = specID;
 
         datalist.appendChild(option);
       });

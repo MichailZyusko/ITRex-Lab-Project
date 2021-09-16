@@ -1,9 +1,9 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-return-await */
 /* eslint-disable class-methods-use-this */
 
 import { v4 as uuidv4 } from 'uuid';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+
 import ClientsTable from './tables/clientsTable/ClientsTable.js';
 import CredentialsTable from './tables/credentialsTable/credentialsTable.js';
 import MedicalCardsTable from './tables/medicalCardsTable/MedicalCardsTable.js';
@@ -11,29 +11,16 @@ import ResolutionsTable from './tables/resolutionsTable/ResolutionsTable.js';
 import SpecializationsTable from './tables/specializationsTable/SpecializationsTable.js';
 import DoctorsTable from './tables/doctorsTable/DoctorsTable.js';
 
-import createDatabase from '../../storage/database/createDatabase.js';
-import sequelize from '../../storage/database/index.js';
 import config from '../../../config.js';
 import ApiError from '../../errors/ApiError.js';
-
-(async () => {
-  try {
-    await createDatabase();
-    await sequelize.sync();
-  } catch (error) {
-    console.log(error);
-  }
-})();
 
 const { secretKey } = config;
 
 class DatabaseStorage {
   async setPatient(patient) {
-    patient.patientID = uuidv4();
-    await ClientsTable.setPatient(patient);
-    await CredentialsTable.addUser(patient);
-
-    return 'OK';
+    const patientID = uuidv4();
+    await ClientsTable.setPatient({ ...patient, patientID });
+    await CredentialsTable.addUser({ ...patient, patientID });
   }
 
   async findByLogin(password, login) {
@@ -43,13 +30,13 @@ class DatabaseStorage {
       throw new ApiError(403, 'Wrong password or login');
     }
 
-    const { userID, password: passwordFromDB } = record;
+    const { user_id: id, password: passwordFromDB } = record;
 
-    if (passwordFromDB !== password) {
+    if (!await bcrypt.compareSync(password, passwordFromDB)) {
       throw new ApiError(403, 'Wrong password or login');
     }
 
-    const token = jwt.sign({ id: userID }, secretKey);
+    const token = jwt.sign({ id }, secretKey);
 
     return { token };
   }
@@ -61,59 +48,69 @@ class DatabaseStorage {
       throw new ApiError(403, 'Wrong password or login');
     }
 
-    const { userID, password: passwordFromDB } = record;
+    const { user_id: id, password: passwordFromDB } = record;
 
-    if (passwordFromDB !== password) {
+    if (!await bcrypt.compareSync(password, passwordFromDB)) {
       throw new ApiError(403, 'Wrong password or login');
     }
 
-    const token = jwt.sign({ id: userID }, secretKey);
+    const { doctorID } = await DoctorsTable.getDoctor(id);
 
-    return { token };
+    const token = jwt.sign({ id }, secretKey);
+
+    return { token, doctorID };
   }
 
   async getPatientByID(ID) {
-    return await ClientsTable.getPatientByID(ID);
+    const patient = await ClientsTable.getPatientByID(ID);
+    return patient;
   }
 
   async getAllSpecializations() {
-    return await SpecializationsTable.getAllSpecializations();
+    const specializations = await SpecializationsTable.getAllSpecializations();
+    return specializations;
   }
 
   async setDiagnose(ID, doctorID, diagnose, comingDate, TTL, name) {
     const medicalCardID = uuidv4();
     const resolutionID = uuidv4();
     await MedicalCardsTable.addRecord(ID, medicalCardID);
-    return await ResolutionsTable.addRecord(resolutionID, medicalCardID,
+    await ResolutionsTable.addRecord(resolutionID, medicalCardID,
       doctorID, diagnose, comingDate, TTL, name);
   }
 
-  async getAllResolutionsByID(patientID) {
-    return await MedicalCardsTable.getAllRecords(patientID);
+  async getResolutionsByID(patientID) {
+    const resolutions = await MedicalCardsTable.getAllRecords(patientID);
+    return resolutions;
   }
 
   async isExistPatient(patient) {
-    return await ClientsTable.isExistPatient(patient);
+    const bool = await ClientsTable.isExistPatient(patient);
+    return bool;
   }
 
   async getAllPatientLikeValue(text) {
-    return await ClientsTable.getAllPatientLikeValue(text);
+    const patients = await ClientsTable.getAllPatientLikeValue(text);
+    return patients;
   }
 
   async getResolutionByID(resolutionID) {
-    return await ResolutionsTable.getResolutionByID(resolutionID);
+    const resolution = await ResolutionsTable.getResolutionByID(resolutionID);
+    return resolution;
   }
 
   async deleteResolutionByID(resolutionID) {
-    return await ResolutionsTable.deleteResolutionByID(resolutionID);
+    await ResolutionsTable.deleteResolutionByID(resolutionID);
   }
 
   async findSpecialization(doctorID) {
-    return await DoctorsTable.findSpecialization(doctorID);
+    const specialization = await DoctorsTable.findSpecialization(doctorID);
+    return specialization;
   }
 
   async getDoctor(userID) {
-    return await DoctorsTable.getDoctor(userID);
+    const doctor = await DoctorsTable.getDoctor(userID);
+    return doctor;
   }
 }
 

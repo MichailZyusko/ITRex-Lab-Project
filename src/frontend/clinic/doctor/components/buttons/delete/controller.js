@@ -2,26 +2,29 @@
 
 import deleteResolution from './services.js';
 
-const resolutionSelector = document.getElementById('resolutionSelector');
-const searchResult = document.getElementById('searchResult');
-const clearInputs = () => {
-  resolutionSelector.value = '';
-  searchResult.innerText = '';
-};
+const table = document.getElementById('table');
 
-export default async () => {
-  const resolution = resolutionSelector.value.trim();
+export default async (event) => {
+  const { resolutionID } = event.currentTarget;
+
   const confirmed = confirm('Are you sure about this? The data cannot be recovered later');
 
-  if (!(resolution && confirmed)) {
+  if (!(resolutionID && confirmed)) {
     return null;
   }
 
-  clearInputs();
-
-  const selectedOption = document.getElementById(resolution);
-  const { resolutionID } = selectedOption;
-
   const result = await deleteResolution(resolutionID);
+
+  if (result) {
+    Array.from(table.children).forEach((item) => {
+      const tds = Array.from(item.children);
+      const lastTD = tds[tds.length - 1];
+      const button = lastTD.children[0];
+      if (button.resolutionID === resolutionID) {
+        tds[4].innerHTML = 'deleted';
+      }
+    });
+  }
+
   return result;
 };

@@ -8,7 +8,7 @@ const reqObject = () => ({
 
 const makeDELETERequest = (route) => async (resolutionID) => {
   try {
-    const response = await fetch(`${route}?resolutionID=${resolutionID}`, reqObject());
+    const response = await fetch(`${route}/${resolutionID}`, reqObject());
 
     if (!response.ok) {
       const { message } = await response.json();
@@ -24,4 +24,4 @@ const makeDELETERequest = (route) => async (resolutionID) => {
   }
 };
 
-export default makeDELETERequest('/api/resolutions/id');
+export default makeDELETERequest('/api/resolutions');

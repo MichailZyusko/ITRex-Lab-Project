@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  app:
+    image: michailzyusko2001/clinic
+    command: npm start
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/lab
+    environment: NODE_ENV=dev
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+  db:
+    image: mysql:8.0
+    restart: always
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent" ]
+      interval: 3s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - todo-mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_DATABASE=queuedb
+  redis:
+    image: redis:6.2
+    restart: always
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+volumes:
+  todo-mysql-data:
+
+#docker-compose up

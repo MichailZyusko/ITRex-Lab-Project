@@ -1,20 +1,12 @@
-/* eslint-disable class-methods-use-this */
-
 import controller from './controller.js';
-import isExistClient from './isExistClient.js';
-import isValidQueryParams from './isValidQueryParams.js';
+import isExistResolution from './isExistResolution.js';
+import isValidResolutionID from './isValidResolutionID.js';
 
 class DeleteClient {
-  controller(req, res, next) {
-    return controller(req, res, next);
-  }
-
-  isValidQueryParams(req, res, next) {
-    return isValidQueryParams(req, res, next);
-  }
-
-  isExistClient(req, res, next) {
-    return isExistClient(req, res, next);
+  constructor() {
+    this.controller = controller;
+    this.isValidResolutionID = isValidResolutionID;
+    this.isExistResolution = isExistResolution;
   }
 }
 

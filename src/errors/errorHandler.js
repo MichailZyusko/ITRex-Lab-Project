@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
-
 import ApiError from './ApiError.js';
 
-export default (err, req, res, next) => {
+export default (err, req, res) => {
   let message = 'Something went wrong';
   let status = 500;
 
@@ -12,6 +10,4 @@ export default (err, req, res, next) => {
   }
 
   res.status(status).send({ code: status, message });
-  // Когда-нибудь добавлю страницы ошибки с ejs
-  // res.status(status).send({ redirectURL: `/html/errorPage/${status}.html` });
 };

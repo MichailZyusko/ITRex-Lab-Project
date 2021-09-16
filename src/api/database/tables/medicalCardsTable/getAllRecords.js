@@ -1,16 +1,3 @@
-// import medicalCardsTable from '../../../../storage/database/tables/medicalCardsTable.js';
-
-// export default async (key) => {
-//   try {
-//     const resolutions = await medicalCardsTable.findAll({ where: { clientID: `${key}` } });
-
-//     return resolutions;
-//   } catch (error) {
-//     console.log(error);
-//     return null;
-//   }
-// };
-
 import mysql from 'mysql2';
 import config from '../../../../../config.js';
 
@@ -32,8 +19,8 @@ export default async (patientID) => {
   const query = `SELECT * 
   FROM medical_cards 
   JOIN resolutions 
-  ON medical_cards.medicalCardID = resolutions.medicalCardID 
-  WHERE patientID = '${patientID}'`;
+  ON medical_cards.medical_card_id = resolutions.medical_card_id 
+  WHERE patient_id = '${patientID}'`;
 
   try {
     const [result] = await connection.query(query);

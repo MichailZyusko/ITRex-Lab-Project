@@ -15,15 +15,17 @@ export default async (login) => {
     password,
     database: databaseName,
   }).promise();
-
-  const query = `SELECT credentials.password, credentials.userID FROM credentials
-                    INNER JOIN doctors ON
-                    doctors.userID=credentials.userID AND
-                    credentials.login= '${login}'`;
+  const query = `
+    SELECT credentials.password, credentials.user_id
+    FROM credentials
+    INNER JOIN doctors ON
+    doctors.user_id = credentials.user_id
+    WHERE
+    credentials.login= '${login}'`;
 
   try {
-    const result = await connection.query(query);
-    return result[0][0];
+    const [[result]] = await connection.query(query);
+    return result;
   } catch (error) {
     console.log(error);
   } finally {

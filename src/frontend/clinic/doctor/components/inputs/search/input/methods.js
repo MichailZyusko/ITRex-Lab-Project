@@ -1,6 +1,5 @@
 const findAllPatientLikeValue = (route) => async (search) => {
   try {
-    // TODO спросить насчет собаки в параметрах
     const response = await fetch(`${route}?search=${search}`);
     const result = await response.json();
 
@@ -11,4 +10,4 @@ const findAllPatientLikeValue = (route) => async (search) => {
   }
 };
 
-export default findAllPatientLikeValue('/api/clients/');
+export default findAllPatientLikeValue('/api/patients/');

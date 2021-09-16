@@ -14,11 +14,11 @@ export default async (req, res, next) => {
     const { doctorID } = new GetDoctorDto(req);
 
     if (!doctorID) {
-      throw new ApiError(400, 'Request body is empty');
+      throw new ApiError(400, 'DoctorID is empty');
     }
 
     if (!isValid(doctorID)) {
-      throw new ApiError(400, 'Not valid form data');
+      throw new ApiError(400, 'Not valid doctorID');
     }
 
     req.data = doctorID;

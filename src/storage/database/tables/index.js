@@ -1,10 +1,9 @@
-import clientsTable from './clientsTable.js';
-import doctorsTable from './doctorsTable.js';
-import medicalCardsTable from './medicalCardsTable.js';
-import credentialsTable from './credentialsTable.js';
-import resolutionsTable from './resolutionsTable.js';
+import patientsDefine from './patients.js';
+import medicalCardsDefine from './medicalCards.js';
+import credentialsDefine from './credentials.js';
+import resolutionsDefine from './resolutions.js';
 
 export {
-  clientsTable, credentialsTable,
-  doctorsTable, medicalCardsTable, resolutionsTable,
+  patientsDefine, credentialsDefine,
+  medicalCardsDefine, resolutionsDefine,
 };

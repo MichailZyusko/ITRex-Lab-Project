@@ -6,4 +6,6 @@ export default async (text) => {
   if (searchResult) {
     return searchResult;
   }
+
+  return false;
 };

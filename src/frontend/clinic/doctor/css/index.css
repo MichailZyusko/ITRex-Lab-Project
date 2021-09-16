@@ -17,12 +17,12 @@ body{
 
 table {
   display: flex;
-    flex-flow: column;
-    height: 100%;
-    width: 100%;
- /* border-collapse: collapse;
- width: 100%;
- backdrop-filter: blur(15px); */
+  flex-flow: column;
+  height: 100%;
+  width: 100%;
+  /* border-collapse: collapse;
+  width: 100%;
+  backdrop-filter: blur(15px); */
 }
 
 thead{
@@ -35,9 +35,9 @@ thead{
 
 tbody{
   flex: 1 1 auto;
-  display: block;       
-  overflow-y: auto;    
-  overflow-x: hidden; 
+  display: block;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 table tbody tr {
@@ -52,7 +52,22 @@ table thead, table tbody tr {
 }
 
 td, th {
- text-align: center;
+  text-align: center;
+  font-size: 14px;
+  word-wrap: break-word;
+}
+
+thead td {
+  font-size: 17px;
+}
+
+#medicalCard{
+  /*max-height: 50vh;*/
+  padding: 0px 5px;
+  display: flex;
+  flex: 2;
+  background: linear-gradient(212.42deg, rgba(97, 186, 77, 0.32) 32.72%, rgba(154, 131, 232, 0.16) 68.49%);
+  border: 5px solid #FFFFFF;
 }
 
 #search{
@@ -64,7 +79,7 @@ td, th {
 #searchBlock{
   display: flex;
   flex: 1;
-  flex-direction: column;
+  /*flex-direction: column;*/
 
   padding: 20px 15px;
   background: linear-gradient(168.12deg,
@@ -74,10 +89,6 @@ td, th {
   border: 1px solid #FFFFFF;
   backdrop-filter: blur(15px); 
   /* Note: backdrop-filter has minimal browser support */
-}
-
-#setDiagnose{
-  width: 60%;
 }
 
 #icon{
@@ -190,14 +201,7 @@ td, th {
   margin-top: 15px;
 }
 
-#medicalCard{
-  max-height: 50vh;
-  padding: 0px 35px;
-  display: flex;
-  flex: 2;
-  background: linear-gradient(212.42deg, rgba(97, 186, 77, 0.32) 32.72%, rgba(154, 131, 232, 0.16) 68.49%);
-  border: 5px solid #FFFFFF;
-}
+
 
 #recordField{
   max-height: 25vh;

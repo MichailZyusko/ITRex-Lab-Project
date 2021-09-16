@@ -1,12 +1,33 @@
-import medicalCardsTable from '../../../../storage/database/tables/medicalCardsTable.js';
+import mysql from 'mysql2';
+import config from '../../../../../config.js';
 
-export default async (key, medicalCardID) => {
+const {
+  database: {
+    port, host, user, databaseName, password,
+  },
+} = config;
+
+export default async (patient_id, medical_card_id) => {
+  const connection = mysql.createConnection({
+    host,
+    port,
+    user,
+    password,
+    database: databaseName,
+  }).promise();
+
+  const query = 'INSERT INTO medical_cards SET ?';
+
   try {
-    await medicalCardsTable.create({
-      patientID: key,
-      medicalCardID,
+    const [result] = await connection.query(query, {
+      patient_id,
+      medical_card_id,
     });
+
+    return result;
   } catch (error) {
     console.log(error);
+  } finally {
+    await connection.end();
   }
 };

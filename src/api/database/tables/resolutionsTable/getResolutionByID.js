@@ -1,14 +1,32 @@
-import resolutionsTable from '../../../../storage/database/tables/resolutionsTable.js';
+import mysql from 'mysql2';
+import config from '../../../../../config.js';
+
+const {
+  database: {
+    port, host, user, databaseName, password,
+  },
+} = config;
 
 export default async (resolutionID) => {
-  try {
-    const resolution = await resolutionsTable.findOne({
-      where: { resolutionID: `${resolutionID}` },
-    });
+  const connection = mysql.createConnection({
+    host,
+    port,
+    user,
+    password,
+    database: databaseName,
+  }).promise();
 
-    return resolution;
+  const query = `SELECT *
+  FROM resolutions
+  WHERE resolution_id = '${resolutionID}'`;
+
+  try {
+    const [[result]] = await connection.query(query);
+
+    return result;
   } catch (error) {
     console.log(error);
-    return null;
+  } finally {
+    await connection.end();
   }
 };

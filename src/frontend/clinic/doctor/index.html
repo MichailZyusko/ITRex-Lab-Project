@@ -6,11 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/classes.css">
   <link rel="stylesheet" href="css/index.css">
-  <title>TheReseption</title>
+  <title>TheReception</title>
 </head>
 <body>
   <div class="frame">
-    <div class="h1">THE RESEPTION</div>
+    <div class="h1">THE RECEPTION</div>
      <form id="form" action="">
       <span style="max-width: 40%; max-height: 20vh;">
         <img src="img/profilePicture.svg" alt="" id="profileImg">
@@ -19,11 +19,11 @@
         <div class="h2">Personal Info</div>
         <div class="field">
           <div class="h6" style="margin-right: 30px;">FIRST NAME</div>
-          <input type="text" class="input" name="firstName">
+          <input type="text" class="input" name="first_name">
         </div>
         <div class="field">
           <div class="h6" style="margin-right: 30px;">LAST NAME</div>
-          <input type="text" class="input" name="lastName">
+          <input type="text" class="input" name="last_name">
         </div>
         <div class="field">
           <div class="h6" style="margin-right: 30px;">GENDER</div>
@@ -38,6 +38,10 @@
           <input type="text" class="input" name="email">
         </div>
       </div>
+       <div style="display: flex; flex: 1; flex-direction: column; justify-content: space-around; align-items: center">
+         <div id="queueStatus" class="h2">0 persons in line</div>
+         <button class="button h3" id="nextButton" type="button" form="form" style="width: 50%">NEXT</button>
+       </div>
     </form>
   </div>
   <div class="separator"></div>
@@ -46,42 +50,31 @@
       <input list="patients" id="search" class="input h4" placeholder="Search" style="width: 30%;">
       <datalist id="patients"></datalist>
     </div>
-    <div id="docNextClientinfo">
-      <div style="display: flex; flex: 3; justify-content: space-between;">
-        <img src="img/icn.svg" alt="" style="max-width: 25%;">
-      </div>
-      <div style="display: flex; flex: 1; justify-content: space-between;">
-        <div id="queueStatus" class="h2">0 persons in line</div>
-        <button class="button h3" id="nextButton" type="button" form="form">NEXT</button>
+    <div style="display: flex; flex-direction: column; flex: 1; width: 75%; align-self: center; max-height: 20vh;">
+      <div id="searchBlock">
+        <div style="display: flex; justify-content:space-around; align-items: center; flex-direction: column">
+          <button class="button h3" id="setDiagnose" style="width: 80%; height: 7vh">SET DIAGNOSE</button>
+          <select name="dropdown" class="input h4" id="time">
+            <option value="10000">10 sec</option>
+            <option value="30000">30 sec</option>
+            <option value="60000">1 min</option>
+            <option value="300000">5 min</option>
+            <option value="600000">10 min</option>
+            <option value="1800000">30 min</option>
+          </select>
+        </div>
+        <textarea class="searchResult h4" id="diagnoseText"></textarea>
       </div>
     </div>
-
-    <div style="display: flex; flex: 1; margin-top: 65px;">
-      <div style="display: flex; flex-direction: column; flex: 1;">
-        <input list="resolutions" id="resolutionSelector"
-        class="input h4" placeholder="Select resolution" style="margin-bottom: 20px;">
-        <datalist id="resolutions"></datalist>
-        <div id="searchBlock">
-          <pre class="searchResult h4" id="searchResult"></pre>
-          <button class="button h3" style="margin-top: 15px" id="deleteButton">DELETE</button>
-        </div>
-      </div>
-      <div class="separator"></div>
-        <div style="display: flex; flex-direction: column; flex: 1;">
-        <div id="searchBlock">
-          <textarea class="searchResult h4" id="diagnoseText"></textarea>
-          <div style="display: flex; justify-content:space-around; align-items: center; margin-top: 20px;">
-            <button class="button h3" id="setDiagnose">SET DIAGNOSE</button>
-            <select name="dropdown" class="input h4" id="time">
-              <option value="10000">10 sec</option>
-              <option value="30000">30 sec</option>
-              <option value="60000">1 min</option>
-              <option value="300000">5 min</option>
-              <option value="600000">10 min</option>
-              <option value="1800000">30 min</option>
-            </select>
-          </div>
-        </div>
+    <div style="display: flex; flex: 1; margin-top: 30px;">
+      <div id="medicalCard">
+        <table>
+          <caption style="margin: 20px 0; color: white;" class="h1">Medical cards</caption>
+          <thead>
+          <tr><td>№</td><td>Specialist</td><td>Doctor Name</td><td>Resolution</td><td>Status</td><td>Date</td><td>Manage</td></tr>
+          </thead>
+          <tbody id="table"></tbody>
+        </table>
       </div>
     </div>
   </div>

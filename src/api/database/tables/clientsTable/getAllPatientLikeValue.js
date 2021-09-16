@@ -1,23 +1,34 @@
-import pkg from 'sequelize';
-import clientsTable from '../../../../storage/database/tables/clientsTable.js';
+import mysql from 'mysql2';
+import config from '../../../../../config.js';
 
-const { Op } = pkg;
+const {
+  database: {
+    port, host, user, databaseName, password,
+  },
+} = config;
 
 export default async (text) => {
-  try {
-    const allPatients = await clientsTable.findAll({
-      where: {
-        [Op.or]: {
-          firstName: { [Op.like]: `%${text}%` },
-          lastName: { [Op.like]: `%${text}%` },
-          email: { [Op.like]: `%${text}%` },
-        },
-      },
-    });
+  const connection = mysql.createConnection({
+    host,
+    port,
+    user,
+    password,
+    database: databaseName,
+  }).promise();
 
-    return allPatients;
+  const query = `SELECT *
+  FROM patients
+  WHERE first_name LIKE '%${text}%'
+  OR last_name LIKE '%${text}%'
+  OR email LIKE '%${text}%'`;
+
+  try {
+    const [result] = await connection.query(query);
+
+    return result;
   } catch (error) {
     console.log(error);
-    return null;
+  } finally {
+    await connection.end();
   }
 };

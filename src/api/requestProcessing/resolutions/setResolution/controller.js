@@ -1,6 +1,10 @@
 import database from '../../../database/DatabaseStorage.js';
 
-export default async ({ data: { diagnose, ID, TTL }, doctor: doctorSpecialization, doctorName: name }, res, next) => {
+export default async ({
+  data: { diagnose, ID, TTL },
+  doctor: doctorSpecialization,
+  doctor_full_name: name,
+}, res, next) => {
   try {
     const comingDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
 

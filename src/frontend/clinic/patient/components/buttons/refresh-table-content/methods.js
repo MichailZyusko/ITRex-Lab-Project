@@ -15,5 +15,5 @@ const getAllResolutions = (route) => async () => {
     return null;
   }
 };
-
-export default getAllResolutions('/api/resolutions/');
+// TODO Придумать что-нибудь с роутом так как нельзя просто передавать false
+export default getAllResolutions('/api/resolutions/patient/false');

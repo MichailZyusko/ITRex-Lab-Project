@@ -16,8 +16,7 @@ export default async () => {
     database: databaseName,
   }).promise();
 
-  const query = `SELECT * 
-    FROM specializations`;
+  const query = 'SELECT * FROM specializations';
 
   try {
     const [result] = await connection.query(query);

@@ -16,8 +16,10 @@ export default async (userID) => {
     database: databaseName,
   }).promise();
 
-  const query = `SELECT * FROM doctors
-                    WHERE userID = '${userID}';`;
+  const query = `
+    SELECT * 
+    FROM doctors
+    WHERE user_id = '${userID}';`;
 
   try {
     const result = await connection.query(query);

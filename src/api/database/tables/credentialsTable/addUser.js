@@ -1,14 +1,35 @@
-import credentialsTable from '../../../../storage/database/tables/credentialsTable.js';
+import bcrypt from 'bcrypt';
+import mysql from 'mysql2';
+import config from '../../../../../config.js';
 
-export default async (email, patientID, password) => {
+const {
+  database: {
+    port, host, user, databaseName, password,
+  },
+} = config;
+
+export default async (email, patientID, userPassword) => {
+  const connection = mysql.createConnection({
+    host,
+    port,
+    user,
+    password,
+    database: databaseName,
+  }).promise();
+
+  const query = 'INSERT INTO credentials SET ?';
+
   try {
-    const userID = patientID;
-    await credentialsTable.create({
+    const [result] = await connection.query(query, {
       login: email,
-      userID,
-      password,
+      user_id: patientID,
+      password: await bcrypt.hashSync(userPassword, 10),
     });
+
+    return result;
   } catch (error) {
     console.log(error);
+  } finally {
+    await connection.end();
   }
 };

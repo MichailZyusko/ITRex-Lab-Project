@@ -52,7 +52,9 @@ table thead, table tbody tr {
 }
 
 td, th {
- text-align: center;
+  text-align: center;
+  font-size: 15px;
+  word-wrap: break-word;
 }
 
 #search{

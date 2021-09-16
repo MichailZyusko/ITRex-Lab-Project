@@ -1,7 +1,3 @@
-/* eslint-disable no-return-await */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-param-reassign */
-
 import getCurrentPatient from './methods.js';
 
 const diagnoseText = document.getElementById('diagnoseText');
@@ -23,6 +19,7 @@ const changeText = (currentClient) => {
     return null;
   }
 
+  // eslint-disable-next-line no-param-reassign
   Array.from(form).forEach((element) => { element.value = ''; });
   diagnoseText.value = '';
 
@@ -38,12 +35,12 @@ const checkDiagnose = async (currentClient) => {
   return 'Please, fill resolution for this client';
 };
 
-export default async (/* ws */) => {
-  // ws.send(client)
+export default async () => {
   const currentClient = await getCurrentPatient();
 
   if (currentClient) {
     changeText(currentClient);
+
     return checkDiagnose(currentClient);
   }
 

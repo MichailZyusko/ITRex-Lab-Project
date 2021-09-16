@@ -1,42 +1,75 @@
 import searchChangeServices from './services.js';
+import deleteButtonClick from '../../../buttons/delete/controller.js';
 
-const addOption = (resolutionID, date, resolutionText, status) => {
-  const option = document.createElement('option');
-  const datalist = document.getElementById('resolutions');
-
-  option.value = `${date.slice(0, 19).replace('T', ' ')} | ${resolutionText} | ${status}`;
-  // option.label = `${date.slice(0, 19).replace('T', ' ')} | ${resolutionText} | ${status}`;
-  // option.value = patientID;
-  option.resolutionID = resolutionID;
-  option.id = `${date.slice(0, 19).replace('T', ' ')} | ${resolutionText} | ${status}`;
-
-  datalist.appendChild(option);
-};
+const table = document.getElementById('table');
 
 const setSearchResult = async (patientID) => {
-  const response = await searchChangeServices(patientID);
-  try {
-    response.forEach((element) => {
-      const {
-        resolutionID, date, resolutionText, status,
-      } = element;
-      addOption(resolutionID, date, resolutionText, status);
-    });
+  function addTD(data, tr, isDate) {
+    const td = document.createElement('td');
+    if (data) {
+      td.innerText = data;
+    } else {
+      td.innerText = '---';
+    }
 
+    if (isDate) {
+      td.innerText = data.slice(0, 10);
+    }
+
+    tr.appendChild(td);
+  }
+
+  const tableContent = await searchChangeServices(patientID);
+  try {
+    if (tableContent) {
+      table.innerHTML = '';
+      let id = 0;
+
+      console.log(tableContent);
+
+      tableContent.forEach((element) => {
+        const {
+          resolution_id: resID, date, resolution_text: resText,
+          status, doctor_specialization: docSpec, doctor_full_name: docName,
+        } = element;
+        const button = document.createElement('button');
+        const td = document.createElement('td');
+        const tr = document.createElement('tr');
+
+        id += 1;
+        addTD(id, tr);
+        addTD(docSpec, tr);
+        addTD(docName, tr);
+        addTD(resText, tr);
+        addTD(status, tr);
+        addTD(date, tr, true);
+
+        button.resolutionID = resID;
+        button.innerText = 'DELETE';
+        button.className = 'button h3';
+        button.style.fontSize = '10px';
+        button.style.padding = '0px 3px';
+        button.addEventListener('click', deleteButtonClick);
+
+        td.appendChild(button);
+        tr.appendChild(td);
+        table.appendChild(tr);
+      });
+    }
     return 'We found something for you';
   } catch (error) {
-    return response;
+    console.error(error);
   }
 };
 
 export default () => {
   const searchValue = document.getElementById('search').value.trim();
   const optionWithID = document.getElementById(searchValue);
-  const { patientID } = optionWithID;
+  const { patient_id: id } = optionWithID;
 
-  if (!patientID) {
+  if (!id) {
     return 'Nothing was found for your query ';
   }
 
-  return setSearchResult(patientID);
+  return setSearchResult(id);
 };

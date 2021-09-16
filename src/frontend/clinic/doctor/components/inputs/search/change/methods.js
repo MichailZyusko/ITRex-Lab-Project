@@ -1,7 +1,6 @@
-const makeGERequestWithQueryParams = (route) => async (patientID) => {
+const getRequest = (route) => async (patientID) => {
   try {
-    // TODO спросить насчет собаки в параметрах
-    const response = await fetch(`${route}patient/${patientID}`);
+    const response = await fetch(`${route}${patientID}`);
     const result = await response.json();
 
     return response.ok ? { result, ok: true } : { result, ok: false };
@@ -11,4 +10,4 @@ const makeGERequestWithQueryParams = (route) => async (patientID) => {
   }
 };
 
-export default makeGERequestWithQueryParams('/api/resolutions/');
+export default getRequest('/api/resolutions/patient/');

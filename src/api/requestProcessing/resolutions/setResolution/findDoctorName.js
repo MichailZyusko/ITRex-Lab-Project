@@ -3,7 +3,7 @@ import DatabaseStorage from '../../../database/DatabaseStorage.js';
 export default async (req, res, next) => {
   try {
     const result = await DatabaseStorage.getDoctor(req.data.doctorID);
-    req.doctorName = `${result.firstName} ${result.lastName}`;
+    req.doctor_full_name = `${result.first_name} ${result.last_name}`;
     next();
   } catch (error) {
     console.error(error);
