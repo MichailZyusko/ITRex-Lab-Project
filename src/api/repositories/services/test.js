@@ -31,7 +31,7 @@ describe('QueueServices', () => {
       isExistPatient: () => {},
     });
 
-    queue = new QueueService(queueID, redisStorage);
+    queue = new QueueService(redisStorage);
   });
 
   afterEach(() => {
@@ -41,15 +41,15 @@ describe('QueueServices', () => {
   describe('[METHOD] addPatient', () => {
     it('Positive: Should add patient with "patientID" to queue with "queueID" with score "count"', async () => {
       redisStorage.setPatient
-        .withArgs(patientID, queueID, count + 1)
-        .resolves(1);
+          .withArgs(patientID, queueID)
+          .resolves(1);
 
-      const result = await queue.addPatient(patientID);
+      const result = await queue.addPatient(patientID, queueID);
 
       expect(result).equals(1);
       expect(redisStorage.setPatient.called).equals(true);
       expect(redisStorage.setPatient.calledOnce).equals(true);
-      expect(redisStorage.setPatient.calledWith(patientID, queueID, count + 1)).equals(true);
+      expect(redisStorage.setPatient.calledWith(patientID, queueID)).equals(true);
     });
     // Add more cases (negative and other);
   });
@@ -74,10 +74,10 @@ describe('QueueServices', () => {
   describe('[METHOD] deleteCurrentPatient', () => {
     it('Positive: Should delete current patient from queue with "queueID"', async () => {
       redisStorage.deleteCurrentPatient
-        .withArgs(queueID)
-        .resolves(exampleOfPatient);
+          .withArgs(queueID)
+          .resolves(exampleOfPatient);
 
-      const result = await queue.deleteCurrentPatient();
+      const result = await queue.deleteCurrentPatient(queueID);
 
       expect(result).equals(exampleOfPatient);
       expect(redisStorage.deleteCurrentPatient.called).equals(true);
@@ -89,31 +89,31 @@ describe('QueueServices', () => {
 
   describe('[METHOD] isExistPatient', () => {
     it('Positive: Should return true if patient with "patientID" exist in queue with "queueID"',
-      async () => {
-        redisStorage.isExistPatient
-          .withArgs(queueID, patientID)
-          .resolves(true);
+        async () => {
+          redisStorage.isExistPatient
+              .withArgs(queueID, patientID)
+              .resolves(true);
 
-        const result = await queue.isExistPatient(patientID);
+          const result = await queue.isExistPatient(patientID, queueID);
 
-        expect(result).equals(true);
-        expect(redisStorage.isExistPatient.called).equals(true);
-        expect(redisStorage.isExistPatient.calledOnce).equals(true);
-        expect(redisStorage.isExistPatient.calledWith(queueID, patientID)).equals(true);
-      });
+          expect(result).equals(true);
+          expect(redisStorage.isExistPatient.called).equals(true);
+          expect(redisStorage.isExistPatient.calledOnce).equals(true);
+          expect(redisStorage.isExistPatient.calledWith(queueID, patientID)).equals(true);
+        });
 
     it('Negatife: Should return false if patient with "patientID" does not exist in queue with "queueID"',
-      async () => {
-        redisStorage.isExistPatient
-          .withArgs(queueID, patientID)
-          .resolves(true);
+        async () => {
+          redisStorage.isExistPatient
+              .withArgs(queueID, patientID)
+              .resolves(true);
 
-        const result = await queue.isExistPatient(invalidPatientID);
+          const result = await queue.isExistPatient(invalidPatientID);
 
-        expect(result).equals(false);
-        expect(redisStorage.isExistPatient.called).equals(true);
-        expect(redisStorage.isExistPatient.calledOnce).equals(true);
-        expect(redisStorage.isExistPatient.calledWith(queueID, patientID)).equals(false);
-      });
+          expect(result).equals(false);
+          expect(redisStorage.isExistPatient.called).equals(true);
+          expect(redisStorage.isExistPatient.calledOnce).equals(true);
+          expect(redisStorage.isExistPatient.calledWith(queueID, patientID)).equals(false);
+        });
   });
 });

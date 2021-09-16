@@ -1,7 +1,7 @@
 /* eslint-disable no-return-await */
 /* eslint-disable class-methods-use-this */
 
-import { addUser, findByLogin } from './index.js';
+import { addUser, findByLogin, findDoctorByLogin } from './index.js';
 
 class PasswordsTable {
   async addUser({ email, patientID, password }) {
@@ -10,6 +10,10 @@ class PasswordsTable {
 
   async findByLogin(login) {
     return await findByLogin(login);
+  }
+
+  async findDoctorByLogin(login) {
+    return await findDoctorByLogin(login);
   }
 }
 

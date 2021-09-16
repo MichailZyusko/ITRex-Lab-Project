@@ -13,8 +13,8 @@ const addOption = (resolutionID, date, resolutionText, status) => {
   datalist.appendChild(option);
 };
 
-const setSearchResult = async (lastName, firstName, email) => {
-  const response = await searchChangeServices(lastName, firstName, email);
+const setSearchResult = async (patientID) => {
+  const response = await searchChangeServices(patientID);
   try {
     response.forEach((element) => {
       const {
@@ -30,11 +30,13 @@ const setSearchResult = async (lastName, firstName, email) => {
 };
 
 export default () => {
-  const [lastName, firstName, email] = document.getElementById('search').value.trim().split(' | ');
+  const searchValue = document.getElementById('search').value.trim();
+  const optionWithID = document.getElementById(searchValue);
+  const { patientID } = optionWithID;
 
-  if (!(lastName && firstName && email)) {
+  if (!patientID) {
     return 'Nothing was found for your query ';
   }
 
-  return setSearchResult(lastName, firstName, email);
+  return setSearchResult(patientID);
 };

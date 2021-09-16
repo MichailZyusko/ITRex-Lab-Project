@@ -1,50 +1,42 @@
 /* eslint-disable no-return-await */
 /* eslint-disable no-plusplus */
 
-import { v4 as uuidv4 } from 'uuid';
 import RedisStorage from '../storage/queueStorage.js';
 import DatabaseStorage from '../../database/DatabaseStorage.js';
 
 export default class Queue {
-  constructor(queueID, storage) {
+  constructor(storage) {
     this.storage = storage || new RedisStorage();
-    this.queueID = queueID || uuidv4();
-    this.count = 0;
   }
 
-  async addPatient(patientID) {
+  async addPatient(patientID, queueID) {
     try {
-      const result = await this.storage.setPatient(patientID, this.queueID, this.count + 1);
-      if (result) {
-        this.count++;
-      }
-
-      return result;
+      return await this.storage.setPatient(patientID, queueID, new Date().getTime());
     } catch (error) {
       console.error(error);
     }
   }
 
-  async getCurrentPatient() {
+  async getCurrentPatient(queueID) {
     try {
-      const [patientID] = await this.storage.getCurrentPatient(this.queueID);
+      const [patientID] = await this.storage.getCurrentPatient(queueID);
       return await DatabaseStorage.getPatientByID(patientID);
     } catch (error) {
       console.error(error);
     }
   }
 
-  async deleteCurrentPatient() {
+  async deleteCurrentPatient(queueID) {
     try {
-      return await this.storage.deleteCurrentPatient(this.queueID);
+      return await this.storage.deleteCurrentPatient(queueID);
     } catch (error) {
       console.error(error);
     }
   }
 
-  async isExistPatient(patientID) {
+  async isExistPatient(patientID, queueID) {
     try {
-      if (await this.storage.isExistPatient(this.queueID, patientID)) {
+      if (await this.storage.isExistPatient(queueID, patientID)) {
         return true;
       }
 

@@ -6,9 +6,14 @@ const reqObject = {
   },
 };
 
-const queueUp = (route) => async () => {
+const queueUp = (route) => async (doctorID) => {
   try {
-    const response = await fetch(route, reqObject);
+    if (!doctorID) {
+      alert('Choose doctor');
+      return false;
+    }
+
+    const response = await fetch(`${route}/?specializationID=${doctorID}`, reqObject);
     const result = await response.json();
 
     if (!response.ok) {

@@ -19,7 +19,11 @@ export default async () => {
           const td = document.createElement('td');
           td.innerText = id++;
           tr.appendChild(td);
-        } else if (key === 'doctorID') {
+        } else if (key === 'doctorSpecialization') {
+          const td = document.createElement('td');
+          td.innerText = value;
+          tr.appendChild(td);
+        } else if (key === 'doctorName') {
           const td = document.createElement('td');
           td.innerText = value;
           tr.appendChild(td);

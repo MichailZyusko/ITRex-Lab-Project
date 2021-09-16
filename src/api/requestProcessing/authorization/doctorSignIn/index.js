@@ -3,7 +3,7 @@
 import controller from './controller.js';
 import isValidPasswordLogin from './isValidPasswordLogin.js';
 
-class SignUp {
+class DoctorSignIn {
   controller(req, res, next) {
     return controller(req, res, next);
   }
@@ -13,4 +13,4 @@ class SignUp {
   }
 }
 
-export default new SignUp();
+export default new DoctorSignIn();

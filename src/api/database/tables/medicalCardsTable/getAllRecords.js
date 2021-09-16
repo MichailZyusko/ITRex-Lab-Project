@@ -37,7 +37,6 @@ export default async (patientID) => {
 
   try {
     const [result] = await connection.query(query);
-
     return result;
   } catch (error) {
     console.log(error);

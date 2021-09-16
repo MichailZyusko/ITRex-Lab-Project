@@ -5,9 +5,9 @@ import { addRecord, getResolutionByID, deleteResolutionByID } from './index.js';
 
 class ResolutionsTable {
   async addRecord(resolutionID, medicalCardID,
-    doctorID, diagnose, comingDate, TTL) {
+    doctorID, diagnose, comingDate, TTL, name) {
     return await addRecord(resolutionID, medicalCardID,
-      doctorID, diagnose, comingDate, TTL);
+      doctorID, diagnose, comingDate, TTL, name);
   }
 
   async getResolutionByID(resolutionID) {

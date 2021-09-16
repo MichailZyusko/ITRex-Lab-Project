@@ -1,7 +1,7 @@
 import getSearchingClient from './methods.js';
 
-export default async (lastName, firstName, email) => {
-  const searchResult = await getSearchingClient(lastName, firstName, email);
+export default async (patientID) => {
+  const searchResult = await getSearchingClient(patientID);
 
   if (searchResult.ok) {
     return searchResult.result;

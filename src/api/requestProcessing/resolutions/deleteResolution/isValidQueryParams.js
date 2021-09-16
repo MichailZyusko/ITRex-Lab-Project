@@ -12,7 +12,6 @@ const isValid = (resolutionID) => validator.isUUID(resolutionID);
 export default async (req, res, next) => {
   try {
     const { resolutionID } = new DeletePatientDTO(req);
-
     if (!resolutionID) {
       throw new ApiError(400, 'Request searchString is empty');
     }
