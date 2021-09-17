@@ -22,7 +22,6 @@ services:
       - DB_DIALECT=mysql
       - TOKEN_KEY=SECRET_KEY
       - TTL_DEFAULT=60000
-    context:  .
     depends_on:
       db:
         condition: service_healthy
