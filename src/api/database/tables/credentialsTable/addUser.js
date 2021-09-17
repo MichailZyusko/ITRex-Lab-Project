@@ -8,7 +8,7 @@ const {
   },
 } = config;
 
-export default async (email, patientID, userPassword) => {
+export default async ({ email, patientID, password: userPassword }) => {
   const connection = mysql.createConnection({
     host,
     port,

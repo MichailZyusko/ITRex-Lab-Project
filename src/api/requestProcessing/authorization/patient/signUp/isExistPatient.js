@@ -1,5 +1,5 @@
 import ApiError from '../../../../../errors/ApiError.js';
-import DatabaseStorage from '../../../../database/DatabaseStorage.js';
+import DatabaseStorage from '../../../../database/index.js';
 
 const isExist = async (patient) => DatabaseStorage.isExistPatient(patient);
 

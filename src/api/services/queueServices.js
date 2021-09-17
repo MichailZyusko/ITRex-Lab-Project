@@ -1,5 +1,5 @@
 import RedisStorage from '../repositories/queueStorage.js';
-import DatabaseStorage from '../database/DatabaseStorage.js';
+import DatabaseStorage from '../database/index.js';
 
 export default class Queue {
   constructor(storage) {

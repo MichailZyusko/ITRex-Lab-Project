@@ -1,4 +1,4 @@
-import DatabaseStorage from '../../../database/DatabaseStorage.js';
+import DatabaseStorage from '../../../database/index.js';
 
 export default async (req, res, next) => {
   try {

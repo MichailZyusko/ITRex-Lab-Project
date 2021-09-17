@@ -1,5 +1,5 @@
 import ApiError from '../../../../errors/ApiError.js';
-import Database from '../../../database/DatabaseStorage.js';
+import Database from '../../../database/index.js';
 
 const isExist = async (resolutionID) => !await Database.getResolutionByID(resolutionID);
 

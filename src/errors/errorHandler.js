@@ -1,6 +1,6 @@
 import ApiError from './ApiError.js';
 
-export default (err, req, res) => {
+export default (err, req, res, next) => {
   let message = 'Something went wrong';
   let status = 500;
 
