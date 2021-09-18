@@ -2,7 +2,7 @@ import { getPatientDataByID, getAllSpecializations } from './methods.js';
 import refreshTableContentClick from '../buttons/refresh-table-content/controller.js';
 
 const form = document.querySelector('form');
-const datalist = document.querySelector('datalist');
+const specializationsDatalist = document.getElementById('specialities');
 
 export default async () => {
   try {
@@ -30,7 +30,7 @@ export default async () => {
         option.id = `${specName}`;
         option.specializationID = specID;
 
-        datalist.appendChild(option);
+        specializationsDatalist.appendChild(option);
       });
     }
   } catch (error) {

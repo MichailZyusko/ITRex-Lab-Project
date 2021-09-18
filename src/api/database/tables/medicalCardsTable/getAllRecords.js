@@ -3,7 +3,7 @@ import config from '../../../../../config.js';
 
 const {
   database: {
-    port, host, user, databaseName, password,
+    port, host, user, database, password,
   },
 } = config;
 
@@ -13,7 +13,7 @@ export default async (patientID) => {
     port,
     user,
     password,
-    database: databaseName,
+    database,
   }).promise();
 
   const query = `SELECT * 

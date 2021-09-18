@@ -3,19 +3,19 @@ import config from '../../../../../config.js';
 
 const {
   database: {
-    port, host, user, databaseName, password,
+    port, host, user, database, password,
   },
 } = config;
 
 export default async ({
-  firstName, lastName, birthday, gender, email, patientID,
+  firstName, lastName, birthday, gender, email, patientID, userID,
 }) => {
   const connection = mysql.createConnection({
     host,
     port,
     user,
     password,
-    database: databaseName,
+    database,
   }).promise();
 
   const query = 'INSERT INTO patients SET ?';
@@ -28,6 +28,7 @@ export default async ({
       birthday,
       gender,
       email,
+      user_id: userID,
     });
 
     return result;

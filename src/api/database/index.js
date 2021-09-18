@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
-import ClientsTable from './tables/clientsTable/ClientsTable.js';
+import PatientsTable from './tables/patientsTable/PatientsTable.js';
 import CredentialsTable from './tables/credentialsTable/credentialsTable.js';
 import MedicalCardsTable from './tables/medicalCardsTable/MedicalCardsTable.js';
 import ResolutionsTable from './tables/resolutionsTable/ResolutionsTable.js';
@@ -19,8 +19,12 @@ const { secretKey } = config;
 class DatabaseStorage {
   async setPatient(patient) {
     const patientID = uuidv4();
-    await ClientsTable.setPatient({ ...patient, patientID });
-    await CredentialsTable.addUser({ ...patient, patientID });
+    const userID = uuidv4();
+    const medicalCardID = uuidv4();
+
+    await MedicalCardsTable.addRecord(patientID, medicalCardID);
+    await CredentialsTable.addUser({ ...patient, userID });
+    await PatientsTable.setPatient({ ...patient, patientID, userID });
   }
 
   async findByLogin(password, login) {
@@ -54,15 +58,22 @@ class DatabaseStorage {
       throw new ApiError(403, 'Wrong password or login');
     }
 
-    const { doctorID } = await DoctorsTable.getDoctor(id);
+    // TODO нужно ли
+    const { doctorID } = await DoctorsTable.getDoctorByUserID(id);
 
     const token = jwt.sign({ id }, secretKey);
 
+    // TODO нужно ли
     return { token, doctorID };
   }
 
   async getPatientByID(ID) {
-    const patient = await ClientsTable.getPatientByID(ID);
+    const patient = await PatientsTable.getPatientByID(ID);
+    return patient;
+  }
+
+  async getPatientByUserID(userID) {
+    const patient = await PatientsTable.getPatientByUserID(userID);
     return patient;
   }
 
@@ -71,12 +82,15 @@ class DatabaseStorage {
     return specializations;
   }
 
-  async setDiagnose(ID, doctorID, diagnose, comingDate, TTL, name) {
-    const medicalCardID = uuidv4();
+  async setDiagnose(ID, doctorID, diagnose, comingDate, TTL) {
     const resolutionID = uuidv4();
-    await MedicalCardsTable.addRecord(ID, medicalCardID);
-    await ResolutionsTable.addRecord(resolutionID, medicalCardID,
-      doctorID, diagnose, comingDate, TTL, name);
+    const { medical_card_id: medicalCardID } = await MedicalCardsTable.getMedicalCardByID(ID);
+    const { specialization_name: specialization } = await DoctorsTable.findSpecialization(doctorID);
+    const { first_name: fn, last_name: ln } = await DoctorsTable.getDoctorByID(doctorID);
+    const name = `${fn} ${ln}`;
+
+    await ResolutionsTable.addRecord(resolutionID, medicalCardID, specialization,
+      diagnose, comingDate, TTL, name);
   }
 
   async getResolutionsByID(patientID) {
@@ -85,12 +99,12 @@ class DatabaseStorage {
   }
 
   async isExistPatient(patient) {
-    const bool = await ClientsTable.isExistPatient(patient);
+    const bool = await PatientsTable.isExistPatient(patient);
     return bool;
   }
 
   async getAllPatientLikeValue(text) {
-    const patients = await ClientsTable.getAllPatientLikeValue(text);
+    const patients = await PatientsTable.getAllPatientLikeValue(text);
     return patients;
   }
 
@@ -110,6 +124,16 @@ class DatabaseStorage {
 
   async getDoctor(userID) {
     const doctor = await DoctorsTable.getDoctor(userID);
+    return doctor;
+  }
+
+  async getDoctorsBySpecID(specID) {
+    const doctors = await DoctorsTable.getDoctorsBySpecID(specID);
+    return doctors;
+  }
+
+  async getDoctorByUserID(userID) {
+    const doctor = await DoctorsTable.getDoctorByUserID(userID);
     return doctor;
   }
 }

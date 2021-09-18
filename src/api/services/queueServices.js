@@ -8,7 +8,7 @@ export default class Queue {
 
   async addPatient(patientID, queueID) {
     try {
-      return await this.storage.setPatient(patientID, queueID, new Date().getTime());
+      return await this.storage.setPatient(patientID, queueID, Date.now());
     } catch (error) {
       console.error(error);
     }

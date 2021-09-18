@@ -3,6 +3,10 @@ const getRequest = (route) => async (patientID) => {
     const response = await fetch(`${route}${patientID}`);
     const result = await response.json();
 
+    if (response.status === 302) {
+      window.location = result.url;
+    }
+
     return response.ok ? { result, ok: true } : { result, ok: false };
   } catch (error) {
     console.error(error);

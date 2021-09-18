@@ -21,8 +21,6 @@ router.route('/patient/:id')
   .post(
     setResolution.isValidRequestData,
     setResolution.isExistPatientID,
-    setResolution.findDoctorSpecialization,
-    setResolution.findDoctorName,
     setResolution.controller,
   );
 export default router;

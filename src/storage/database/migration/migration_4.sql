@@ -1,8 +1,8 @@
-use queuedb;
+USE clinic;
 
 CREATE TABLE IF NOT EXISTS doctor_specialization (
-    specializationID VARCHAR(255),
-    doctorID VARCHAR(255),
-    FOREIGN KEY (doctorID) REFERENCES doctors(doctorID),
-    FOREIGN KEY (specializationID) REFERENCES specializations(specializationID)
+    specialization_id VARCHAR(255),
+    doctor_id VARCHAR(255),
+    FOREIGN KEY (doctor_id) REFERENCES doctors(doctor_id),
+    FOREIGN KEY (specialization_id) REFERENCES specializations(specialization_id)
 );

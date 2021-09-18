@@ -3,27 +3,25 @@ import config from '../../../../../config.js';
 
 const {
   database: {
-    port, host, user, databaseName, password,
+    port, host, user, database, password,
   },
 } = config;
 
-export default async (text) => {
+export default async (doctorID) => {
   const connection = mysql.createConnection({
     host,
     port,
     user,
     password,
-    database: databaseName,
+    database,
   }).promise();
 
   const query = `SELECT *
-  FROM patients
-  WHERE first_name LIKE '%${text}%'
-  OR last_name LIKE '%${text}%'
-  OR email LIKE '%${text}%'`;
+  FROM doctors
+  WHERE doctor_id = '${doctorID}'`;
 
   try {
-    const [result] = await connection.query(query);
+    const [[result]] = await connection.query(query);
 
     return result;
   } catch (error) {

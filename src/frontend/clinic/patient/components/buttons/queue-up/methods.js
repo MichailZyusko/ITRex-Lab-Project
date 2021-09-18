@@ -1,3 +1,4 @@
+const URL = '/api/patients/me/';
 const reqObject = {
   method: 'POST',
   headers: {
@@ -13,8 +14,12 @@ const queueUp = (route) => async (doctorID) => {
       return false;
     }
 
-    const response = await fetch(`${route}?specializationID=${doctorID}`, reqObject);
+    const response = await fetch(`${route}?doctorID=${doctorID}`, reqObject);
     const result = await response.json();
+
+    if (response.status === 302) {
+      window.location = result.url;
+    }
 
     if (!response.ok) {
       const { message } = result;
@@ -30,4 +35,4 @@ const queueUp = (route) => async (doctorID) => {
   }
 };
 
-export default queueUp('/api/patients/me/');
+export default queueUp(URL);

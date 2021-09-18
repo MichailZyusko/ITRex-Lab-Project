@@ -1,6 +1,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import cron from 'node-cron';
+
 import config from './config.js';
 import cronJob from './src/cron/deleteOldData.js';
 import patientsRouter from './src/api/routes/patientsRouter.js';
@@ -8,6 +9,7 @@ import doctorsRouter from './src/api/routes/doctorsRouter.js';
 import resolutionsRouter from './src/api/routes/resolutionsRouter.js';
 import authorizationRouter from './src/api/routes/authorizationRouter.js';
 import errorHandler from './src/errors/errorHandler.js';
+
 import DBinitialization from './src/storage/database/index.js';
 import isAuthPatient from './src/api/middleware/isAuthPatient.js';
 import isAuthResolutions from './src/api/middleware/isAuthResolutions.js';

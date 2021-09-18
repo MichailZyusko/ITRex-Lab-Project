@@ -3,9 +3,10 @@ export default (req, res, next) => {
     const { patientToken } = req.cookies;
 
     if (!patientToken) {
-      return res.redirect('http://localhost:3000/patient-sign-in/');
+      return res
+        .status(302)
+        .send({ url: '/patient-sign-in/' });
     }
-
     next();
   } catch (error) {
     next(error);

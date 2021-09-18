@@ -1,6 +1,8 @@
-const findAllPatientLikeValue = (route) => async (search) => {
+const URL = '/api/doctors/specializations/';
+
+const getRequest = (route) => async (specializationID) => {
   try {
-    const response = await fetch(`${route}?search=${search}`);
+    const response = await fetch(`${route}${specializationID}`);
     const result = await response.json();
 
     if (response.status === 302) {
@@ -14,4 +16,4 @@ const findAllPatientLikeValue = (route) => async (search) => {
   }
 };
 
-export default findAllPatientLikeValue('/api/patients/');
+export default getRequest(URL);

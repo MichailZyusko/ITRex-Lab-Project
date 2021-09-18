@@ -7,7 +7,7 @@ const {
   },
 } = config;
 
-export default async (login) => {
+export default async (patientID) => {
   const connection = mysql.createConnection({
     host,
     port,
@@ -15,16 +15,14 @@ export default async (login) => {
     password,
     database,
   }).promise();
-  const query = `
-    SELECT credentials.password, credentials.user_id
-    FROM credentials
-    INNER JOIN doctors ON
-    doctors.user_id = credentials.user_id
-    WHERE
-    credentials.login= '${login}'`;
+
+  const query = `SELECT *
+  FROM medical_cards
+  WHERE patient_id = '${patientID}'`;
 
   try {
     const [[result]] = await connection.query(query);
+
     return result;
   } catch (error) {
     console.log(error);

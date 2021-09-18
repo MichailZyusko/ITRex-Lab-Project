@@ -3,6 +3,10 @@ const getAllResolutions = (route) => async () => {
     const response = await fetch(route);
     const result = await response.json();
 
+    if (response.status === 302) {
+      window.location = result.url;
+    }
+
     if (!response.ok) {
       const { result: message } = result;
 

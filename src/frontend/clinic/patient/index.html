@@ -37,13 +37,6 @@
           <div class="h6" style="margin-right: 30px;">EMAIL</div>
           <input type="text" class="input" name="email">
         </div>
-        <div class="field">
-          <div class="h6" style="margin-right: 30px;">PASSWORD</div>
-          <input type="password" class="input" name="password">
-        </div>
-        <br>
-        <br>
-        <button class="button h3" style="width: 75%;">Save changes</button>
       </div>
     </form>
   </div>
@@ -57,13 +50,19 @@
       <div style="margin-top: 15px; ">
         <div>
           <label for="doctorSpecialization" class="h6" style="margin-right:20px">Specialization: </label>
-          <input list="specialities" id="doctorSpecialization" name="doctorName" class="input h4" placeholder="Doctor specialization">
-          <datalist id="specialities">
-          </datalist>
+          <input list="specialities" id="doctorSpecialization" name="doctorSpec" class="input h4" placeholder="Specialization">
+          <datalist id="specialities"></datalist>
         </div>
-        <div style="margin-top: 30px;">
-          <label for="dateTime" class="h6" style="margin-right:26px">Date:</label>
-          <input type="datetime-local" name="dateTime" class="input h4" id="datetime" >
+        <br>
+        <div>
+          <label for="doctorName" class="h6" style="margin-right:20px">Doctors name: </label>
+          <input list="names" id="doctorName" name="doctorName" class="input h4" placeholder="Name">
+          <datalist id="names"></datalist>
+        </div>
+        <br>
+        <div>
+          <label for="dateTime" class="h6" style="margin-right:26px">Record date:</label>
+          <input type="datetime-local" name="dateTime" class="input h4" id="datetime" style="width: 55%" >
         </div>
         <button class="button h3" id="submitButton">queue up</button>
       </div>

@@ -2,10 +2,10 @@ import queueUp from './methods.js';
 
 export default async () => {
   try {
-    const doctor = document.getElementById('doctorSpecialization').value.trim();
-    const optionWithID = document.getElementById(doctor);
-    const { specializationID } = optionWithID;
-    const { positionInQueue } = await queueUp(specializationID);
+    const doctor = document.getElementById('doctorName').value.trim();
+    const option = document.getElementById(doctor);
+    const { doctorID } = option;
+    const { positionInQueue } = await queueUp(doctorID);
 
     if (positionInQueue) {
       document.getElementById('queueStatus').innerText = `${positionInQueue} people before You`;

@@ -3,7 +3,9 @@ export default (req, res, next) => {
     const { doctorToken } = req.cookies;
 
     if (!doctorToken) {
-      return res.redirect('http://localhost:3000/doctor-sign-in/');
+      return res
+        .status(302)
+        .send({ url: '/doctor-sign-in/' });
     }
 
     next();

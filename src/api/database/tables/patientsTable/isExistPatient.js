@@ -7,7 +7,9 @@ const {
   },
 } = config;
 
-export default async (login) => {
+export default async ({
+  firstName, lastName, birthday, gender,
+}) => {
   const connection = mysql.createConnection({
     host,
     port,
@@ -15,17 +17,20 @@ export default async (login) => {
     password,
     database,
   }).promise();
+
   const query = `
-    SELECT credentials.password, credentials.user_id
-    FROM credentials
-    INNER JOIN doctors ON
-    doctors.user_id = credentials.user_id
-    WHERE
-    credentials.login= '${login}'`;
+    SELECT * 
+    FROM patients 
+    WHERE first_name = '${firstName}' 
+    AND last_name = '${lastName}'
+#     AND birthday = '${birthday}'
+    AND gender = '${gender}'
+  `;
 
   try {
-    const [[result]] = await connection.query(query);
-    return result;
+    const [result] = await connection.query(query);
+
+    return result.length;
   } catch (error) {
     console.log(error);
   } finally {

@@ -9,5 +9,9 @@ export default (err, req, res, next) => {
     status = err.statusCode;
   }
 
+  if (status === 401) {
+    return res.redirect('http://localhost:3000/patient-sign-in');
+  }
+
   res.status(status).send({ code: status, message });
 };

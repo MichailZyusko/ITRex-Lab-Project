@@ -4,17 +4,17 @@ import config from '../../../../../config.js';
 
 const {
   database: {
-    port, host, user, databaseName, password,
+    port, host, user, database, password,
   },
 } = config;
 
-export default async ({ email, patientID, password: userPassword }) => {
+export default async ({ email, userID, password: userPassword }) => {
   const connection = mysql.createConnection({
     host,
     port,
     user,
     password,
-    database: databaseName,
+    database,
   }).promise();
 
   const query = 'INSERT INTO credentials SET ?';
@@ -22,7 +22,7 @@ export default async ({ email, patientID, password: userPassword }) => {
   try {
     const [result] = await connection.query(query, {
       login: email,
-      user_id: patientID,
+      user_id: userID,
       password: await bcrypt.hashSync(userPassword, 10),
     });
 

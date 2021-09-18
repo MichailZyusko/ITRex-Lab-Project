@@ -3,7 +3,7 @@ import config from '../../../../config.js';
 
 const {
   database: {
-    port, host, user, databaseName, password,
+    port, host, user, database, password,
   },
 } = config;
 
@@ -13,21 +13,20 @@ export default async () => {
     port,
     user,
     password,
-    database: databaseName,
+    database,
   }).promise();
 
   const sqlQuery = `CREATE TABLE IF NOT EXISTS patients (
-    id VARCHAR(255),
+    id CHAR(36),
     first_name VARCHAR(255),
     last_name VARCHAR(255),
     gender VARCHAR(255),
     birthday DATE,
     email VARCHAR(255),
-    PRIMARY KEY (id)
-#     FOREIGN KEY (id) REFERENCES medical_cards(patient_id)
-                                    
-#     user_id VARCHAR(255),
-#     FOREIGN KEY (user_id) REFERENCES users(id)
+    user_id CHAR(36),
+    PRIMARY KEY (id),
+    FOREIGN KEY (id) REFERENCES medical_cards(patient_id),
+    FOREIGN KEY (user_id) REFERENCES credentials(user_id)
   )`;
 
   try {

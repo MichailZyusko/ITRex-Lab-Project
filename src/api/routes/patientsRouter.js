@@ -16,12 +16,10 @@ router.route('/')
 router.route('/waiting/current')
   .get(
     currentPatient.isValidDoctorData,
-    currentPatient.findDoctorQueueID,
     currentPatient.getController,
   )
   .delete(
     currentPatient.isValidDoctorData,
-    currentPatient.findDoctorQueueID,
     currentPatient.deleteController,
   );
 

@@ -4,7 +4,7 @@ import resolutionStatus from '../api/database/tables/resolutionStatus.js';
 
 const {
   database: {
-    port, host, user, databaseName, password,
+    port, host, user, database, password,
   },
 } = config;
 
@@ -14,7 +14,7 @@ export default async () => {
     port,
     user,
     password,
-    database: databaseName,
+    database,
   }).promise();
   const now = Date.now();
 
