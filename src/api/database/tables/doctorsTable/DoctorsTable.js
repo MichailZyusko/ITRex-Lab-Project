@@ -1,9 +1,11 @@
-import { findSpecialization, getDoctor } from './index.js';
+import { findSpecialization, getDoctorByUserID, getDoctorsBySpecID, getDoctorByID } from './index.js';
 
 class DoctorsTable {
   constructor() {
     this.findSpecialization = findSpecialization;
-    this.getDoctor = getDoctor;
+    this.getDoctorByUserID = getDoctorByUserID;
+    this.getDoctorsBySpecID = getDoctorsBySpecID;
+    this.getDoctorByID = getDoctorByID;
   }
 }
 

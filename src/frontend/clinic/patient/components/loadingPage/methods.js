@@ -1,15 +1,17 @@
 const getRequest = (route) => async () => {
   try {
     const response = await fetch(route);
+
     const result = await response.json();
-
-    if (!response.ok) {
-      const { result: message } = result;
-
-      alert(`Error ${message}`);
-      return false;
+    if (response.status === 302) {
+      window.location = result.url;
     }
-    return result;
+
+    if (response.ok) {
+      return result;
+    }
+
+    return false;
   } catch (error) {
     console.error(error);
     return null;

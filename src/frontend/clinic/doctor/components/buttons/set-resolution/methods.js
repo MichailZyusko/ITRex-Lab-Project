@@ -19,6 +19,11 @@ const DELETERequest = (route) => async () => {
   try {
     const response = await fetch(`${route}`, deleteReqObject());
     const result = await response.json();
+
+    if (response.status === 302) {
+      window.location = result.url;
+    }
+
     if (!response.ok) {
       const { message } = result;
 
@@ -42,6 +47,10 @@ const setResolutionRequest = (route) => async (patientID = null, data = null) =>
     const response = await fetch(`${route}/${patientID}`, postReqObject(data));
     const result = await response.json();
 
+    if (response.status === 302) {
+      window.location = result.url;
+    }
+
     if (!response.ok) {
       const { message } = result;
 
@@ -60,6 +69,10 @@ const makeGERequest = (route) => async () => {
   try {
     const response = await fetch(route);
     const result = await response.json();
+
+    if (response.status === 302) {
+      window.location = result.url;
+    }
 
     return result;
   } catch (error) {

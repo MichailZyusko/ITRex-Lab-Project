@@ -1,5 +1,5 @@
 import RedisStorage from '../repositories/queueStorage.js';
-import DatabaseStorage from '../database/DatabaseStorage.js';
+import DatabaseStorage from '../database/index.js';
 
 export default class Queue {
   constructor(storage) {
@@ -8,7 +8,7 @@ export default class Queue {
 
   async addPatient(patientID, queueID) {
     try {
-      return await this.storage.setPatient(patientID, queueID, new Date().getTime());
+      return await this.storage.setPatient(patientID, queueID, Date.now());
     } catch (error) {
       console.error(error);
     }

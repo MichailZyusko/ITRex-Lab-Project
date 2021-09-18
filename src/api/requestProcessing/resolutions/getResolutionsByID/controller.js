@@ -1,4 +1,4 @@
-import database from '../../../database/DatabaseStorage.js';
+import database from '../../../database/index.js';
 
 export default async ({ data: patientID }, res, next) => {
   try {

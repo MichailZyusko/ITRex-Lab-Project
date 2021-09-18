@@ -1,4 +1,8 @@
 import findSpecialization from './findSpecialization.js';
-import getDoctor from './getDoctor.js';
+import getDoctorByUserID from './getDoctorByUserID.js';
+import getDoctorsBySpecID from './getDoctorsBySpecID.js';
+import getDoctorByID from './getDoctorByID.js';
 
-export { findSpecialization, getDoctor };
+export {
+  findSpecialization, getDoctorByUserID, getDoctorsBySpecID, getDoctorByID,
+};

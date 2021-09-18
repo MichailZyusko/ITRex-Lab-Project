@@ -1,9 +1,9 @@
-CREATE DATABASE IF NOT EXISTS queuedb;
+CREATE DATABASE IF NOT EXISTS clinic;
 
-USE queuedb;
+USE clinic;
 
 CREATE TABLE IF NOT EXISTS specializations (
-    specializationID VARCHAR(255),
-    specializationName VARCHAR(255),
-    PRIMARY KEY (specializationID)
+    specialization_id VARCHAR(255),
+    specialization_name VARCHAR(255),
+    PRIMARY KEY (specialization_id)
 );

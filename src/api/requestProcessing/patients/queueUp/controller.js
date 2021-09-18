@@ -1,7 +1,8 @@
 import queue from '../../../../storage/index.js';
 
-export default async ({ data: { specializationID: queueID } }, res, next) => {
+export default async ({ data: { patientID, doctorID: queueID } }, res, next) => {
   try {
+    await queue.addPatient(patientID, queueID);
     const positionInQueue = await queue.storage.getQueueLength(queueID);
 
     res.status(201).send({ positionInQueue });

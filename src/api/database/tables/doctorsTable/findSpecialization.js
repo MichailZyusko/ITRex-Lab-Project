@@ -3,7 +3,7 @@ import config from '../../../../../config.js';
 
 const {
   database: {
-    port, host, user, databaseName, password,
+    port, host, user, database, password,
   },
 } = config;
 
@@ -13,20 +13,21 @@ export default async (doctorID) => {
     port,
     user,
     password,
-    database: databaseName,
+    database,
   }).promise();
 
   const query = `
-    SELECT specializations.* 
+    SELECT *
     FROM specializations
-    INNER JOIN doctor_specialization ON
+    JOIN doctor_specialization ON
     specializations.specialization_id=doctor_specialization.specialization_id
-    INNER JOIN doctors ON
+    JOIN doctors ON
     doctors.doctor_id = doctor_specialization.doctor_id AND
-    doctors.user_id = '${doctorID}';`;
+    doctors.doctor_id = '${doctorID}'`;
 
   try {
     const [[result]] = await connection.query(query);
+
     return result;
   } catch (error) {
     console.log(error);

@@ -3,27 +3,27 @@ import config from '../../../../../config.js';
 
 const {
   database: {
-    port, host, user, databaseName, password,
+    port, host, user, database, password,
   },
 } = config;
 
-export default async (userID) => {
+export default async (patientID) => {
   const connection = mysql.createConnection({
     host,
     port,
     user,
     password,
-    database: databaseName,
+    database,
   }).promise();
 
-  const query = `
-    SELECT * 
-    FROM doctors
-    WHERE user_id = '${userID}';`;
+  const query = `SELECT *
+  FROM patients
+  WHERE id = '${patientID}'`;
 
   try {
-    const result = await connection.query(query);
-    return result[0][0];
+    const [[result]] = await connection.query(query);
+
+    return result;
   } catch (error) {
     console.log(error);
   } finally {

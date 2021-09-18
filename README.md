@@ -1,39 +1,42 @@
 # ITRex-Lab-Project
 This project will create an electronic doctor's waiting list. The project includes the creation of two websites with working functionality and the connection of databases.
 
-// TODO Добавить запись, что нужно также npm i websocket
 How to use? There are several options:
-  If you want to run the application, follow these instructions: 
+
+    If you want to run the application, follow these instructions: 
     1. Сlone this repository.
     2. Open the cloned repository folder in the terminal.
     3. Run npm i
     4. Run npm start
     5. Open browser and go to the following links:
-     1) http://0.0.0.0:3000/html/client.html
-     2) http://0.0.0.0:3000/html/clinic.html
+     1) http://localhost:3000/patient-sign-in
+     2) http://localhost:3000/doctor-sign-in
 
   Then emulate the doctor and the patient and watch the result :) 
     
   If you want to start Docker, follow these instructions:
+
     1. Open your terminal and enter the following commands:
-     1) docker build . -t queue
-     2) docker build . -t websocket
-     3) docker-compose up
+     1) docker-compose up
     2. Open browser and go to the following links:
-     1) http://0.0.0.0:3000/html/client.html
-     2) http://0.0.0.0:3000/html/clinic.html
+     1) http://localhost:3000/patient-sign-in
+     2) http://localhost:3000/doctor-sign-in
 
   Then emulate the doctor and the patient and watch the result :) 
 
   If you want to run unit tests, follow these instructions:
+
     1. Сlone this repository.
     2. Open the cloned repository folder in the terminal.
     3. Run npm i 
-    4. Go to the next directory: 'ITRex-Lab-Project/src/api/classes'
-    5. Run this command: export NODE_ENV=dev && mocha --delay test.js
+    4.1 Go to the next directory: 'ITRex-Lab-Project/src/api/services
+    4.2 Go to the next directory: 'ITRex-Lab-Project/src/api/repositories
+    5. Run this command: export NODE_ENV=dev && mocha test.js
 
   You may not be able to run a test. You probably do not have mocha for bash.
-   Open your terminal and type the following command: $ sudo apt install mocha
+   Open your terminal and type the following command:
+
+    1. $ sudo apt install mocha
 
 
 If you have any questions, feel free to ask me on the discord
@@ -64,9 +67,9 @@ Versions:
   3) Удалена уязвимость с перезагрузкой страницы и удалением текущего пациента доктора
 
  1.1.3
-  1) Текущий пациент находиться на сервере а не в localstorage
-  2) Добавлены функция, которая исользует замыкание для создние разных маршрутов для HTTP запросов
-  3) Мионорные изменения кода
+  1) Текущий пациент находится на сервере, а не в localstorage
+  2) Добавлены функция, которая использует замыкание для создания разных маршрутов для HTTP запросов
+  3) Минорные изменения кода
   4) Добавлена валидация(частично)
   5) Выделил обработчики для HTTP Req: Validate, Adapt, Process on middleware
   6) Добавил красивое и понятное логирование
@@ -89,7 +92,7 @@ Versions:
 
  2.0.0
   1) Изменена структура хранения клиентов в Redis (от строк к объектам)
-  2) Изменена структрура проекта 
+  2) Изменена структура проекта 
   3) Docker работает правильно (есть один вопрос)
   4) Добавлены конфиг файлы
   5) Исправлены ошибки с REST API
@@ -118,7 +121,7 @@ Versions:
  2.0.4
   1) Удален весь inMemory, Redis, database 
   2) Redis используется только для хранения очереди(id пациента) использую осортированный set
-  3) Немного измененна структура БД. Добавлены/удалены некоторые таблицы
+  3) Немного изменённая структура БД. Добавлены/удалены некоторые таблицы
   4) Изменился frontend:
       1. Добавлена таблица со всеми резолюциями на странице клиента
       2. Search as you type
@@ -129,10 +132,13 @@ Versions:
       1. Docker
       2. Tests
       3. Websoket
-  
-
+      
   2.0.5
    1) Fix bugs 
 
   2.0.6
    1) Добавленые базовые тесты
+   
+ 2.2.0
+   1) Доработка качества кода
+   2) Добавлена функция выбора конкретного доктора

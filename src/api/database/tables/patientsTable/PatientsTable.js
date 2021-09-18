@@ -1,16 +1,16 @@
 import {
-  setPatient, getPatientByID,
-  isExistPatient,
-  getAllPatientLikeValue,
+  setPatient, getPatientByUserID, getPatientByID,
+  isExistPatient, getAllPatientLikeValue,
 } from './index.js';
 
-class ClientsTable {
+class PatientsTable {
   constructor() {
     this.setPatient = setPatient;
     this.getAllPatientLikeValue = getAllPatientLikeValue;
+    this.getPatientByUserID = getPatientByUserID;
     this.getPatientByID = getPatientByID;
     this.isExistPatient = isExistPatient;
   }
 }
 
-export default new ClientsTable();
+export default new PatientsTable();

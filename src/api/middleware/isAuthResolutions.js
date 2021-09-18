@@ -10,7 +10,9 @@ export default (req, res, next) => {
     const { patientToken, doctorToken } = new GetTokenDTO(req);
 
     if (!(patientToken || doctorToken)) {
-      return res.redirect('http://localhost:3000/patient-sign-in/');
+      return res
+        .status(302)
+        .send({ url: '/patient-sign-in/' });
     }
 
     next();

@@ -7,7 +7,7 @@ import {
 export default async () => {
   await databaseDefine();
   await medicalCardsDefine();
-  await patientsDefine();
   await credentialsDefine();
+  await patientsDefine();
   await resolutionsDefine();
 };

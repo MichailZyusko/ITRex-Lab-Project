@@ -12,22 +12,27 @@ export default class RedisStorage {
   }
 
   async setPatient(patientID, queueID, count) {
-    return await this.redisClient.zaddAsync(`queues:${queueID}`, 'NX', count, patientID);
+    const result = await this.redisClient.zaddAsync(`queues:${queueID}`, 'NX', count, patientID);
+    return result;
   }
 
   async getCurrentPatient(queueID) {
-    return await this.redisClient.zrangeAsync(`queues:${queueID}`, 0, 0);
+    const result = await this.redisClient.zrangeAsync(`queues:${queueID}`, 0, 0);
+    return result;
   }
 
   async deleteCurrentPatient(queueID) {
-    return await this.redisClient.zpopminAsync(`queues:${queueID}`);
+    const result = await this.redisClient.zpopminAsync(`queues:${queueID}`);
+    return result;
   }
 
   async getQueueLength(queueID) {
-    return await this.redisClient.zcardAsync(`queues:${queueID}`);
+    const result = await this.redisClient.zcardAsync(`queues:${queueID}`);
+    return result;
   }
 
   async isExistPatient(queueID, patientID) {
-    return await this.redisClient.zscoreAsync(`queues:${queueID}`, patientID);
+    const result = await this.redisClient.zscoreAsync(`queues:${queueID}`, patientID);
+    return result;
   }
 }

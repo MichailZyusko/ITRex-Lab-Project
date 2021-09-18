@@ -3,7 +3,7 @@ import config from '../../../../config.js';
 
 const {
   database: {
-    port, host, user, databaseName, password,
+    port, host, user, database, password,
   },
 } = config;
 
@@ -13,7 +13,7 @@ const dbConfig = {
   port,
   password,
 };
-const sql = `use ${databaseName};`;
+const sql = `use ${database};`;
 const sqlFile = './migration_1.sql';
 
 execsql.config(dbConfig)
