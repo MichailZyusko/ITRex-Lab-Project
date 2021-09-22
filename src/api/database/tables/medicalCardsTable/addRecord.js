@@ -7,6 +7,14 @@ const {
   },
 } = config;
 
+/**
+ * Создает медицинскую карточку пациенту с patient_id
+ *
+ * @param {string} patient_id - UUID пациента
+ * @param {string} medical_card_id - UUID медицинской карты
+ * @returns {Promise<RowDataPacket[][]|RowDataPacket[]|OkPacket|OkPacket[]|ResultSetHeader>}
+ */
+
 export default async (patient_id, medical_card_id) => {
   const connection = mysql.createConnection({
     host,

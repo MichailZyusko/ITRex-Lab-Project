@@ -7,6 +7,12 @@ const {
   },
 } = config;
 
+/**
+ * Получаем все специализации докторов
+ *
+ * @returns {Promise<RowDataPacket[][]|RowDataPacket[]|OkPacket|OkPacket[]|ResultSetHeader>}
+ */
+
 export default async () => {
   const connection = mysql.createConnection({
     host,

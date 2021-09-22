@@ -80,6 +80,7 @@
 
 .input{
   padding: 5px 15px 5px 10px;
+  outline: none;
 
   color:#94919E ;
   background: #F3F9F2;

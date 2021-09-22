@@ -7,9 +7,22 @@ const {
   },
 } = config;
 
+/**
+ * Добавляет резолюцию в таблицу
+ *
+ * @param {string} resolution_id - UUID резолюции
+ * @param {string} medical_card_id - UUID медицинской карты
+ * @param {string} doctor_id - UUID доктора
+ * @param {string} resolution - Текст резолюции
+ * @param {Date} comingDate - дата, когда доктор поставил резолюцию
+ * @param {Date} TTL - Time To Life резолюции
+ * @param {string} name - полное имя доктора, который поставил резолюцию
+ * @returns {Promise<RowDataPacket[][]|RowDataPacket[]|OkPacket|OkPacket[]|ResultSetHeader>}
+ */
+
 export default async (
   resolution_id, medical_card_id,
-  doctor_id, diagnose, comingDate, TTL, name,
+  doctor_id, resolution, comingDate, TTL, name,
 ) => {
   const connection = mysql.createConnection({
     host,
@@ -27,7 +40,7 @@ export default async (
       medical_card_id,
       doctor_specialization: doctor_id,
       doctor_full_name: name,
-      resolution_text: diagnose,
+      resolution_text: resolution,
       date: comingDate,
       status: 'relevant',
       TTL,

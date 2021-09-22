@@ -2,13 +2,33 @@ import validator from 'validator';
 import ApiError from '../../../../errors/ApiError.js';
 
 class GetPatientID {
+  /**
+   * DTO для получения данных из req
+   *
+   * @constructor
+   * @param {string} patientID - UUID пациента
+   */
   constructor({ patientID } = {}) {
     this.patientID = patientID;
   }
 }
 
-const isValid = (text) => validator.isUUID(text);
+/**
+ * Валидация входящих данных
+ *
+ * @param {string} id - UUID пациента
+ * @returns {boolean}
+ */
+const isValid = (id) => validator.isUUID(id);
 
+/**
+ * Middleware для валидации входящих данных
+ *
+ * @param {object} req - объект запроса
+ * @param {object} res - объект ответа
+ * @param {function} next - следующая функция промежуточной обработки
+ * @returns {Promise<void>}
+ */
 export default async (req, res, next) => {
   try {
     const { patientID } = new GetPatientID(req);

@@ -1,3 +1,12 @@
+/**
+ * Middleware для проверки авторизации пациента
+ *
+ * @param {object} req - объект запроса
+ * @param {object} res - объект ответа
+ * @param {function} next - следующая функция промежуточной обработки
+ * @returns {*}
+ */
+
 export default (req, res, next) => {
   try {
     const { patientToken } = req.cookies;

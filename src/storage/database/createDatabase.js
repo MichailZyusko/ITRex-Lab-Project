@@ -7,6 +7,11 @@ const {
   },
 } = config;
 
+/**
+ * Функция создает базу данных с именем ${database}
+ *
+ * */
+
 export default async () => {
   const connection = mysql.createConnection({
     host, port, user, password,
@@ -15,7 +20,6 @@ export default async () => {
 
   try {
     await connection.query(query);
-    return true;
   } catch (error) {
     console.error(error);
   } finally {

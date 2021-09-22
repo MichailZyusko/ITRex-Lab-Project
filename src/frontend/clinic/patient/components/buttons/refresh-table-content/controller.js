@@ -2,6 +2,12 @@ import getMedicalCardContent from './methods.js';
 
 const table = document.getElementById('table');
 
+/**
+ * Добавляет данные резолюций пациента на страницу
+ *
+ * @returns {Promise<string>}
+ */
+
 export default async () => {
   const tableContent = await getMedicalCardContent();
   function addTD(data, tr, isDate) {

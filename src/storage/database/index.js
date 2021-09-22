@@ -4,6 +4,11 @@ import {
   medicalCardsDefine, resolutionsDefine,
 } from './tables/index.js';
 
+/**
+ * Функция инициализирует базу данных и все таблицы в ней
+ *
+ * */
+
 export default async () => {
   await databaseDefine();
   await medicalCardsDefine();

@@ -4,6 +4,13 @@ import deleteResolution from './services.js';
 
 const table = document.getElementById('table');
 
+/**
+ * Удаляет резолюцию при нажатии на кнопку
+ *
+ * @param {Object} event - объект события нажатия на кнопку
+ * @returns {Promise<*|null>}
+ */
+
 export default async (event) => {
   const { resolutionID } = event.currentTarget;
 

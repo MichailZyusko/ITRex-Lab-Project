@@ -17,6 +17,12 @@ import ApiError from '../../errors/ApiError.js';
 const { secretKey } = config;
 
 class DatabaseStorage {
+  /**
+   * Добавляет пациента в базу данных
+   *
+   * @param {object} patient - объект пациента
+   * @returns {Promise<void>}
+   */
   async setPatient(patient) {
     const patientID = uuidv4();
     const userID = uuidv4();
@@ -27,6 +33,13 @@ class DatabaseStorage {
     await PatientsTable.setPatient({ ...patient, patientID, userID });
   }
 
+  /**
+   * Ищет пациента с password & login
+   *
+   * @param {string} password - пароль пациента
+   * @param {string} login - логин пациента
+   * @returns {Promise<{token: (*)}>}
+   */
   async findByLogin(password, login) {
     const record = await CredentialsTable.findByLogin(login);
 
@@ -45,6 +58,13 @@ class DatabaseStorage {
     return { token };
   }
 
+  /**
+   * Ищет доктора с password & login
+   *
+   * @param {string} password - пароль доктора
+   * @param {string} login - логин доктора
+   * @returns {Promise<{token: (*)}>}
+   */
   async findDoctorByLogin(password, login) {
     const record = await CredentialsTable.findDoctorByLogin(login);
 
@@ -67,22 +87,49 @@ class DatabaseStorage {
     return { token, doctorID };
   }
 
+  /**
+   * Возвращает пациента с id:ID
+   *
+   * @param {string} ID - UUID пациента
+   * @returns {Promise<*>}
+   */
   async getPatientByID(ID) {
     const patient = await PatientsTable.getPatientByID(ID);
     return patient;
   }
 
+  /**
+   * Возвращает пользователя с id:userID
+   *
+   * @param {string} userID - UUID пользователя
+   * @returns {Promise<*>}
+   */
   async getPatientByUserID(userID) {
     const patient = await PatientsTable.getPatientByUserID(userID);
     return patient;
   }
 
+  /**
+   * Возвращает все специализации докторов
+   *
+   * @returns {Promise<RowDataPacket[][]|RowDataPacket[]|OkPacket|OkPacket[]|ResultSetHeader>}
+   */
   async getAllSpecializations() {
     const specializations = await SpecializationsTable.getAllSpecializations();
     return specializations;
   }
 
-  async setDiagnose(ID, doctorID, diagnose, comingDate, TTL) {
+  /**
+   * Задает пациенту резолюцию
+   *
+   * @param {string} ID - UUID пациента
+   * @param {string} doctorID - UUID доктора
+   * @param {string} resolution - UUID резолюции
+   * @param {Date} comingDate - дата обращения пациента
+   * @param {Date} TTL - Time To Life для резолюции
+   * @returns {Promise<void>}
+   */
+  async setDiagnose(ID, doctorID, resolution, comingDate, TTL) {
     const resolutionID = uuidv4();
     const { medical_card_id: medicalCardID } = await MedicalCardsTable.getMedicalCardByID(ID);
     const { specialization_name: specialization } = await DoctorsTable.findSpecialization(doctorID);
@@ -90,48 +137,80 @@ class DatabaseStorage {
     const name = `${fn} ${ln}`;
 
     await ResolutionsTable.addRecord(resolutionID, medicalCardID, specialization,
-      diagnose, comingDate, TTL, name);
+      resolution, comingDate, TTL, name);
   }
 
+  /**
+   * Возвращает резолюции пациента с id:patientID
+   *
+   * @param {string} patientID - UUID пациента
+   * @returns {Promise<RowDataPacket[][]|RowDataPacket[]|OkPacket|OkPacket[]|ResultSetHeader>}
+   */
   async getResolutionsByID(patientID) {
     const resolutions = await MedicalCardsTable.getAllRecords(patientID);
     return resolutions;
   }
 
+  /**
+   * Возвращает пациента если он существует
+   *
+   * @param {object} patient - объект пациента
+   * @returns {Promise<*>}
+   */
   async isExistPatient(patient) {
     const bool = await PatientsTable.isExistPatient(patient);
     return bool;
   }
 
+  /**
+   * Возвращает всех пациентов, имеющих в своем имени или фамилии или email text
+   *
+   * @param {string} text - строка для поиска пациентов
+   * @returns {Promise<RowDataPacket[][]|RowDataPacket[]|OkPacket|OkPacket[]|ResultSetHeader>}
+   */
   async getAllPatientLikeValue(text) {
     const patients = await PatientsTable.getAllPatientLikeValue(text);
     return patients;
   }
 
+  /**
+   * Возвращает резолюцию у которой id:resolutionID
+   *
+   * @param {string} resolutionID - UUID резолюции
+   * @returns {Promise<*>}
+   */
   async getResolutionByID(resolutionID) {
     const resolution = await ResolutionsTable.getResolutionByID(resolutionID);
     return resolution;
   }
 
+  /**
+   * Удаляет резолюцию у которой id:resolutionID
+   *
+   * @param {string} resolutionID - UUID резолюции
+   * @returns {Promise<void>}
+   */
   async deleteResolutionByID(resolutionID) {
     await ResolutionsTable.deleteResolutionByID(resolutionID);
   }
 
-  async findSpecialization(doctorID) {
-    const specialization = await DoctorsTable.findSpecialization(doctorID);
-    return specialization;
-  }
-
-  async getDoctor(userID) {
-    const doctor = await DoctorsTable.getDoctor(userID);
-    return doctor;
-  }
-
+  /**
+   * Возвращает доктора у которого specialization_id:specID
+   *
+   * @param {string} specID - UUID специализации
+   * @returns {Promise<RowDataPacket[][]|RowDataPacket[]|OkPacket|OkPacket[]|ResultSetHeader>}
+   */
   async getDoctorsBySpecID(specID) {
     const doctors = await DoctorsTable.getDoctorsBySpecID(specID);
     return doctors;
   }
 
+  /**
+   * Возвращает доктора у которого user_id:userID
+   *
+   * @param {string} userID - UUID пользователя
+   * @returns {Promise<*>}
+   */
   async getDoctorByUserID(userID) {
     const doctor = await DoctorsTable.getDoctorByUserID(userID);
     return doctor;

@@ -7,6 +7,13 @@ const {
   },
 } = config;
 
+/**
+ * Возвращает доктора по его specification_id:specID
+ *
+ * @param {string} specID - UUID специализации
+ * @returns {Promise<RowDataPacket[][]|RowDataPacket[]|OkPacket|OkPacket[]|ResultSetHeader>}
+ */
+
 export default async (specID) => {
   const connection = mysql.createConnection({
     host,

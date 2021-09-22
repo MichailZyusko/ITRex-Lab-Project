@@ -1,5 +1,15 @@
 import DatabaseStorage from '../../../../database/index.js';
 
+/**
+ * Контроллер для аутентификация
+ *
+ * @param {string} password - пароль пользователя
+ * @param {string} login - логин пользователя
+ * @param {object} res - объект ответа
+ * @param {function} next - следующая функция промежуточной обработки
+ * @returns {Promise<void>}
+ */
+
 export default async ({ data: { password, login } }, res, next) => {
   try {
     const result = await DatabaseStorage.findByLogin(password, login);

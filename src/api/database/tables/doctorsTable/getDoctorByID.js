@@ -7,6 +7,13 @@ const {
   },
 } = config;
 
+/**
+ * Возвращает доктора по его id:doctorID
+ *
+ * @param {string} doctorID - UUID доктора
+ * @returns {Promise<*>}
+ */
+
 export default async (doctorID) => {
   const connection = mysql.createConnection({
     host,

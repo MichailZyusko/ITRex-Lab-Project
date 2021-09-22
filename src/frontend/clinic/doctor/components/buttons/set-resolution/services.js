@@ -1,5 +1,14 @@
 import { setResolution, deletePatient } from './methods.js';
 
+/**
+ * Задает текущему пациенту резолюцию, и время жизни для этой резолюции
+ *
+ * @param {number} timeToLive - время в мс. сколько отводиться для жизни резолюции
+ * @param {string} resolutionText - текст резолюции
+ * @param {object} currentPatient - текущий пациент
+ * @returns {Promise<string>}
+ */
+
 export default async (timeToLive, resolutionText, currentPatient) => {
   if (currentPatient) {
     const patient = await setResolution(currentPatient.id, {

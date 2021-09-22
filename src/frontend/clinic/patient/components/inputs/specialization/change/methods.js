@@ -1,5 +1,12 @@
 const URL = '/api/doctors/specializations/';
 
+/**
+ * Отправляет GET-запрос на сервер по указанному route
+ *
+ * @param {string} route - маршрут для обращения к серверу
+ * @returns {(function(*): Promise<any|boolean|null|undefined>)|*}
+ */
+
 const getRequest = (route) => async (specializationID) => {
   try {
     const response = await fetch(`${route}${specializationID}`);

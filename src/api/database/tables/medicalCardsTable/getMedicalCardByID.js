@@ -7,6 +7,13 @@ const {
   },
 } = config;
 
+/**
+ * Возвращает медицинскую карточку по patientID
+ *
+ * @param {string} patientID - UUID пациента
+ * @returns {Promise<*>}
+ */
+
 export default async (patientID) => {
   const connection = mysql.createConnection({
     host,

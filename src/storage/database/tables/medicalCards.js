@@ -7,6 +7,12 @@ const {
   },
 } = config;
 
+/**
+ * Функция создает таблицу медицинских карточек с полями
+ * @field {CHAR(36)} patient_id - UUID пациента
+ * @field {CHAR(36)} medical_card_id - UUID медицинской карты
+ * */
+
 export default async () => {
   const connection = mysql.createConnection({
     host,

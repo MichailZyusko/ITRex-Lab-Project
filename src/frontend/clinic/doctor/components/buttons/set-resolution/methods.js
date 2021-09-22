@@ -1,3 +1,7 @@
+const routeForSetResolution = '/api/resolutions/patient';
+const routeForGetCurrentPatient = '/api/patients/waiting/current';
+const routeForDelCurrentPatient = '/api/patients/waiting/current';
+
 const deleteReqObject = () => ({
   method: 'DELETE',
   headers: {
@@ -14,6 +18,13 @@ const postReqObject = (data) => ({
     charset: 'UTF-8',
   },
 });
+
+/**
+ * Удаляет первого пациента в очереди
+ *
+ * @param {string} route - маршрут для обращения к серверу
+ * @returns {(function(): Promise<boolean|any|undefined>)|*}
+ */
 
 const DELETERequest = (route) => async () => {
   try {
@@ -37,6 +48,13 @@ const DELETERequest = (route) => async () => {
     return false;
   }
 };
+
+/**
+ * Задает резолюцию текущему пациенту
+ *
+ * @param {string} route - маршрут для обращения к серверу
+ * @returns {(function(): Promise<boolean|any|undefined>)|*}
+ */
 
 const setResolutionRequest = (route) => async (patientID = null, data = null) => {
   if (!data) {
@@ -65,6 +83,13 @@ const setResolutionRequest = (route) => async (patientID = null, data = null) =>
   }
 };
 
+/**
+ * Получает текущего пациента из очереди
+ *
+ * @param {string} route - маршрут для обращения к серверу
+ * @returns {(function(): Promise<boolean|any|undefined>)|*}
+ */
+
 const makeGERequest = (route) => async () => {
   try {
     const response = await fetch(route);
@@ -81,8 +106,8 @@ const makeGERequest = (route) => async () => {
   }
 };
 
-const getCurrentPatient = makeGERequest('/api/patients/waiting/current');
-const setResolution = setResolutionRequest('/api/resolutions/patient');
-const deletePatient = DELETERequest('/api/patients/waiting/current');
+const getCurrentPatient = makeGERequest(routeForGetCurrentPatient);
+const setResolution = setResolutionRequest(routeForSetResolution);
+const deletePatient = DELETERequest(routeForDelCurrentPatient);
 
 export { setResolution, deletePatient, getCurrentPatient };

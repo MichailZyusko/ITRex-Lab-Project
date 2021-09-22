@@ -8,6 +8,11 @@ const {
   },
 } = config;
 
+/**
+ * Меняет статус устаревшим данным
+ *
+ * */
+
 export default async () => {
   const connection = mysql.createConnection({
     host,
@@ -33,6 +38,7 @@ export default async () => {
         SET status = '${resolutionStatus.outdate}'
         WHERE resolution_id = '${item.resolution_id}'
         `;
+
         await connection.query(updateQuery);
       });
   } catch (error) {

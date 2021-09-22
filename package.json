@@ -27,6 +27,7 @@
     "bluebird": "^3.7.2",
     "chai": "^4.3.4",
     "cookie-parser": "^1.4.5",
+    "documentation": "^13.2.5",
     "dotenv": "^10.0.0",
     "execsql": "^0.0.3",
     "express": "^4.17.1",

@@ -7,6 +7,13 @@ const {
   },
 } = config;
 
+/**
+ * Функция создает таблицу пациентов с полями
+ * @field {CHAR(36)} user_id - UUID пользователя
+ * @field {VARCHAR(255)} password - пароль пользователя
+ * @field {VARCHAR(255)} login - логин пользователя
+ * */
+
 export default async () => {
   const connection = mysql.createConnection({
     host,

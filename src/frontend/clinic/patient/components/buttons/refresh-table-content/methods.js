@@ -1,3 +1,12 @@
+const routeForGetAllResolutions = '/api/resolutions/patient/false';
+
+/**
+ * Отправляет GET-запрос на сервер
+ *
+ * @param {string} route - маршрут для обращения к серверу
+ * @returns {(function(): Promise<boolean|any|null|undefined>)|*}
+ */
+
 const getAllResolutions = (route) => async () => {
   try {
     const response = await fetch(route);
@@ -19,5 +28,6 @@ const getAllResolutions = (route) => async () => {
     return null;
   }
 };
+
 // TODO Придумать что-нибудь с роутом так как нельзя просто передавать false
-export default getAllResolutions('/api/resolutions/patient/false');
+export default getAllResolutions(routeForGetAllResolutions);

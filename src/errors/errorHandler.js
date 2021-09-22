@@ -1,6 +1,15 @@
 import ApiError from './ApiError.js';
 
-export default (err, req, res, next) => {
+/**
+ * Отлавливает ошибки и возвращает их на сторону клиента
+ *
+ * @param {object} err - объект ошибки
+ * @param {object} req - объект request
+ * @param {object} res - объект response
+ *
+ */
+
+export default (err, req, res) => {
   let message = 'Something went wrong';
   let status = 500;
 

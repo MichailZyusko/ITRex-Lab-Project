@@ -1,3 +1,13 @@
+const routeForAllSpecializations = '/api/doctors/specializations/';
+const routeForGetPatientDataByID = '/api/patients/me/';
+
+/**
+ * Отправляет GET-запрос на указанный route
+ *
+ * @param {string} route - маршрут для обращения к серверу
+ * @returns {(function(): Promise<any|boolean|null|undefined>)|*}
+ */
+
 const getRequest = (route) => async () => {
   try {
     const response = await fetch(route);
@@ -18,6 +28,6 @@ const getRequest = (route) => async () => {
   }
 };
 
-const getAllSpecializations = getRequest('/api/doctors/specializations/');
-const getPatientDataByID = getRequest('/api/patients/me/');
+const getAllSpecializations = getRequest(routeForAllSpecializations);
+const getPatientDataByID = getRequest(routeForGetPatientDataByID);
 export { getAllSpecializations, getPatientDataByID };

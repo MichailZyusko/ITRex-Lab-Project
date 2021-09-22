@@ -4,6 +4,12 @@ import refreshTableContentClick from '../buttons/refresh-table-content/controlle
 const form = document.querySelector('form');
 const specializationsDatalist = document.getElementById('specialities');
 
+/**
+ * Загружает информацию о пациенте и добавляем специализации всех докторов
+ *
+ * @returns {Promise<void>}
+ */
+
 export default async () => {
   try {
     const patient = await getPatientDataByID();
@@ -12,7 +18,12 @@ export default async () => {
         const [key, value] = item;
 
         if (form.elements[key]) {
-          form.elements[key].value = value;
+          if (key === 'birthday') {
+            const dt = new Date(Date.parse(value) - (new Date().getTimezoneOffset() * 60));
+            form.elements[key].value = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
+          } else {
+            form.elements[key].value = value;
+          }
         }
       });
 

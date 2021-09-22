@@ -5,13 +5,25 @@ const form = document.querySelector('form');
 
 let previousClient = null;
 
-const changeText = (currentClient) => {
-  if (currentClient) {
-    Object.entries(currentClient).forEach((item) => {
+/**
+ * Обновляет информацию о текущем пациенте на странице
+ *
+ * @param {object} currentPatient - текущий пациент
+ * @returns {null}
+ */
+
+const changeText = (currentPatient) => {
+  if (currentPatient) {
+    Object.entries(currentPatient).forEach((item) => {
       const [key, value] = item;
 
       if (form.elements[key]) {
-        form.elements[key].value = value;
+        if (key === 'birthday') {
+          const dt = new Date(Date.parse(value) - (new Date().getTimezoneOffset() * 60));
+          form.elements[key].value = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
+        } else {
+          form.elements[key].value = value;
+        }
       }
     });
 
@@ -26,25 +38,38 @@ const changeText = (currentClient) => {
   return null;
 };
 
-const checkDiagnose = async (currentClient) => {
-  if (previousClient !== currentClient) {
-    previousClient = currentClient;
+/**
+ * Проверяет новый это пациент или нет
+ *
+ * @param {object} currentPatient - текущий пациент
+ * @returns {Promise<string>}
+ */
+
+const checkNewPatient = async (currentPatient) => {
+  if (previousClient !== currentPatient) {
+    previousClient = currentPatient;
     return 'Call the next patient';
   }
 
   return 'Please, fill resolution for this client';
 };
 
+/**
+ * Получает текущего пациента
+ *
+ * @returns {Promise<string|string>}
+ */
+
 export default async () => {
-  const currentClient = await getCurrentPatient();
+  const currentPatient = await getCurrentPatient();
 
-  if (currentClient) {
-    changeText(currentClient);
+  if (currentPatient) {
+    changeText(currentPatient);
 
-    return checkDiagnose(currentClient);
+    return checkNewPatient(currentPatient);
   }
 
-  changeText(currentClient);
+  changeText(currentPatient);
 
   return 'You don\'t have new patient\'s';
 };

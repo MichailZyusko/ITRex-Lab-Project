@@ -7,6 +7,19 @@ const {
   },
 } = config;
 
+/**
+ * Создает пациента
+ *
+ * @param {string} firstName - имя пациента
+ * @param {string} lastName - фамилия пациента
+ * @param {Date} birthday - день рождения пациента
+ * @param {string} gender - гендер пациента
+ * @param {string} email - email пациента
+ * @param {string} patientID - UUID пациента
+ * @param {string} userID - UUID пользователя
+ * @returns {Promise<RowDataPacket[][]|RowDataPacket[]|OkPacket|OkPacket[]|ResultSetHeader>}
+ */
+
 export default async ({
   firstName, lastName, birthday, gender, email, patientID, userID,
 }) => {

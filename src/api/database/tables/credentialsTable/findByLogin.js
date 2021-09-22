@@ -7,6 +7,13 @@ const {
   },
 } = config;
 
+/**
+ * Возвращает пользователя с login:login
+ *
+ * @param {string} login - логин пользователя
+ * @returns {Promise<*>}
+ */
+
 export default async (login) => {
   const connection = mysql.createConnection({
     host,

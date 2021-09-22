@@ -3,6 +3,13 @@ import deleteButtonClick from '../../../buttons/delete/controller.js';
 
 const table = document.getElementById('table');
 
+/**
+ * Добавляет контент таблицы с резолюциями
+ *
+ * @param {string} patientID - UUID пациента
+ * @returns {Promise<string>}
+ */
+
 const setSearchResult = async (patientID) => {
   function addTD(data, tr, isDate) {
     const td = document.createElement('td');

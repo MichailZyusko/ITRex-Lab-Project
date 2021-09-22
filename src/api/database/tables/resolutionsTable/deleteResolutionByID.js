@@ -8,6 +8,13 @@ const {
   },
 } = config;
 
+/**
+ * Удаляет резолюцию с id:resolutionID
+ *
+ * @param {string} resolutionID - UUID резолюции
+ * @returns {Promise<RowDataPacket[][]|RowDataPacket[]|OkPacket|OkPacket[]|ResultSetHeader>}
+ */
+
 export default async (resolutionID) => {
   const connection = mysql.createConnection({
     host,

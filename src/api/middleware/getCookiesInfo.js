@@ -4,6 +4,13 @@ import ApiError from '../../errors/ApiError.js';
 import database from '../database/index.js';
 
 class GetTokenDTO {
+  /**
+   * DTO для получения JWT из cookies
+   *
+   * @constructor
+   * @param {string} patientToken - JWT token для пациента
+   * @param {string} doctorToken - JWT token для доктора
+   */
   constructor({ cookies: { patientToken, doctorToken } } = {}) {
     this.patientToken = patientToken;
     this.doctorToken = doctorToken;
@@ -11,6 +18,15 @@ class GetTokenDTO {
 }
 
 const { secretKey } = config;
+
+/**
+ * Middleware для проверки авторизации доктора
+ *
+ * @param {object} req - объект запроса
+ * @param {object} res - объект ответа
+ * @param {function} next - следующая функция промежуточной обработки
+ * @returns {*}
+ */
 
 export default async (req, res, next) => {
   try {

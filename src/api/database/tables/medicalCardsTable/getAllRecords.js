@@ -7,6 +7,13 @@ const {
   },
 } = config;
 
+/**
+ * Возвращает все резолюции пациента по его patientID
+ *
+ * @param {string} patientID - UUID пациента
+ * @returns {Promise<RowDataPacket[][]|RowDataPacket[]|OkPacket|OkPacket[]|ResultSetHeader>}
+ */
+
 export default async (patientID) => {
   const connection = mysql.createConnection({
     host,

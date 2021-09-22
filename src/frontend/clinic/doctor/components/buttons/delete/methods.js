@@ -1,3 +1,5 @@
+const routeForDeleteResolution = '/api/resolutions';
+
 const reqObject = () => ({
   method: 'DELETE',
   headers: {
@@ -5,6 +7,13 @@ const reqObject = () => ({
     charset: 'UTF-8',
   },
 });
+
+/**
+ * Отправляет DELETE-запрос на сервер
+ *
+ * @param {string} route - маршрут для обращения к серверу
+ * @returns {(function(*): Promise<boolean|undefined>)|*}
+ */
 
 const makeDELETERequest = (route) => async (resolutionID) => {
   try {
@@ -24,4 +33,4 @@ const makeDELETERequest = (route) => async (resolutionID) => {
   }
 };
 
-export default makeDELETERequest('/api/resolutions');
+export default makeDELETERequest(routeForDeleteResolution);

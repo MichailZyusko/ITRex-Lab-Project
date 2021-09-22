@@ -7,6 +7,16 @@ const {
   },
 } = config;
 
+/**
+ * Проверяет на существование пациента с такими данными
+ *
+ * @param {string} firstName - имя пациента
+ * @param {string} lastName - фамилия пациента
+ * @param {Date} birthday - день рождения пациента
+ * @param {string} gender - гендер пациента
+ * @returns {Promise<number>}
+ */
+
 export default async ({
   firstName, lastName, birthday, gender,
 }) => {

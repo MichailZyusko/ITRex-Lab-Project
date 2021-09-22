@@ -8,6 +8,15 @@ const {
   },
 } = config;
 
+/**
+ * Создает пользователя с login:email и password:userPassword
+ *
+ * @param {string} email - логин пользователя
+ * @param {string} userID - UUID пользователя
+ * @param {string} userPassword - пароль пользователя
+ * @returns {Promise<RowDataPacket[][]|RowDataPacket[]|OkPacket|OkPacket[]|ResultSetHeader>}
+ */
+
 export default async ({ email, userID, password: userPassword }) => {
   const connection = mysql.createConnection({
     host,

@@ -7,6 +7,18 @@ const {
   },
 } = config;
 
+/**
+ * Функция создает таблицу резолюцию с полями
+ * @field {CHAR(36)} resolution_id - UUID резолюции
+ * @field {CHAR(36)} medical_card_id - UUID медицинской карты
+ * @field {VARCHAR(255)} doctor_specialization - название специализации доктора
+ * @field {VARCHAR(255)} doctor_full_name - полное имя доктора
+ * @field {VARCHAR(255)} resolution_text - текст резолюции
+ * @field {VARCHAR(255)} status - статус резолюции
+ * @field {DATETIME} TTL - Time To Life резолюции
+ * @field {DATETIME} date - Время и дата выставления резолюции
+ * */
+
 export default async () => {
   const connection = mysql.createConnection({
     host,

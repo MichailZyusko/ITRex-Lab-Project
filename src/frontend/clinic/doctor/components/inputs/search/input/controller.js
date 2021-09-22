@@ -1,6 +1,15 @@
 import searchInputServices from './services.js';
 
-const addOption = (patient, datalist) => {
+const search = document.getElementById('search');
+const patients = document.getElementById('patients');
+
+/**
+ * Добавляет тег option к datalist с id:patients
+ *
+ * @param {object} patient - пациент
+ */
+
+const addOption = (patient) => {
   const option = document.createElement('option');
   const {
     first_name: firstName, last_name: lastName, email, id,
@@ -11,11 +20,14 @@ const addOption = (patient, datalist) => {
   option.id = email;
   option.patient_id = id;
 
-  datalist.appendChild(option);
+  patients.appendChild(option);
 };
 
-const search = document.getElementById('search');
-const patients = document.getElementById('patients');
+/**
+ * Получает всех пациентов
+ *
+ * @returns {Promise<void>}
+ */
 
 export default async () => {
   const { value } = search;
@@ -24,6 +36,6 @@ export default async () => {
 
   if (allPatient) {
     patients.innerHTML = '';
-    allPatient.forEach((item) => addOption(item, patients));
+    allPatient.forEach((item) => addOption(item));
   }
 };

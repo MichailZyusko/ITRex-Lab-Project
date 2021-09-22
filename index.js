@@ -21,6 +21,10 @@ const { app: { port, host } } = config;
   await DBinitialization();
 })();
 
+app.get('/', (req, res) => {
+  res.redirect(`http://${host}:${port}/patient-sign-in`);
+});
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -41,7 +45,7 @@ app.use('/api/doctors', isAuthPatient, doctorsRouter);
 app.use(errorHandler);
 
 app.listen(port, host, () => {
-  console.log(`Example app listening at http://${host}:${port}/patient-sign-in/...`);
+  console.log(`Example app listening at http://${host}:${port}...`);
 });
 
 cron.schedule('*/5 * * * * *', cronJob);

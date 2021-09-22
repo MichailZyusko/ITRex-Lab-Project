@@ -7,6 +7,13 @@ const {
   },
 } = config;
 
+/**
+ * Возвращает всех пациентов у которых в имени или фамилии или в email содержится text
+ *
+ * @param {string} text - текст для полнотекстового поиска
+ * @returns {Promise<RowDataPacket[][]|RowDataPacket[]|OkPacket|OkPacket[]|ResultSetHeader>}
+ */
+
 export default async (text) => {
   const connection = mysql.createConnection({
     host,
