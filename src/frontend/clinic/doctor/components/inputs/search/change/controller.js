@@ -32,8 +32,6 @@ const setSearchResult = async (patientID) => {
       table.innerHTML = '';
       let id = 0;
 
-      console.log(tableContent);
-
       tableContent.forEach((element) => {
         const {
           resolution_id: resID, date, resolution_text: resText,

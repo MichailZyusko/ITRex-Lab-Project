@@ -13,7 +13,7 @@ export default async ({ data: patientID }, res, next) => {
   try {
     const patient = await database.getPatientByID(patientID);
 
-    res.send(patient);
+    res.status(200).send(patient);
   } catch (error) {
     console.error(error);
     next(error);

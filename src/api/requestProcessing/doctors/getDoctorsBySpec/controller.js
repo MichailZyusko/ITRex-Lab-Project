@@ -12,7 +12,7 @@ export default async ({ data: specializationID }, res, next) => {
   try {
     const doctors = await database.getDoctorsBySpecID(specializationID);
 
-    res.send(doctors);
+    res.status(200).send(doctors);
   } catch (error) {
     console.error(error);
     next(error);

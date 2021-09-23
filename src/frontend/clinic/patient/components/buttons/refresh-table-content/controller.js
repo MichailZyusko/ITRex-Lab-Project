@@ -30,8 +30,6 @@ export default async () => {
       table.innerHTML = '';
       let id = 0;
 
-      console.log(tableContent);
-
       tableContent.forEach((element) => {
         const {
           date, resolution_text: resText,

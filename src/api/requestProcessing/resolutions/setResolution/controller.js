@@ -22,7 +22,7 @@ export default async ({
     await database.setDiagnose(ID, doctorID, resolution, comingDate, TTL);
     const patient = await database.getPatientByID(ID);
 
-    res.send(patient);
+    res.status(201).send(patient);
   } catch (error) {
     console.error(error);
     next(error);
